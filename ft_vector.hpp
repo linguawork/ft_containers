@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/06 10:00:27 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/06 14:36:36 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #ifndef FT_VECTOR_HPP // defining HEADER
 #define FT_VECTOR_HPP
 #include <memory> //std::allocator
+#include "./enable_if.hpp" // attaching enable_if class
+#include "./is_integral.hpp" // attaching structures for enable_if
 
 
 /*
@@ -93,7 +95,10 @@ namespace ft
 	Question2:
 	Why is the keyword "explicit" is used in vector constructors?
 	
+	answer: to call for conversion explicitly 
+	more:  https://stackoverflow.com/questions/121162/what-does-the-explicit-keyword-mean
 	
+	чтобы данные могли вызываться явно через создание объекта, а не подразумевая.
 	*/
 
 	explicit vector (const allocator_type& alloc = allocator_type()) : f_irst(0), s_ize(0), c_apacity(0), a_llocator(alloc)
@@ -101,9 +106,61 @@ namespace ft
 		std::cout << "Default vector constructor called" << std::endl; 
 	}
 	
-	explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+	explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : s_ize(n), c_apacity(n), a_llocator(alloc)
+	{
+		std::cout << "Vector constructor with parameters called, size and capacity are given n value\n" << std::endl;
+		std::cout << "value_type instance and allocator_type instance are created empty\n" << std::endl; 
 		
+		size_type i;
+		
+		//pointer of allocator, new (n elements)
+		//https://www.cplusplus.com/reference/memory/allocator/allocate/
+		f_irst = _allocator.allocate(n); 
+		i = 0;
+		while(i < n)
+		{
+			//https://www.cplusplus.com/reference/memory/allocator/construct/
+			a_llocator.construct(f_irst + i, val); // сonstruct method of allocator class, fills vector with values
+			i++;
+		}
+	}
 
+	/*
+	library to know about enable_if
+	https://www.cplusplus.com/reference/type_traits/
+
+	enable_if
+	https://www.cplusplus.com/reference/type_traits/enable_if/
+
+
+	//using enable_if in iterators
+	https://stackoverflow.com/questions/28529376/stdvector-constructor-taking-pair-of-iterators
+	
+	"it's sufficient for implementations to test for integral types only, but they can do more if they want to."
+	 
+	in std::vector the Iterator is described as:
+
+	// template <class InputIterator>
+	// vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+	
+	*/
+
+	
+
+		
+		//vector constructor with iterators
+		template <class InputIterator>
+        	 vector (InputIterator first, InputIterator last,
+                 const allocator_type& alloc = allocator_type(), typename enable_if<!is_integral<InputIterator>::value>::type* = 0) : a_llocator(alloc)
+		{
+			if (first > last)
+				throw std::length_error("vector");
+			s_ize = last - first;
+			c_apacity = s_ize;
+			f_irst = a_llocator.allocate(c_apacity);
+			for (difference_type i = 0; i < static_cast<difference_type>(s_ize); i++)
+				a_llocator.construct(f_irst + i, *(first + i));
+		 }
 		
 		
 			
