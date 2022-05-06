@@ -6,12 +6,14 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:02:25 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/06 14:11:54 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/06 19:12:06 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITERATOR_TRAITS_HPP
 #define ITERATOR_TRAITS_HPP
+
+#include <iterator> // typedef	std::random_access_iterator_tag	iterator_category;
 
 /*
 implementing class iterator_traits

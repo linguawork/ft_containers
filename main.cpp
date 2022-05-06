@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/06 14:42:09 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/06 19:42:29 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,15 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 
 //attaching my vector header
 #include "./ft_vector.hpp"
+#include "randomaccessiterator.hpp"
 
 int main ()
 {
   // constructors used in the same order as described above:
-  std::vector<int> first;                                // empty vector of ints
-  std::vector<int> second (4,100);                       // four ints with value 100
-  std::vector<int> third (second.begin(),second.end());  // iterating through second
-  std::vector<int> fourth (third);                       // a copy of third
+  // std::vector<int> first;                                // empty vector of ints
+  // std::vector<int> second (4,100);                       // four ints with value 100
+  // std::vector<int> third (second.begin(),second.end());  // iterating through second
+  // std::vector<int> fourth (third);                       // a copy of third
 
 
   // constructors used in the same order as described above:
