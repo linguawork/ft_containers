@@ -53,7 +53,8 @@ class RandomAccessIterator
 		virtual ~RandomAccessIterator() {}	
 		RandomAccessIterator(const RandomAccessIterator<typename ft::remove_const<T>::type> & src) : _ptr(src._ptr){}
 		
-		pointer base(void) const{
+		pointer base(void) const
+        {
 			return _ptr;
 		}
 		// removed IsConst
@@ -96,9 +97,9 @@ class RandomAccessIterator
 			return(_ptr - a);
 		}
 		
-		// difference_type operator-(const RandomAccessIterator<T,true> & b){
-		// 	return(_ptr - b.base());
-		// }
+		 difference_type operator-(const RandomAccessIterator<T> & b){
+		 	return(_ptr - b.base());
+		 }
 		
 		// difference_type operator-(const RandomAccessIterator<T, false> & b){
 		// 	return(_ptr - b.base());
