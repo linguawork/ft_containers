@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/08 16:58:08 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/08 18:33:10 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 // constructing vectors
 #include <iostream>
 #include <vector>
+#include <iterator>
 
 int main ()
 {
