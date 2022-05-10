@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/06 10:00:27 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/10 15:09:08 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,25 @@ namespace ft
 		public:
 			typedef 	Allocator 								allocator_type; // renamed Allocator
 			typedef 	typename allocator_type::pointer 		pointer; // shortcut to pointer of std::allocator member
+			
+			
 			typedef		std::ptrdiff_t 							difference_type;
-			typedef		std::size_t 							size_type;
+			/*
+			https://www.quora.com/Why-do-some-C-programs-use-size_t-instead-of-int-What-are-the-advantages
+			size_t implies the size of an object, and usually matches 
+			the processor address size which is often 64 bits.
+			int is a signed integer, and is usually only 32 bits on 64 bit systems which is 
+			less than you need to store the size of some objects.
+
+			see print_size.c file
+			Stepanov wrote about ptrdiff_t as difference_type in typedef for STL at page 72 (about iterators, iterator_traits)
+			*/
+			typedef		std::size_t 							size_type; // 8bytes not 4 bytes for signed int(which is not enough for objects)
 
 		private:
-			pointer			f_irst; // pointer from allocator
-			size_type 		s_ize;
-			size_type		c_apacity; 
+			pointer			first_element; // pointer from allocator
+			size_type 		size;
+			size_type		capacity; 
 			allocator_type	a_llocator;	
 
 		//MEMBER TYPES according to std98 documentation https://www.cplusplus.com/reference/vector/vector/
@@ -92,6 +104,7 @@ namespace ft
 	/*
 	Question2:
 	Why is the keyword "explicit" is used in vector constructors?
+	- because we want to construct objects of classes explicitely, в явном а не в скрытном виде
 	
 	
 	*/
