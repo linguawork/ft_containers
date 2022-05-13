@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/13 16:17:15 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/13 17:00:09 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,22 +147,13 @@ namespace ft
 		Constructs a container with as many elements as the range [first,last),
 		with each element constructed from its corresponding 
 		element in that range, in the same order.		
-	*/
-	// template <class InputIterator>
-    //      vector (InputIterator first, InputIterator last,
-    //              const allocator_type& alloc = allocator_type());
 
-
-
-	//range
-	/*
 	For this constructor we have to use iterator
 	which will work through enable if to work with correct data_types
 	correct data_types are filtered via is_integral
 	
 	so I have to realize ft::is_integral
-	std::enable_if
-	
+	ft::enable_if
 	*/
 	template <class InputIterator>
 	vector (InputIterator first, InputIterator last,
@@ -177,6 +168,45 @@ namespace ft
 			for (difference_type i = 0; i < static_cast<difference_type>(size_t_not_int); i++)
 				allocator_kind.construct(ptr_first_elem + i, *(first + i));
 		}
+		
+	//operator of assignation=
+	vector& operator=(const vector& x)
+	{
+		size_type i;
+		
+		if (this == &x)
+			return *this;
+		for (i = 0; i < size_t_not_int; i++)
+			allocator_kind.destroy(ptr_first_elem + i);
+		this->size_t_not_int = x.size_t_not_int;
+		if(capacity_in_size_t < size_t_not_int)
+		{
+			if (capacity_in_size_t != 0)
+				allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
+			capacity_in_size_t = size_t_not_int;
+			ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
+		}
+		for ( i = 0; i < size_t_not_int; i++)
+			allocator_kind.construct(ptr_first_elem + i, x[i]); // the operator [] is not working yet
+		return *this;
+	}
+
+	//copy constructor
+	vector (const vector& x) :  size_t_not_int (0), capacity_in_size_t (0)
+	{
+		*this = x; // we need to use operator = 
+	}
+
+	//distructor
+	~vector()
+	{
+		size_type i;
+		for (i = 0; i < size_t_not_int; i++)
+			allocator_kind.destroy(ptr_first_elem + i);
+		if(capacity_in_size_t)
+			allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
+	}
+
 		
 		
 		// {

@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/13 16:27:55 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/13 16:58:45 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,43 +42,32 @@ int main ()
   // ft::vector<int> third (second.begin(),second.end());  // iterating through second
   // ft::vector<int> fourth (third);                       // a copy of third
 
-  // // the iterator constructor can also be used to construct from arrays:
-  // int myints[] = {16,2,77,29};
-  // std::vector<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
-  // ft::vector<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
-
-
-  // std::cout << "The contents of fifth in std::vector are:";
-  // for (std::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
-  //   std::cout << ' ' << *it;
-  // std::cout << '\n';
-
-  // std::cout << "The contents of fifth in ft::vector are:";
-  // for (std::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
-  //   std::cout << ' ' << *it;
-  // std::cout << '\n';
 
       ft::vector<int> first_obj; //test for default constructor
       ft::vector<int> second (4,100);//test for constructor with values in vector
-      
         // std::vector<int> second (4,100); 
         // printf("%d", second[0]);// 32 (4 x 8)
 
+      
+      ft::vector<int> third (5,20);
+      ft::vector<int> fourth (third);// a copy of third
+      
+
   // the iterator constructor can also be used to construct from arrays:
   // this is the test for range constructor
-	int myints[] = {16,2,77,29};
-	std::vector<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
-	ft::vector<int> my_fifth (myints, myints + sizeof(myints) / sizeof(int) );
+	// int myints[] = {16,2,77,29};
+	// std::vector<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
+	// ft::vector<int> my_fifth (myints, myints + sizeof(myints) / sizeof(int) );
 
-	std::cout << "The contents of std::vector are:";
-	for (std::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
-		std::cout << ' ' << *it;
-	std::cout << '\n';
+	// std::cout << "The contents of std::vector are:";
+	// for (std::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
+	// 	std::cout << ' ' << *it;
+	// std::cout << '\n';
 
-	std::cout << "The contents of my::vector are:";
-	for (ft::vector<int>::iterator my_it = my_fifth.begin(); my_it != my_fifth.end(); ++my_it)
-		std::cout << ' ' << *my_it;
-	std::cout << '\n';
+	// std::cout << "The contents of my::vector are:";
+	// for (ft::vector<int>::iterator my_it = my_fifth.begin(); my_it != my_fifth.end(); ++my_it)
+	// 	std::cout << ' ' << *my_it;
+	// std::cout << '\n';
         
 
       
