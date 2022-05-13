@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/13 17:00:09 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/13 17:07:44 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,12 +194,15 @@ namespace ft
 	//copy constructor
 	vector (const vector& x) :  size_t_not_int (0), capacity_in_size_t (0)
 	{
+		std::cout << "copy constructor called" << std::endl;
 		*this = x; // we need to use operator = 
 	}
 
-	//distructor
+	//destructor
 	~vector()
 	{
+
+		std::cout << "vector class obj destructor called" << std::endl;
 		size_type i;
 		for (i = 0; i < size_t_not_int; i++)
 			allocator_kind.destroy(ptr_first_elem + i);
@@ -207,36 +210,14 @@ namespace ft
 			allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
 	}
 
-		
-		
-		// {
-		// difference_type len = last - first;
 
-		// size_t_not_int = 0;
-		// capacity_in_size_t = len;
-		// ptr_first_elem = allocator_kind.allocate(allocator_kind);
-		// assign(first, last);
-		// }
-
-
-
-
-
-
-	// ~vector()
-	// 	{
-	// 		size_type i;
-			
-	// 		i = 0;	
-	// 		while (i < ptr_first_elem) // switched of, because so far I dont have camparison operator
-	// 		{
-	// 			allocator_kind.destroy(ptr_first_elem + i);
-	// 		if(capacity_in_size_t)
-	// 			allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
-	// 			i++;
-	// 		}
-	// 	}
+// this one added for copy constructor test
+	const_reference operator[] (size_type n) const
+	{
+		return(*(ptr_first_elem + n));
+	}
 	
+
 
 		
 		
