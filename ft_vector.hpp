@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/10 15:09:08 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/13 16:17:15 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #ifndef FT_VECTOR_HPP // defining HEADER
 #define FT_VECTOR_HPP
 #include <memory> //std::allocator
+// #include <iterator> 
+#include <iostream>
+#include "ft_utility.hpp"
 
 
 /*
@@ -59,10 +62,10 @@ namespace ft
 			typedef		std::size_t 							size_type; // 8bytes not 4 bytes for signed int(which is not enough for objects)
 
 		private:
-			pointer			first_element; // pointer from allocator
-			size_type 		size;
-			size_type		capacity; 
-			allocator_type	a_llocator;	
+			pointer			ptr_first_elem; // pointer from allocator
+			size_type 		size_t_not_int;
+			size_type		capacity_in_size_t; 
+			allocator_type	allocator_kind;	
 
 		//MEMBER TYPES according to std98 documentation https://www.cplusplus.com/reference/vector/vector/
 		public:
@@ -73,10 +76,17 @@ namespace ft
 			typedef 	const value_type& 						const_reference;
 //			typedef 	typename allocator_type::pointer 		pointer; // shortcut to pointer of std::allocator member
 			typedef 	typename allocator_type::const_pointer 	const_pointer; // 
-			typedef 	RandomAccessIterator<value_type> 		iterator; // https://www.cplusplus.com/reference/iterator/RandomAccessIterator/
-			typedef		RandomAccessIterator<const value_type> 	const_iterator; //https://en.cppreference.com/w/cpp/iterator/iterator_tags
-			typedef		reverse_iterator<iterator> 				reverse_iterator;
-			typedef		reverse_iterator<const_iterator> 		const_reverse_iterator;		
+
+			//switched off for a while (not running along vector yet)
+			// typedef 	RandomAccessIterator<value_type> 		iterator; // https://www.cplusplus.com/reference/iterator/RandomAccessIterator/
+			// typedef		RandomAccessIterator<const value_type> 	const_iterator; //https://en.cppreference.com/w/cpp/iterator/iterator_tags
+			// typedef		reverse_iterator<iterator> 				reverse_iterator;
+			// typedef		reverse_iterator<const_iterator> 		const_reverse_iterator;	
+			
+			typedef ft::vector_iterator<value_type> iterator;
+			typedef ft::vector_iterator<const value_type> const_iterator;
+			// typedef ft::reverse_iterator<iterator> reverse_iterator;
+			// typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;	
 //			typedef		std::ptrdiff_t 							difference_type;
 //			typedef		std::size_t 							size_type;		
 
@@ -108,14 +118,95 @@ namespace ft
 	
 	
 	*/
-
-	explicit vector (const allocator_type& alloc = allocator_type()) : f_irst(0), s_ize(0), c_apacity(0), a_llocator(alloc)
+	//this is the Default constructor
+	explicit vector (const allocator_type& alloc = allocator_type()) : ptr_first_elem(0), size_t_not_int(0), capacity_in_size_t(0), allocator_kind(alloc)
 	{
 		std::cout << "Default vector constructor called" << std::endl; 
 	}
 	
-	explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+	/*
+	https://www.cplusplus.com/reference/vector/vector/vector/
+	(2) fill constructor
+		Constructs a container with n elements. Each element is a copy of val.
+	*/
+	
+	explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : 
+	size_t_not_int(n), capacity_in_size_t(n), allocator_kind(alloc)
+	{
+		std::cout << "Fill in vector constructor called" << std::endl; 
+		size_type i;
+		ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
+		for(i = 0; i < n; i++)
+			allocator_kind.construct(ptr_first_elem + i, val);
+	}
+
+
+	/*
+	https://www.cplusplus.com/reference/vector/vector/vector/
+	(3) range constructor
+		Constructs a container with as many elements as the range [first,last),
+		with each element constructed from its corresponding 
+		element in that range, in the same order.		
+	*/
+	// template <class InputIterator>
+    //      vector (InputIterator first, InputIterator last,
+    //              const allocator_type& alloc = allocator_type());
+
+
+
+	//range
+	/*
+	For this constructor we have to use iterator
+	which will work through enable if to work with correct data_types
+	correct data_types are filtered via is_integral
+	
+	so I have to realize ft::is_integral
+	std::enable_if
+	
+	*/
+	template <class InputIterator>
+	vector (InputIterator first, InputIterator last,
+			const allocator_type& alloc = allocator_type(),
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = nullptr): allocator_kind(alloc) 
+		{
+			if (first > last)
+				throw std::length_error("Vector");
+			size_t_not_int = last - first;
+			capacity_in_size_t = size_t_not_int;
+			ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
+			for (difference_type i = 0; i < static_cast<difference_type>(size_t_not_int); i++)
+				allocator_kind.construct(ptr_first_elem + i, *(first + i));
+		}
 		
+		
+		// {
+		// difference_type len = last - first;
+
+		// size_t_not_int = 0;
+		// capacity_in_size_t = len;
+		// ptr_first_elem = allocator_kind.allocate(allocator_kind);
+		// assign(first, last);
+		// }
+
+
+
+
+
+
+	// ~vector()
+	// 	{
+	// 		size_type i;
+			
+	// 		i = 0;	
+	// 		while (i < ptr_first_elem) // switched of, because so far I dont have camparison operator
+	// 		{
+	// 			allocator_kind.destroy(ptr_first_elem + i);
+	// 		if(capacity_in_size_t)
+	// 			allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
+	// 			i++;
+	// 		}
+	// 	}
+	
 
 		
 		
