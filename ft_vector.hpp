@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/14 16:43:21 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/14 19:01:17 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,8 +284,81 @@ namespace ft
 	
 	/* CAPACITY */
 		
+		//size() https://www.cplusplus.com/reference/vector/vector/size/
+		size_type size() const 
+		{
+			return (size_t_not_int);
+		}
+		
+		//max_size() https://www.cplusplus.com/reference/vector/vector/max_size/
+		//https://stackoverflow.com/questions/5068262/how-do-i-implement-arraymax-size
+		size_type max_size() const 
+		{
+			return ((size_type)(-1) / sizeof(value_type)); // return size divided by object
+		}
+		
 
+		//method to help resize
+		void reallocate (size_type n)
+		{
+			size_type i;
 
+			i = 0;
+			if (n > this->max_size())
+				throw ::std::length_error( "ft::vector::reallocate() exceeded max_size()" );
+			if (n < capacity_in_size_t)
+				return;
+			pointer newarr = allocator_kind.allocate(n);
+			try
+			{
+				while ( i < size_t_not_int)
+				{
+					allocator_kind.construct(newarr + i, *(ptr_first_elem + i));
+					i++;
+				}
+			}
+			catch (std::exception &e)
+			{
+				i = 0;
+				while (newarr + i != NULL && i < size_t_not_int)
+				{
+					allocator_kind.destroy(newarr + i); //destroy new vector if there is a problem
+					i++;
+				}
+				allocator_kind.deallocate(newarr, n); // free 
+				throw;
+			}
+			i = 0; // if success we get rid of the old
+			while( i < size_t_not_int) 
+			{
+				allocator_kind.destroy(ptr_first_elem + i); // destroy
+				i++;
+			}
+			if(capacity_in_size_t)
+				allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t); // free
+			capacity_in_size_t = n; // new cap
+			ptr_first_elem = newarr; // new arr
+		}
+
+		void resize (size_type n, value_type val = value_type())
+		{
+			if(n < size_t_not_int)
+			{
+				for(size_type i = n; i < size_t_not_int; i++)
+					allocator_kind.destroy(ptr_first_elem + i);
+				size_t_not_int = n;
+			}
+			else if (n > size_t_not_int)
+			{
+				if (capacity_in_size_t < n)
+					this->reallocate(capacity_in_size_t * 2 > n ? capacity_in_size_t * 2 : n);
+				for (size_type i = size_t_not_int; i < n; i++)
+				{
+					allocator_kind.construct(ptr_first_elem + i, val);
+					size_t_not_int++;
+				}
+			}
+		}
 	
 
 	/* MODIFIER */
