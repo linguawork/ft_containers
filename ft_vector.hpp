@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/14 19:01:17 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/14 19:13:11 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,6 +340,8 @@ namespace ft
 			ptr_first_elem = newarr; // new arr
 		}
 
+
+		//https://www.cplusplus.com/reference/vector/vector/resize/
 		void resize (size_type n, value_type val = value_type())
 		{
 			if(n < size_t_not_int)
