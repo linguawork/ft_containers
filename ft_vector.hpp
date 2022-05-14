@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/13 17:07:44 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/14 16:06:40 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ namespace ft
 //			typedef		std::size_t 							size_type;		
 
 
+
+/* MEMBER FUNCTIONS acc to https://www.cplusplus.com/reference/vector/vector/ */
+
 /* CONSTRUCTORS */
 
 	/*
@@ -121,7 +124,7 @@ namespace ft
 	//this is the Default constructor
 	explicit vector (const allocator_type& alloc = allocator_type()) : ptr_first_elem(0), size_t_not_int(0), capacity_in_size_t(0), allocator_kind(alloc)
 	{
-		std::cout << "Default vector constructor called" << std::endl; 
+		std::cout << "Default ft_vector constructor called" << std::endl; 
 	}
 	
 	/*
@@ -133,7 +136,7 @@ namespace ft
 	explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : 
 	size_t_not_int(n), capacity_in_size_t(n), allocator_kind(alloc)
 	{
-		std::cout << "Fill in vector constructor called" << std::endl; 
+		std::cout << "Fill in ft_vector constructor called" << std::endl; 
 		size_type i;
 		ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
 		for(i = 0; i < n; i++)
@@ -160,6 +163,7 @@ namespace ft
 			const allocator_type& alloc = allocator_type(),
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = nullptr): allocator_kind(alloc) 
 		{
+			std::cout << "Range ft_vector constructor called" << std::endl; 
 			if (first > last)
 				throw std::length_error("Vector");
 			size_t_not_int = last - first;
@@ -194,7 +198,7 @@ namespace ft
 	//copy constructor
 	vector (const vector& x) :  size_t_not_int (0), capacity_in_size_t (0)
 	{
-		std::cout << "copy constructor called" << std::endl;
+		std::cout << "copy of ft_vector constructor called" << std::endl;
 		*this = x; // we need to use operator = 
 	}
 
@@ -202,7 +206,7 @@ namespace ft
 	~vector()
 	{
 
-		std::cout << "vector class obj destructor called" << std::endl;
+		std::cout << "ft_vector class obj destructor called" << std::endl;
 		size_type i;
 		for (i = 0; i < size_t_not_int; i++)
 			allocator_kind.destroy(ptr_first_elem + i);
@@ -211,12 +215,57 @@ namespace ft
 	}
 
 
-// this one added for copy constructor test
+
+	/* ELEMENT ACCESS */
+	
+	/* 
+	this operator overload was added  first to make copy constructor work
+	https://www.cplusplus.com/reference/vector/vector/
+	*/
+	
 	const_reference operator[] (size_type n) const
 	{
 		return(*(ptr_first_elem + n));
 	}
 	
+
+	/*
+	Now need to iterate along vector
+	So I need to implement begin and end
+		ITERATORS
+	*/
+
+	//https://www.cplusplus.com/reference/vector/vector/begin/
+		iterator begin()
+		{
+			return (iterator(ptr_first_elem));
+		}
+		
+		const_iterator begin() const
+		{
+			return (const_iterator(ptr_first_elem));
+		}
+		
+		iterator end()
+		{
+			return (iterator(ptr_first_elem + size_t_not_int));
+		}
+		
+		const_iterator end() const
+		{
+			return (const_iterator(ptr_first_elem + size_t_not_int));
+		}
+
+
+		
+
+	/* CAPACITY */
+
+	/* MODIFIER */
+
+	/* */
+
+
 
 
 		
