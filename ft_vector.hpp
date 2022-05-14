@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/14 16:27:23 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/14 16:43:21 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 // #include <iterator> 
 #include <iostream>
 #include "ft_utility.hpp"
+#include "ft_reverse_iterator.hpp"
 
 
 /*
@@ -280,9 +281,12 @@ namespace ft
 		}
 	
 
+	
+	/* CAPACITY */
 		
 
-	/* CAPACITY */
+
+	
 
 	/* MODIFIER */
 

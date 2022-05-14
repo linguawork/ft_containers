@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/14 16:32:45 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/14 16:37:38 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 
 int main ()
 {
+    // CONSTRUCTOR TESTS used in the same order as described above:
   {
-  // CONSTRUCTOR TESTS used in the same order as described above:
       ft::vector<int> first_obj; //test for default constructor
       ft::vector<int> second (4,100);//test for constructor with values in vector
         // std::vector<int> second (4,100); 
@@ -62,6 +62,7 @@ int main ()
 
   //test for reverse_iterator class 
   //rbegin, rend() methods need reverse_iterator
+  //https://www.cplusplus.com/reference/vector/vector/rbegin/
   {
       ft::vector<int> myvector (5);  // 5 default-constructed ints
 
@@ -76,6 +77,13 @@ int main ()
       for (ft::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
       std::cout << ' ' << *it;
       std::cout << '\n';
+    }
+
+
+
+    {
+
+      
     }
 
     
