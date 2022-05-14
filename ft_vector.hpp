@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/14 16:06:40 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/14 16:27:23 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ namespace ft
 			
 			typedef ft::vector_iterator<value_type> iterator;
 			typedef ft::vector_iterator<const value_type> const_iterator;
-			// typedef ft::reverse_iterator<iterator> reverse_iterator;
-			// typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;	
+			typedef ft::reverse_iterator<iterator> reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;	
 //			typedef		std::ptrdiff_t 							difference_type;
 //			typedef		std::size_t 							size_type;		
 
@@ -256,6 +256,29 @@ namespace ft
 			return (const_iterator(ptr_first_elem + size_t_not_int));
 		}
 
+	//methods for reverse_iterators
+	//https://www.cplusplus.com/reference/vector/vector/rbegin/
+
+		reverse_iterator rbegin() 
+		{
+			return (reverse_iterator(end()));
+		}
+
+		const_reverse_iterator rbegin() const 
+		{
+			return (const_reverse_iterator(end()));
+		}
+
+		reverse_iterator rend() 
+		{
+			return (reverse_iterator(begin()));
+		}
+
+		const_reverse_iterator rend() const 
+		{
+			return (const_reverse_iterator(begin()));
+		}
+	
 
 		
 
