@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/14 19:13:11 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/15 17:06:33 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,7 +294,8 @@ namespace ft
 		//https://stackoverflow.com/questions/5068262/how-do-i-implement-arraymax-size
 		size_type max_size() const 
 		{
-			return ((size_type)(-1) / sizeof(value_type)); // return size divided by object
+			// return ((size_type)(-1) / sizeof(value_type)); // return size divided by object
+			return (allocator_kind.max_size());
 		}
 		
 
@@ -361,6 +362,29 @@ namespace ft
 				}
 			}
 		}
+		
+		//https://www.cplusplus.com/reference/vector/vector/capacity/
+		size_type capacity(void) const
+		{
+			return (capacity_in_size_t);
+		}
+
+		bool empty() const 
+		{
+			// return (size_t_not_int == 0);
+			return (ptr_first_elem == 0);
+		}
+
+
+		//https://www.cplusplus.com/reference/vector/vector/reserve/
+		void reserve (size_type n) 
+		{
+			if (n > capacity_in_size_t)
+				reallocate(n);
+		}
+
+
+		
 	
 
 	/* MODIFIER */

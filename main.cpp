@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/14 19:07:47 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/15 17:19:04 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,78 @@ int main ()
         for (int i=0;i<myvector.size();i++)
           std::cout << ' ' << myvector[i];
         std::cout << '\n';
+    }
+
+
+    //https://www.cplusplus.com/reference/vector/vector/capacity/
+    {
+      std::cout << "\n" << "capacity() test" << "\n";
+      
+      ft::vector<int> myvector (100, 5);
+      std::vector<int> myvector2 (100, 5);
+
+      // need to check with push_back()
+
+      std::cout << "size: " << (int) myvector.size() << '\n';
+      std::cout << "capacity: " << (int) myvector.capacity() << '\n';
+      std::cout << "max_size: " << (int) myvector.max_size() << '\n'; //why -1
+
+      std::cout << "size: " << (int) myvector2.size() << '\n';
+      std::cout << "capacity: " << (int) myvector2.capacity() << '\n';
+      std::cout << "max_size: " << (int) myvector2.max_size() << '\n'; //why -1
+    }
+
+
+    //https://www.cplusplus.com/reference/vector/vector/empty/
+    {
+      std::cout << "\n" << "empty() test" << "\n";
+        // std::vector<int> myvector;
+        // int sum (0);
+        
+        ft::vector<int> myvector (100, 5);
+        ft::vector<int> myvector2;
+        // std::vector<int> myvector (100, 5);
+        // std::vector<int> myvector2;
+
+        // for (int i=1;i<=10;i++) myvector.push_back(i);
+
+        if (!myvector.empty())
+        {
+          std::cout << "vector is not empty\n" << std::endl;
+        }
+        else
+          std::cout << "vector is empty\n" << std::endl;
+
+        if (!myvector2.empty())
+        {
+          std::cout << "vector2 is not empty\n" << std::endl;
+        }
+        else
+          std::cout << "vector2 is empty\n" << std::endl;
+
+        // std::cout << "total: " << sum << '\n';
+      
+    }
+
+
+  //https://www.cplusplus.com/reference/vector/vector/reserve/
+    {
+      ft::vector<int>::size_type sz;
+      
+      ft::vector<int> bar;
+      sz = bar.capacity(); // 0
+      std::cout << "capacity " << sz << '\n';
+      bar.reserve(100);   // this is the only difference with foo above
+      // std::cout << "making bar grow:\n";
+      // for (int i=0; i<100; ++i) {
+      //   bar.push_back(i);
+      //  sz = bar.capacity();
+      // std::cout << "capacity " << sz << '\n';
+        if (sz!=bar.capacity()) // 
+        {
+          sz = bar.capacity(); // 100
+          std::cout << "capacity changed: " << sz << '\n';
+        }
     }
 
     
