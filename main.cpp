@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/15 17:19:04 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/15 19:25:30 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int main ()
       std::cout << '\n';
     }
 
-
+    /*******************CAPACITY PART TESTS**********************************/
+    
     //test for size() https://www.cplusplus.com/reference/vector/vector/size/
     {
        std::cout << "\n" << "size() test" << "\n";
@@ -145,18 +146,18 @@ int main ()
     {
       std::cout << "\n" << "capacity() test" << "\n";
       
-      ft::vector<int> myvector (100, 5);
-      std::vector<int> myvector2 (100, 5);
+      ft::vector<int> myvector (99, 5);
+      std::vector<int> myvector2 (99, 5);
 
       // need to check with push_back()
 
       std::cout << "size: " << (int) myvector.size() << '\n';
       std::cout << "capacity: " << (int) myvector.capacity() << '\n';
-      std::cout << "max_size: " << (int) myvector.max_size() << '\n'; //why -1
+      std::cout << "max_size: " <<  myvector.max_size() << '\n'; //when we cast to int, we get -1
 
       std::cout << "size: " << (int) myvector2.size() << '\n';
       std::cout << "capacity: " << (int) myvector2.capacity() << '\n';
-      std::cout << "max_size: " << (int) myvector2.max_size() << '\n'; //why -1
+      std::cout << "max_size: " <<  myvector2.max_size() << '\n'; //when we cast to int we get -1
     }
 
 
@@ -194,6 +195,7 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/reserve/
     {
+      std::cout << "\n" << "reserve() test" << "\n";
       ft::vector<int>::size_type sz;
       
       ft::vector<int> bar;
@@ -205,11 +207,90 @@ int main ()
       //   bar.push_back(i);
       //  sz = bar.capacity();
       // std::cout << "capacity " << sz << '\n';
-        if (sz!=bar.capacity()) // 
-        {
-          sz = bar.capacity(); // 100
-          std::cout << "capacity changed: " << sz << '\n';
-        }
+      if (sz!=bar.capacity()) // 
+      {
+        sz = bar.capacity(); // 100
+        std::cout << "capacity changed: " << sz << '\n';
+      }
+    }
+
+
+/*******************ELEMENT ACCESS TESTS**********************************/
+
+//https://www.cplusplus.com/reference/vector/vector/operator[]/
+    {
+       std::cout << "\n" << "operator[] test" << "\n";
+       std::cout  << "The test is skipped because  the operator= code uses "<< "\n" 
+       << " the operator[], it works" << "\n";
+    }
+
+//https://www.cplusplus.com/reference/vector/vector/at/
+    {
+       std::cout << "\n" << "at() test" << "\n";
+         std::vector<int> myvector (10);   // 10 zero-initialized ints
+
+       // assign some values:
+        for (unsigned i=0; i<myvector.size(); i++)
+          myvector.at(i)=i;
+
+        std::cout << "myvector contains:";
+        for (unsigned i=0; i<myvector.size(); i++)
+          std::cout << ' ' << myvector.at(i);
+        std::cout << '\n';
+
+
+
+        ft::vector<int> ftvector (10);   // 10 zero-initialized ints
+                // assign some values:
+        for (unsigned i=0; i<ftvector.size(); i++)
+          ftvector.at(i)=i;
+
+        std::cout << "ftvector contains:";
+        for (unsigned i=0; i<ftvector.size(); i++)
+          std::cout << ' ' << ftvector.at(i);
+        std::cout << '\n';
+    }
+
+
+//https://www.cplusplus.com/reference/vector/vector/front/
+    {
+      std::cout << "\n" << "front() test" << "\n";
+      std::vector<int> myvector (5, 10);
+      ft::vector<int> ftvector (5, 10);
+      // myvector.push_back(78);
+      // myvector.push_back(16);
+
+      // now front equals 78, and back 16
+
+      // myvector.front() //-= myvector.back();
+
+      std::cout << "myvector.front() is now " << myvector.front() << '\n';
+      std::cout << "ftvector.front() is now " << ftvector.front() << '\n';
+    }
+
+
+  //https://www.cplusplus.com/reference/vector/vector/back/
+    {
+        std::vector<int> myvector (1, 88);
+        ft::vector<int> ftvector (1, 99);
+        // myvector.push_back(10);
+
+        // while (myvector.back() != 0)
+        // {
+        //   myvector.push_back ( myvector.back() -1 );
+        // }
+
+        std::cout << "myvector last element contains:";
+        for (unsigned i=0; i<myvector.size() ; i++)
+          std::cout << ' ' << myvector[i];
+        std::cout << '\n';
+
+        std::cout << "ftvector last element contains:";
+        for (unsigned i=0; i<ftvector.size() ; i++)
+          std::cout << ' ' << ftvector[i];
+
+         std::cout << '\n';
+      
     }
 
     

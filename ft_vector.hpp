@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/15 17:06:33 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/15 19:22:41 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,19 +217,6 @@ namespace ft
 
 
 
-	/* ELEMENT ACCESS */
-	
-	/* 
-	this operator overload was added  first to make copy constructor work
-	https://www.cplusplus.com/reference/vector/vector/
-	*/
-	
-	const_reference operator[] (size_type n) const
-	{
-		return(*(ptr_first_elem + n));
-	}
-	
-
 	/*
 	Now need to iterate along vector
 	So I need to implement begin and end
@@ -383,6 +370,63 @@ namespace ft
 				reallocate(n);
 		}
 
+	/* ELEMENT ACCESS */
+	
+	/* 
+	I moved it from the upper part to here
+	there should be const and non-const
+	https://www.cplusplus.com/reference/vector/vector/operator[]/
+	*/
+	reference operator[] (size_type n)
+	{
+		return ( *( this->ptr_first_elem + n ) );
+	}	
+
+	
+	const_reference operator[] (size_type n) const
+	{
+		// return(*(ptr_first_elem + n));
+		return ( *( this->ptr_first_elem + n ) );
+	}
+
+	void check_boundaries( size_type position ) const {
+		if ((position < 0 ||position >= this->size() || empty()))
+			throw ::std::out_of_range( "ft::vector::at() out of range" );
+	}	
+
+	reference at( size_type position ) 
+	{
+		check_boundaries( position );
+		return ( ( *this )[position] );
+	}
+
+	const_reference at( size_type position ) const
+	{
+		check_boundaries( position );
+		return ( ( *this )[position] );
+	}
+
+	reference front( void )
+	{
+		 return ( *this->ptr_first_elem ); 
+	}
+
+	const_reference front( void ) const 
+	{
+		 return ( *this->ptr_first_elem ); 
+	}
+
+	reference back( void ) 
+	{
+		 return ( *this->ptr_first_elem[size_t_not_int - 1] ); 
+	}
+
+	const_reference back( void ) const 
+	{
+		 return ( *this->ptr_first_elem[size_t_not_int - 1] ); 
+	}
+	
+	
 
 		
 	
