@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/16 10:10:36 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/16 14:16:13 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -487,6 +487,47 @@ namespace ft
 		size_t_not_int--;
 	}
     
+	//https://www.cplusplus.com/reference/vector/vector/insert/
+	// single element (1)	iterator insert (iterator position, const value_type& val);	
+	// fill (2)	void insert (iterator position, size_type n, const value_type& val);
+	// range (3) template <class InputIterator>
+    // 			void insert (iterator position, InputIterator first, InputIterator last);
+	
+	// single element (1)	
+	// iterator insert (iterator position, const value_type& val)
+	// {
+	// 	if (position < begin() || position > end())
+	// 		throw std::logic_error("vector position error when inserting a single element");
+	// 	difference_type location = position - begin(); // разница
+	// 	if (size_t_not_int >= capacity_in_size_t)
+	// 	{
+	// 		capacity_in_size_t *= 2;
+	// 		pointer new_vec = allocator_kind.allocate(capacity_in_size_t); // malloc of size
+	// 		//https://www.cplusplus.com/reference/memory/uninitialized_copy/
+	// 		// typedef typename iterator_traits<_ForwardIterator>::value_type value_type;
+	// 		std::uninitialized_copy(begin(), position, iterator(new_vec)); //give memory from at pos (start(begin) to finish (position), insert new vec size
+	// 		allocator_kind.construct(new_vec + location, val); // at the correct pos create a new obj for 1 val
+	// 		std::uninitialized_copy(position, end(), iterator(new_vec + location + 1)); // from pos to end inserted new vec size + 1 elem (inserted elem)
+	// 		for (size_t i = 0; i < size_t_not_int; i++)
+	// 			allocator_kind.destroy(ptr_first_elem + i); // destructor
+	// 		if(size_t_not_int)
+	// 			allocator_kind.deallocate(ptr_first_elem, size_t_not_int); // free
+	// 		size_t_not_int++;
+	// 		ptr_first_elem = new_vec;
+	// 	}
+	// 	else // if the capacity is enough
+	// 	{
+	// 		for (size_type i = size_t_not_int; i > static_cast<size_type>(location); i--)
+	// 		{
+	// 			allocator_kind.destroy(ptr_first_elem + i); // destruct
+	// 			allocator_kind.construct(ptr_first_elem + i, *(ptr_first_elem + i - 1)); // reconstruct by moving to right
+	// 		}
+	// 		allocator_kind.destroy(&(*position)); //destruct what is inside the pos
+	// 		allocator_kind.construct(&(*position), val); // construct new elem
+	// 		size_t_not_int++; // + 1 elem
+	// 	}
+	// 	return (begin() + location);//
+	// }
 
 
 

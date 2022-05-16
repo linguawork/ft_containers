@@ -33,6 +33,8 @@ namespace ft {
 
 	class bidirectional_iterator_tag {};
 
+	class forward_iterator_tag {};
+
 	template<class iterator>
 	struct iterator_traits {
 		typedef iterator iterator_type;
@@ -84,6 +86,7 @@ namespace ft {
 	private:
 		pointer _elem;
 	};
+
 
 }
 
