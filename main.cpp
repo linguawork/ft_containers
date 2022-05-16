@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/16 09:38:10 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/16 10:11:38 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,32 +345,77 @@ int main ()
 
 //https://www.cplusplus.com/reference/vector/vector/push_back/
   {
-      std::cout << "\n" << "pushback() test" << "\n";
+      std::cout << "\n" << "pushback() test commented so far" << "\n";
+      // std::vector<int> myvector(100, 4);
+      // int myint;
+
+      // std::cout << "Please enter some integers for vector (enter 0 to end):\n";
+
+      // do 
+      // {
+      //   std::cin >> myint;
+      //   myvector.push_back (myint);
+      // } while (myint);
+
+      // std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
+            
+      // std::vector<int>::size_type sz;
+      // sz = myvector.capacity(); 
+      // std::cout << "capacity of vector changed: " << sz << '\n';
+
+
+
+
+
+      // ft::vector<int> ftvector(100, 4);;
+      // int ftint;
+
+      // std::cout << "Please enter some integers for ft_vector (enter 0 to end):\n";
+
+      // do 
+      // {
+      //   std::cin >> ftint;
+      //   ftvector.push_back (ftint);
+      // } while (ftint);
+
+      // std::cout << "ft::vector stores " << int(ftvector.size()) << " numbers.\n";
+      // ft::vector<int>::size_type sz1;
+      // sz1 = ftvector.capacity(); 
+      // std::cout << "capacity of ft_vector changed: " << sz1 << '\n';
+  }
+
+
+//https://www.cplusplus.com/reference/vector/vector/pop_back/
+  {
+
+      std::cout << "\n" << "pop_back() test" << "\n";
       std::vector<int> myvector;
-      int myint;
+      int sum (0);
+      myvector.push_back (100);
+      myvector.push_back (200);
+      myvector.push_back (300);
 
-      std::cout << "Please enter some integers for vector (enter 0 to end):\n";
-
-      do 
+      while (!myvector.empty()) 
       {
-        std::cin >> myint;
-        myvector.push_back (myint);
-      } while (myint);
+        sum+=myvector.back();
+        myvector.pop_back();
+      }
+      std::cout << "The elements of myvector add up to " << sum << '\n';
 
-      std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
 
-      ft::vector<int> ftvector;
-      int ftint;
+      ft::vector<int> ft_vector;
+      int sum1 (0);
+      ft_vector.push_back (100);
+      ft_vector.push_back (200);
+      ft_vector.push_back (300);
 
-      std::cout << "Please enter some integers for ft_vector (enter 0 to end):\n";
-
-      do 
+      while (!ft_vector.empty()) //debugged size = 0 there
       {
-        std::cin >> ftint;
-        ftvector.push_back (ftint);
-      } while (ftint);
+        sum1+=ft_vector.back();
+        ft_vector.pop_back();
+      }
 
-      std::cout << "ft::vector stores " << int(ftvector.size()) << " numbers.\n";
+      std::cout << "The elements of myvector add up to " << sum1 << '\n';
   }
 
       

@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/16 09:27:50 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/16 10:10:36 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,8 +358,8 @@ namespace ft
 
 		bool empty() const 
 		{
-			// return (size_t_not_int == 0);
-			return (ptr_first_elem == 0);
+			return (size_t_not_int == 0); 
+			// return (ptr_first_elem == 0); // caused problem in pop_back, so I changed
 		}
 
 
@@ -418,12 +418,12 @@ namespace ft
 
 	reference back( void ) 
 	{
-		 return ( *this->ptr_first_elem[size_t_not_int - 1] ); 
+		 return (ptr_first_elem[size_t_not_int - 1] ); 
 	}
 
 	const_reference back( void ) const 
 	{
-		 return ( *this->ptr_first_elem[size_t_not_int - 1] ); 
+		 return (ptr_first_elem[size_t_not_int - 1] ); 
 	}
 	
 	
@@ -478,6 +478,13 @@ namespace ft
 			reallocate(capacity_in_size_t == 0 ? 1 : capacity_in_size_t * 2);
 		allocator_kind.construct(ptr_first_elem + size_t_not_int, val);
 		size_t_not_int++;
+	}
+
+	//https://www.cplusplus.com/reference/vector/vector/pop_back/
+	void pop_back()
+	{
+		allocator_kind.destroy(ptr_first_elem + size_t_not_int - 1);
+		size_t_not_int--;
 	}
     
 
