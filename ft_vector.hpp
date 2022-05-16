@@ -6,14 +6,14 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/16 14:16:13 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/16 16:52:56 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef FT_VECTOR_HPP // defining HEADER
 #define FT_VECTOR_HPP
-#include <memory> //std::allocator
+#include <memory> //std::allocator  //
 // #include <iterator> 
 #include <iostream>
 #include "ft_utility.hpp"
@@ -37,6 +37,8 @@ In vector container I have to use std::allocator's members
 
 namespace ft
 {
+
+	
 	//Template according to std98 documentation
 	//https://www.cplusplus.com/reference/memory/allocator/
 	//there are fields inside std::allocator and I redefined them via typedef
@@ -487,6 +489,31 @@ namespace ft
 		size_t_not_int--;
 	}
     
+	
+	//we can not use std::uninitialized_copy but we can write our own
+	//https://en.cppreference.com/w/cpp/memory/uninitialized_copy
+	//https://stackoverflow.com/questions/9727556/is-uninitialized-copy-fillin-first-in-last-for-dest-a-a-an-oversight-in-th
+	template<class InputIt, class _ForwardIterator>
+	_ForwardIterator uninitialized_copy(InputIt first, InputIt last, _ForwardIterator d_first)
+	{
+		typedef typename ft::iterator_traits<_ForwardIterator>::value_type value_type;  // through iterator_traits I typedefed VALUE_TYPE
+		_ForwardIterator current = d_first;
+		try {
+			for (; first != last; ++first, (void) ++current) 
+					allocator_kind.construct (&*current, *first);	
+			return current;
+		} 
+		catch (...) 
+		{
+			for (; d_first != current; ++d_first) 
+				d_first->~value_type();
+			throw;
+		}
+	}
+
+
+
+	
 	//https://www.cplusplus.com/reference/vector/vector/insert/
 	// single element (1)	iterator insert (iterator position, const value_type& val);	
 	// fill (2)	void insert (iterator position, size_type n, const value_type& val);
@@ -494,40 +521,113 @@ namespace ft
     // 			void insert (iterator position, InputIterator first, InputIterator last);
 	
 	// single element (1)	
-	// iterator insert (iterator position, const value_type& val)
-	// {
-	// 	if (position < begin() || position > end())
-	// 		throw std::logic_error("vector position error when inserting a single element");
-	// 	difference_type location = position - begin(); // разница
-	// 	if (size_t_not_int >= capacity_in_size_t)
-	// 	{
-	// 		capacity_in_size_t *= 2;
-	// 		pointer new_vec = allocator_kind.allocate(capacity_in_size_t); // malloc of size
-	// 		//https://www.cplusplus.com/reference/memory/uninitialized_copy/
-	// 		// typedef typename iterator_traits<_ForwardIterator>::value_type value_type;
-	// 		std::uninitialized_copy(begin(), position, iterator(new_vec)); //give memory from at pos (start(begin) to finish (position), insert new vec size
-	// 		allocator_kind.construct(new_vec + location, val); // at the correct pos create a new obj for 1 val
-	// 		std::uninitialized_copy(position, end(), iterator(new_vec + location + 1)); // from pos to end inserted new vec size + 1 elem (inserted elem)
-	// 		for (size_t i = 0; i < size_t_not_int; i++)
-	// 			allocator_kind.destroy(ptr_first_elem + i); // destructor
-	// 		if(size_t_not_int)
-	// 			allocator_kind.deallocate(ptr_first_elem, size_t_not_int); // free
-	// 		size_t_not_int++;
-	// 		ptr_first_elem = new_vec;
-	// 	}
-	// 	else // if the capacity is enough
-	// 	{
-	// 		for (size_type i = size_t_not_int; i > static_cast<size_type>(location); i--)
-	// 		{
-	// 			allocator_kind.destroy(ptr_first_elem + i); // destruct
-	// 			allocator_kind.construct(ptr_first_elem + i, *(ptr_first_elem + i - 1)); // reconstruct by moving to right
-	// 		}
-	// 		allocator_kind.destroy(&(*position)); //destruct what is inside the pos
-	// 		allocator_kind.construct(&(*position), val); // construct new elem
-	// 		size_t_not_int++; // + 1 elem
-	// 	}
-	// 	return (begin() + location);//
-	// }
+	iterator insert (iterator position, const value_type& val)
+	{
+		if (position < begin() || position > end())
+			throw std::logic_error("vector position error when inserting a single element");
+		difference_type location = position - begin(); // разница
+		if (size_t_not_int >= capacity_in_size_t)
+		{
+			capacity_in_size_t *= 2;
+			pointer new_vec = allocator_kind.allocate(capacity_in_size_t); // malloc of size
+			//https://www.cplusplus.com/reference/memory/uninitialized_copy/
+			// typedef typename iterator_traits<_ForwardIterator>::value_type value_type;
+			uninitialized_copy(begin(), position, iterator(new_vec)); //give memory from at pos (start(begin) to finish (position), insert new vec size
+				allocator_kind.construct(new_vec + location, val); // at the correct pos create a new obj for 1 val
+			uninitialized_copy(position, end(), iterator(new_vec + location + 1)); // from pos to end inserted new vec size + 1 elem (inserted elem)
+			for (size_t i = 0; i < size_t_not_int; i++)
+				allocator_kind.destroy(ptr_first_elem + i); // destructor
+			if(size_t_not_int)
+				allocator_kind.deallocate(ptr_first_elem, size_t_not_int); // free
+			size_t_not_int++;
+			ptr_first_elem = new_vec;
+		}
+		else // if the capacity is enough
+		{
+			for (size_type i = size_t_not_int; i > static_cast<size_type>(location); i--)
+			{
+				allocator_kind.destroy(ptr_first_elem + i); // destruct
+				allocator_kind.construct(ptr_first_elem + i, *(ptr_first_elem + i - 1)); // reconstruct by moving to right
+			}
+			allocator_kind.destroy(&(*position)); //destruct what is inside the pos
+			allocator_kind.construct(&(*position), val); // construct new elem
+			size_t_not_int++; // + 1 elem
+		}
+		return (begin() + location);//
+	}
+
+
+		// unsigned int get_new_capacity(unsigned int len_to_insert) 
+		// {
+		// 	unsigned int new_capacity = capacity_in_size_t;
+
+		// 	if (size_t_not_int == 0 && capacity_in_size_t == 0)
+		// 		new_capacity = 1;
+
+		// 	if (len_to_insert + size_t_not_int > capacity_in_size_t) {
+		// 		new_capacity = len_to_insert + size_t_not_int;
+		// 		if (capacity_in_size_t * 2 > new_capacity)
+		// 			new_capacity = capacity_in_size_t * 2;
+		// 	}
+
+		// 	return (new_capacity);
+		// }
+
+		// the way around ForwardIter
+		// void insert (iterator position, size_type n, const value_type& val) 
+		// {
+		// 	if (position < begin() || position > end())
+		// 		throw std::logic_error("vector");
+		// 	difference_type start = position - begin();
+
+		// 	if (n + size_t_not_int >= capacity_in_size_t) {
+		// 		unsigned int new_capacity = get_new_capacity(n);
+
+		// 		pointer ptr_first = allocator_kind.allocate(new_capacity);
+		// 		std::memcpy(ptr_first, ptr_first_elem, start * sizeof(value_type));
+		// 		size_type i = 0;
+		// 		for (; i < n; i++) {
+		// 			allocator_kind.construct(ptr_first + start + i, val);
+		// 		}
+
+		// 		if ((capacity_in_size_t - (start + n)) < 0)
+		// 			capacity_in_size_t = new_capacity;
+
+		// 		unsigned int len;
+		// 		if (capacity_in_size_t < (start + n))
+		// 			len = new_capacity - start - n;
+		// 		else
+		// 			len = capacity_in_size_t - start - n;
+
+		// 		std::memcpy(ptr_first + start + n, ptr_first_elem + start,
+		// 					(len) * sizeof(value_type));
+		// 		for (size_type k = 0; i < size(); i++) {
+		// 			allocator_kind.destroy(ptr_first + k);
+		// 		}
+		// 		allocator_kind.deallocate(ptr_first_elem, size_t_not_int);
+		// 		ptr_first_elem = ptr_first;
+		// 		size_t_not_int += n;
+		// 		capacity_in_size_t = new_capacity;
+		// 	} else {
+		// 		size_type i = 0;
+		// 		iterator iter = begin();
+		// 		while (iter != position) {
+		// 			++iter;
+		// 			++i;
+		// 		}
+		// 		for (; i < n + start; i++) {
+		// 			allocator_kind.construct(ptr_first_elem + i, val); // here had a mistake
+		// 			size_t_not_int++;
+		// 		}
+		// 	}
+		// }
+
+		// iterator insert (iterator position, const value_type& val) {
+		// 	difference_type pos = position - begin();
+		// 	insert(position, 1, val);
+
+		// 	return (iterator(&ptr_first_elem[pos]));
+		// }
 
 
 

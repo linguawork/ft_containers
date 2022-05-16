@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/16 13:33:06 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/16 16:08:48 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,47 +431,47 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/insert/
   {
-    std::cout << "\n" << "insert() test" << "\n";
-    std::vector<int> myvector (3,100); //100 100 100
-    std::vector<int>::iterator it;
-    it = myvector.begin();
-        for (it=myvector.begin(); it<myvector.end(); it++)
-      std::cout << ' ' << *it;
-    std::cout << '\n';
+    // std::cout << "\n" << "insert() test" << "\n";
+    // std::vector<int> myvector (3,100); //100 100 100
+    // std::vector<int>::iterator it;
+    // it = myvector.begin();
+    //     for (it=myvector.begin(); it<myvector.end(); it++)
+    //   std::cout << ' ' << *it;
+    // std::cout << '\n';
 
 
   
 
-    it = myvector.begin();
-    it = myvector.insert ( it , 200 ); // it is one the first, inserted on the first place  
-    //200 100 100 100
+    // it = myvector.begin();
+    // it = myvector.insert ( it , 200 ); // it is one the first, inserted on the first place  
+    // //200 100 100 100
 
-    myvector.insert (it,2,300); // it is on the first  and inserts two elements from the pos of it
-    //  300 300 200 100 100 100
+    // myvector.insert (it,2,300); // it is on the first  and inserts two elements from the pos of it
+    // //  300 300 200 100 100 100
    
-    for (it=myvector.begin(); it < myvector.end(); it++) // it went to the last position
-      std::cout << ' ' << *it;
-    std::cout << '\n';
+    // for (it=myvector.begin(); it < myvector.end(); it++) // it went to the last position
+    //   std::cout << ' ' << *it;
+    // std::cout << '\n';
 
 
-    // "it" no longer valid, get a new one: we returned it to the beginning
-    it = myvector.begin();
+    // // "it" no longer valid, get a new one: we returned it to the beginning
+    // it = myvector.begin();
 
-    std::vector<int> anothervector (2,400); // new vec 
-    myvector.insert (it+2,anothervector.begin(),anothervector.end()); 
-    //inserted the new vec from it+2: 300 300 400 400 200 100 100 100
+    // std::vector<int> anothervector (2,400); // new vec 
+    // myvector.insert (it+2,anothervector.begin(),anothervector.end()); 
+    // //inserted the new vec from it+2: 300 300 400 400 200 100 100 100
 
 
 
-    int myarray [] = { 501,502,503 };// one more new vec
-    myvector.insert (myvector.begin(), myarray, myarray+3);
-    // insert the whole vec from the beginning of the vector where we insert
-    // myarray - beginning of the vector
-    // myarray + 3 - inserting 3 elements of myarray
-    std::cout << "myvector contains:";
-    for (it=myvector.begin(); it<myvector.end(); it++)
-      std::cout << ' ' << *it;
-    std::cout << '\n';
+    // int myarray [] = { 501,502,503 };// one more new vec
+    // myvector.insert (myvector.begin(), myarray, myarray+3);
+    // // insert the whole vec from the beginning of the vector where we insert
+    // // myarray - beginning of the vector
+    // // myarray + 3 - inserting 3 elements of myarray
+    // std::cout << "myvector contains:";
+    // for (it=myvector.begin(); it<myvector.end(); it++)
+    //   std::cout << ' ' << *it;
+    // std::cout << '\n';
 
 
     ft::vector<int> ft_vector (3,100);
@@ -482,18 +482,18 @@ int main ()
 
     // ft_vector.insert (it1,2,300);
 
-    // // "it" no longer valid, get a new one:
+    // "it" no longer valid, get a new one:
     // it1 = ft_vector.begin();
 
     // std::vector<int> anothervector1 (2,400);
     // ft_vector.insert (it+2,anothervector1.begin(),anothervector1.end());
 
     // int myarray1 [] = { 501,502,503 };
-    // myvector1.insert (myvector1.begin(), myarray1, myarray1+3);
+    // ftvector.insert (ftvector.begin(), myarray1, myarray1+3);
 
-    std::cout << "myvector contains:";
+    std::cout << "ft_vector contains:";
     for (it1=ft_vector.begin(); it1<ft_vector.end(); it1++)
-      std::cout << ' ' << *it;
+      std::cout << ' ' << *it1;
     std::cout << '\n';
 
 
