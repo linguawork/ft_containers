@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/15 19:25:30 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/16 09:38:10 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,8 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/back/
     {
+        std::cout << "\n" << "back() test" << "\n";
+      
         std::vector<int> myvector (1, 88);
         ft::vector<int> ftvector (1, 99);
         // myvector.push_back(10);
@@ -290,11 +292,86 @@ int main ()
           std::cout << ' ' << ftvector[i];
 
          std::cout << '\n';
-      
     }
 
+  /*******************MODIFIERS**********************************/
+  //https://www.cplusplus.com/reference/vector/vector/
+  //Unit-tests mainly require assign() method, so one can start testing 
+  {
+    std::cout << "\n" << "assign() test" << "\n";
     
-        
+
+    std::vector<int> first;
+    std::vector<int> second;
+    std::vector<int> third;
+
+    first.assign (7,100);             // 7 ints with a value of 100
+
+
+    std::vector<int>::iterator it;
+    it=first.begin()+1; // making iterator on the second cell (+1)
+
+    second.assign (it,first.end()-1); // from 2nd cell to the prefinal cell
+    // the 5 central values of first
+
+    int myints[] = {1776,7,4};
+    third.assign (myints,myints+3);  // assigning from array.
+
+    std::cout << "Size of std::vector first: " << int (first.size()) << '\n';
+    std::cout << "Size of std::vector second: " << int (second.size()) << '\n';
+    std::cout << "Size of std::vector third: " << int (third.size()) << '\n';
+    
+    ft::vector<int> first1;
+    ft::vector<int> second1;
+    ft::vector<int> third1;
+
+    first1.assign (7,100);             // 7 ints with a value of 100
+
+
+    ft::vector<int>::iterator it1;
+    it1=first1.begin()+1; // making iterator on the second cell (+1)
+
+    second1.assign (it1,first1.end()-1); // from 2nd cell to the prefinal cell
+    // the 5 central values of first
+
+    int myints1[] = {1776,7,4};
+    third1.assign (myints1,myints1+3);  // assigning from array.
+
+    std::cout << "Size of ft::vector first1: " << int (first1.size()) << '\n';
+    std::cout << "Size of ft::vector second1: " << int (second1.size()) << '\n';
+    std::cout << "Size of ft::vector third1: " << int (third1.size()) << '\n';
+    
+  }   
+
+//https://www.cplusplus.com/reference/vector/vector/push_back/
+  {
+      std::cout << "\n" << "pushback() test" << "\n";
+      std::vector<int> myvector;
+      int myint;
+
+      std::cout << "Please enter some integers for vector (enter 0 to end):\n";
+
+      do 
+      {
+        std::cin >> myint;
+        myvector.push_back (myint);
+      } while (myint);
+
+      std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
+
+      ft::vector<int> ftvector;
+      int ftint;
+
+      std::cout << "Please enter some integers for ft_vector (enter 0 to end):\n";
+
+      do 
+      {
+        std::cin >> ftint;
+        ftvector.push_back (ftint);
+      } while (ftint);
+
+      std::cout << "ft::vector stores " << int(ftvector.size()) << " numbers.\n";
+  }
 
       
   return 0;

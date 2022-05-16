@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/15 19:22:41 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/16 09:27:50 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -432,6 +432,57 @@ namespace ft
 	
 
 	/* MODIFIER */
+	//https://www.cplusplus.com/reference/vector/vector/assign/	
+	//fill assign
+	void assign (size_type n, const value_type& val) 
+    {
+		// clear(0);
+		resize(0);
+		if (n >= capacity_in_size_t)
+			reallocate(n); // dealoc is inside the method
+		int i;
+		
+		i = 0;
+		while (i < n) 
+		{
+			allocator_kind.construct(ptr_first_elem + size_t_not_int, val);
+			i++;
+		}
+		size_t_not_int = n;
+		
+	}
+	
+	//range assign
+	template <class InputIterator>
+	void assign (InputIterator first, InputIterator last,
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = nullptr)      
+	{
+		if(first > last)
+			throw std::logic_error("ft_vector::assign error");
+		difference_type distance = last - first;
+		resize(0); // may be replaced with clear
+		if (distance >= static_cast<difference_type>(capacity_in_size_t))
+			reallocate(distance);
+		while (first != last) 
+		{
+			allocator_kind.construct(ptr_first_elem + size_t_not_int, *first);
+			size_t_not_int++;
+			first++;
+		}
+	}
+
+	//https://www.cplusplus.com/reference/vector/vector/push_back/
+	void push_back (const value_type& val)
+	{
+		if(size_t_not_int == capacity_in_size_t)
+			reallocate(capacity_in_size_t == 0 ? 1 : capacity_in_size_t * 2);
+		allocator_kind.construct(ptr_first_elem + size_t_not_int, val);
+		size_t_not_int++;
+	}
+    
+
+
+
 
 	/* */
 
