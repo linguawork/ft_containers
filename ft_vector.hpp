@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/16 18:19:09 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/16 19:14:02 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,291 +372,362 @@ namespace ft
 				reallocate(n);
 		}
 
-	/* ELEMENT ACCESS */
-	
-	/* 
-	I moved it from the upper part to here
-	there should be const and non-const
-	https://www.cplusplus.com/reference/vector/vector/operator[]/
-	*/
-	reference operator[] (size_type n)
-	{
-		return ( *( this->ptr_first_elem + n ) );
-	}	
-
-	
-	const_reference operator[] (size_type n) const
-	{
-		// return(*(ptr_first_elem + n));
-		return ( *( this->ptr_first_elem + n ) );
-	}
-
-	void check_boundaries( size_type position ) const {
-		if ((position < 0 ||position >= this->size() || empty()))
-			throw ::std::out_of_range( "ft::vector::at() out of range" );
-	}	
-
-	reference at( size_type position ) 
-	{
-		check_boundaries( position );
-		return ( ( *this )[position] );
-	}
-
-	const_reference at( size_type position ) const
-	{
-		check_boundaries( position );
-		return ( ( *this )[position] );
-	}
-
-	reference front( void )
-	{
-		 return ( *this->ptr_first_elem ); 
-	}
-
-	const_reference front( void ) const 
-	{
-		 return ( *this->ptr_first_elem ); 
-	}
-
-	reference back( void ) 
-	{
-		 return (ptr_first_elem[size_t_not_int - 1] ); 
-	}
-
-	const_reference back( void ) const 
-	{
-		 return (ptr_first_elem[size_t_not_int - 1] ); 
-	}
-	
-	
-
+		/* ELEMENT ACCESS */
 		
-	
-
-	/* MODIFIER */
-	//https://www.cplusplus.com/reference/vector/vector/assign/	
-	//fill assign
-	void assign (size_type n, const value_type& val) 
-    {
-		// clear(0);
-		resize(0);
-		if (n >= capacity_in_size_t)
-			reallocate(n); // dealoc is inside the method
-		int i;
-		
-		i = 0;
-		while (i < n) 
+		/* 
+		I moved it from the upper part to here
+		there should be const and non-const
+		https://www.cplusplus.com/reference/vector/vector/operator[]/
+		*/
+		reference operator[] (size_type n)
 		{
+			return ( *( this->ptr_first_elem + n ) );
+		}	
+
+		
+		const_reference operator[] (size_type n) const
+		{
+			// return(*(ptr_first_elem + n));
+			return ( *( this->ptr_first_elem + n ) );
+		}
+
+		void check_boundaries( size_type position ) const {
+			if ((position < 0 ||position >= this->size() || empty()))
+				throw ::std::out_of_range( "ft::vector::at() out of range" );
+		}	
+
+		reference at( size_type position ) 
+		{
+			check_boundaries( position );
+			return ( ( *this )[position] );
+		}
+
+		const_reference at( size_type position ) const
+		{
+			check_boundaries( position );
+			return ( ( *this )[position] );
+		}
+
+		reference front( void )
+		{
+			return ( *this->ptr_first_elem ); 
+		}
+
+		const_reference front( void ) const 
+		{
+			return ( *this->ptr_first_elem ); 
+		}
+
+		reference back( void ) 
+		{
+			return (ptr_first_elem[size_t_not_int - 1] ); 
+		}
+
+		const_reference back( void ) const 
+		{
+			return (ptr_first_elem[size_t_not_int - 1] ); 
+		}
+		
+		
+
+			
+		
+
+		/* MODIFIER */
+		//https://www.cplusplus.com/reference/vector/vector/assign/	
+		//fill assign
+		void assign (size_type n, const value_type& val) 
+		{
+			// clear(0);
+			resize(0);
+			if (n >= capacity_in_size_t)
+				reallocate(n); // dealoc is inside the method
+			int i;
+			
+			i = 0;
+			while (i < n) 
+			{
+				allocator_kind.construct(ptr_first_elem + size_t_not_int, val);
+				i++;
+			}
+			size_t_not_int = n;
+			
+		}
+		
+		//range assign
+		template <class InputIterator>
+		void assign (InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = nullptr)      
+		{
+			if(first > last)
+				throw std::logic_error("ft_vector::assign error");
+			difference_type distance = last - first;
+			resize(0); // may be replaced with clear
+			if (distance >= static_cast<difference_type>(capacity_in_size_t))
+				reallocate(distance);
+			while (first != last) 
+			{
+				allocator_kind.construct(ptr_first_elem + size_t_not_int, *first);
+				size_t_not_int++;
+				first++;
+			}
+		}
+
+		//https://www.cplusplus.com/reference/vector/vector/push_back/
+		void push_back (const value_type& val)
+		{
+			if(size_t_not_int == capacity_in_size_t)
+				reallocate(capacity_in_size_t == 0 ? 1 : capacity_in_size_t * 2);
 			allocator_kind.construct(ptr_first_elem + size_t_not_int, val);
-			i++;
+			size_t_not_int++;
 		}
-		size_t_not_int = n;
+
+		//https://www.cplusplus.com/reference/vector/vector/pop_back/
+		void pop_back()
+		{
+			allocator_kind.destroy(ptr_first_elem + size_t_not_int - 1);
+			size_t_not_int--;
+		}
 		
-	}
-	
-	//range assign
-	template <class InputIterator>
-	void assign (InputIterator first, InputIterator last,
-			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = nullptr)      
-	{
-		if(first > last)
-			throw std::logic_error("ft_vector::assign error");
-		difference_type distance = last - first;
-		resize(0); // may be replaced with clear
-		if (distance >= static_cast<difference_type>(capacity_in_size_t))
-			reallocate(distance);
-		while (first != last) 
+		//this is to make insert() work
+		//we can not use std::uninitialized_copy but we can write our own
+		//https://en.cppreference.com/w/cpp/memory/uninitialized_copy
+		//https://stackoverflow.com/questions/9727556/is-uninitialized-copy-fillin-first-in-last-for-dest-a-a-an-oversight-in-th
+		template<class InputIt, class _ForwardIterator>
+		_ForwardIterator uninitialized_copy(InputIt first, InputIt last, _ForwardIterator d_first)
 		{
-			allocator_kind.construct(ptr_first_elem + size_t_not_int, *first);
-			size_t_not_int++;
-			first++;
-		}
-	}
-
-	//https://www.cplusplus.com/reference/vector/vector/push_back/
-	void push_back (const value_type& val)
-	{
-		if(size_t_not_int == capacity_in_size_t)
-			reallocate(capacity_in_size_t == 0 ? 1 : capacity_in_size_t * 2);
-		allocator_kind.construct(ptr_first_elem + size_t_not_int, val);
-		size_t_not_int++;
-	}
-
-	//https://www.cplusplus.com/reference/vector/vector/pop_back/
-	void pop_back()
-	{
-		allocator_kind.destroy(ptr_first_elem + size_t_not_int - 1);
-		size_t_not_int--;
-	}
-    
-	//this is to make insert() work
-	//we can not use std::uninitialized_copy but we can write our own
-	//https://en.cppreference.com/w/cpp/memory/uninitialized_copy
-	//https://stackoverflow.com/questions/9727556/is-uninitialized-copy-fillin-first-in-last-for-dest-a-a-an-oversight-in-th
-	template<class InputIt, class _ForwardIterator>
-	_ForwardIterator uninitialized_copy(InputIt first, InputIt last, _ForwardIterator d_first)
-	{
-		typedef typename ft::iterator_traits<_ForwardIterator>::value_type value_type;  // through iterator_traits I typedefed VALUE_TYPE
-		_ForwardIterator current = d_first;
-		try {
-			for (; first != last; ++first, (void) ++current) 
-					allocator_kind.construct (&*current, *first);	
-			return current;
-		} 
-		catch (...) 
-		{
-			for (; d_first != current; ++d_first) 
-				d_first->~value_type();
-			throw;
-		}
-	}
-
-
-	//https://www.cplusplus.com/reference/vector/vector/insert/
-	// single element (1)	iterator insert (iterator position, const value_type& val);	
-	// fill (2)	void insert (iterator position, size_type n, const value_type& val);
-	// range (3) template <class InputIterator>
-    // 			void insert (iterator position, InputIterator first, InputIterator last);
-	
-	// single element (1)	
-	iterator insert (iterator position, const value_type& val)
-	{
-		if (position < begin() || position > end())
-			throw std::logic_error("vector position error when inserting a single element");
-		difference_type location = position - begin(); // разница
-		if (size_t_not_int >= capacity_in_size_t)
-		{
-			capacity_in_size_t *= 2;
-			pointer new_vec = allocator_kind.allocate(capacity_in_size_t); // malloc of size
-			//https://www.cplusplus.com/reference/memory/uninitialized_copy/ (see above)
-			uninitialized_copy(begin(), position, iterator(new_vec)); //give memory from at pos (start(begin) to finish (position), insert new vec size
-				allocator_kind.construct(new_vec + location, val); // at the correct pos create a new obj for 1 val
-			uninitialized_copy(position, end(), iterator(new_vec + location + 1)); // from pos to end inserted new vec size + 1 elem (inserted elem)
-			for (size_t i = 0; i < size_t_not_int; i++)
-				allocator_kind.destroy(ptr_first_elem + i); // destructor
-			if(size_t_not_int)
-				allocator_kind.deallocate(ptr_first_elem, size_t_not_int); // free
-			size_t_not_int++;
-			ptr_first_elem = new_vec;
-		}
-		else // if the capacity is enough
-		{
-			for (size_type i = size_t_not_int; i > static_cast<size_type>(location); i--)
+			typedef typename ft::iterator_traits<_ForwardIterator>::value_type value_type;  // through iterator_traits I typedefed VALUE_TYPE
+			_ForwardIterator current = d_first;
+			try {
+				for (; first != last; ++first, (void) ++current) 
+						allocator_kind.construct (&*current, *first);	
+				return current;
+			} 
+			catch (...) 
 			{
-				allocator_kind.destroy(ptr_first_elem + i); // destruct
-				allocator_kind.construct(ptr_first_elem + i, *(ptr_first_elem + i - 1)); // reconstruct by moving to right
-			}
-			allocator_kind.destroy(&(*position)); //destruct what is inside the pos
-			allocator_kind.construct(&(*position), val); // construct new elem
-			size_t_not_int++; // + 1 elem
-		}
-		return (begin() + location);//
-	}
-
-	// fill (2)	void insert (iterator position, size_type n, const value_type& val);
-	void insert (iterator position, size_type n, const value_type& val)
-	{
-		if (n == 0)
-			return ;
-		else if (max_size() - size_t_not_int < n)
-			throw std::length_error("vector length error in fill type insert()");
-		difference_type start = position - begin();
-		if (size_t_not_int + n > capacity_in_size_t)
-		{
-			size_type new_capacity = capacity_in_size_t * 2 >= size_t_not_int + n ? capacity_in_size_t * 2 : size_t_not_int + n;
-			pointer new_vec = allocator_kind.allocate(capacity_in_size_t);
-			uninitialized_copy(begin(), position, iterator(new_vec));
-			for (size_type i = 0; i < n; i++)
-				allocator_kind.construct(new_vec + start + i, val);
-			uninitialized_copy(position, end(), iterator(new_vec + start + n));
-			for (size_type i = 0; i < size_t_not_int; i++)
-				allocator_kind.destroy(ptr_first_elem + i);
-			allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
-			size_t_not_int += n;
-			capacity_in_size_t = new_capacity;
-			ptr_first_elem = new_vec;
-		}
-		else // if the capacity is enough
-		{
-			for (size_type i = size_t_not_int; i > static_cast<size_type>(start); i--) // bigger than diff
-			{
-				allocator_kind.destroy(ptr_first_elem + i + n - 1); // destruct one by one
-				allocator_kind.construct(ptr_first_elem + i + n - 1, *(ptr_first_elem + i - 1));//put over
-			}
-			for (size_type i = 0; i < n; i++) //
-			{
-				allocator_kind.destroy(ptr_first_elem + i + start);
-				allocator_kind.construct(ptr_first_elem + i + start, val); // запись на n
-			}
-			size_t_not_int += n; // increase
-		}
-	}
-
-	// range (3) template <class InputIterator>
-    // 			void insert (iterator position, InputIterator first, InputIterator last);
-	template <class InputIterator>
-	void insert (iterator position, InputIterator first, InputIterator last,
-		typename enable_if<!is_integral<InputIterator>::value>::type* = 0)
-	{
-		if (position < begin() || position > end() || first > last)
-			throw std::logic_error("vector: error in range insert()");
-		size_type start = static_cast<size_type>(position - begin());
-		size_type count = static_cast<size_type>(last - first);
-		if (size_t_not_int + count > capacity_in_size_t)
-		{
-			size_type new_capacity = capacity_in_size_t * 2 >= size_t_not_int + count ? capacity_in_size_t * 2 : size_t_not_int + count;
-			pointer new_vec = allocator_kind.allocate(new_capacity);
-			uninitialized_copy(begin(), position, iterator(new_vec));
-			try
-			{
-				for (size_type i = 0; i < static_cast<size_type>(count); i++, first++)
-					allocator_kind.construct(new_vec + start + i, *first);
-			}
-			catch (...)
-			{
-				for (size_type i = 0; i < count + start; ++i)
-					allocator_kind.destroy(new_vec + i);
-				allocator_kind.deallocate(new_vec, new_capacity);
+				for (; d_first != current; ++d_first) 
+					d_first->~value_type();
 				throw;
 			}
-			uninitialized_copy(position, end(), iterator(new_vec + start + count));
-			for (size_type i = 0; i < size_t_not_int; i++)
-				allocator_kind.destroy(ptr_first_elem + i);
-			allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
-			size_t_not_int += count;
-			capacity_in_size_t = new_capacity;
-			ptr_first_elem = new_vec;
 		}
-		else
-		{
-			for (size_type i = size_t_not_int; i > static_cast<size_type>(start); i--)
-			{
-				allocator_kind.destroy(ptr_first_elem + i + count - 1);
-				allocator_kind.construct(ptr_first_elem + i + count - 1, *(ptr_first_elem + i - 1));
-			}
-			for (size_type i = 0; i < static_cast<size_type>(count); i++, first++)
-			{
-				allocator_kind.destroy(ptr_first_elem + i + count);
-				allocator_kind.construct(ptr_first_elem + start + i, *first);
-			}
-			size_t_not_int += count;
-		}
-	}
 
+
+		//https://www.cplusplus.com/reference/vector/vector/insert/
+		// single element (1)	iterator insert (iterator position, const value_type& val);	
+		// fill (2)	void insert (iterator position, size_type n, const value_type& val);
+		// range (3) template <class InputIterator>
+		// 			void insert (iterator position, InputIterator first, InputIterator last);
+		
+		// single element (1)	
+		iterator insert (iterator position, const value_type& val)
+		{
+			if (position < begin() || position > end())
+				throw std::logic_error("vector position error when inserting a single element");
+			difference_type location = position - begin(); // разница
+			if (size_t_not_int >= capacity_in_size_t)
+			{
+				capacity_in_size_t *= 2;
+				pointer new_vec = allocator_kind.allocate(capacity_in_size_t); // malloc of size
+				//https://www.cplusplus.com/reference/memory/uninitialized_copy/ (see above)
+				uninitialized_copy(begin(), position, iterator(new_vec)); //give memory from at pos (start(begin) to finish (position), insert new vec size
+					allocator_kind.construct(new_vec + location, val); // at the correct pos create a new obj for 1 val
+				uninitialized_copy(position, end(), iterator(new_vec + location + 1)); // from pos to end inserted new vec size + 1 elem (inserted elem)
+				for (size_t i = 0; i < size_t_not_int; i++)
+					allocator_kind.destroy(ptr_first_elem + i); // destructor
+				if(size_t_not_int)
+					allocator_kind.deallocate(ptr_first_elem, size_t_not_int); // free
+				size_t_not_int++;
+				ptr_first_elem = new_vec;
+			}
+			else // if the capacity is enough
+			{
+				for (size_type i = size_t_not_int; i > static_cast<size_type>(location); i--)
+				{
+					allocator_kind.destroy(ptr_first_elem + i); // destruct
+					allocator_kind.construct(ptr_first_elem + i, *(ptr_first_elem + i - 1)); // reconstruct by moving to right
+				}
+				allocator_kind.destroy(&(*position)); //destruct what is inside the pos
+				allocator_kind.construct(&(*position), val); // construct new elem
+				size_t_not_int++; // + 1 elem
+			}
+			return (begin() + location);//
+		}
+
+		// fill (2)	void insert (iterator position, size_type n, const value_type& val);
+		void insert (iterator position, size_type n, const value_type& val)
+		{
+			if (n == 0)
+				return ;
+			else if (max_size() - size_t_not_int < n)
+				throw std::length_error("vector length error in fill type insert()");
+			difference_type start = position - begin();
+			if (size_t_not_int + n > capacity_in_size_t)
+			{
+				size_type new_capacity = capacity_in_size_t * 2 >= size_t_not_int + n ? capacity_in_size_t * 2 : size_t_not_int + n;
+				pointer new_vec = allocator_kind.allocate(capacity_in_size_t);
+				uninitialized_copy(begin(), position, iterator(new_vec));
+				for (size_type i = 0; i < n; i++)
+					allocator_kind.construct(new_vec + start + i, val);
+				uninitialized_copy(position, end(), iterator(new_vec + start + n));
+				for (size_type i = 0; i < size_t_not_int; i++)
+					allocator_kind.destroy(ptr_first_elem + i);
+				allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
+				size_t_not_int += n;
+				capacity_in_size_t = new_capacity;
+				ptr_first_elem = new_vec;
+			}
+			else // if the capacity is enough
+			{
+				for (size_type i = size_t_not_int; i > static_cast<size_type>(start); i--) // bigger than diff
+				{
+					allocator_kind.destroy(ptr_first_elem + i + n - 1); // destruct one by one
+					allocator_kind.construct(ptr_first_elem + i + n - 1, *(ptr_first_elem + i - 1));//put over
+				}
+				for (size_type i = 0; i < n; i++) //
+				{
+					allocator_kind.destroy(ptr_first_elem + i + start);
+					allocator_kind.construct(ptr_first_elem + i + start, val); // запись на n
+				}
+				size_t_not_int += n; // increase
+			}
+		}
+
+		// range (3) template <class InputIterator>
+		// 			void insert (iterator position, InputIterator first, InputIterator last);
+		template <class InputIterator>
+		void insert (iterator position, InputIterator first, InputIterator last,
+			typename enable_if<!is_integral<InputIterator>::value>::type* = 0)
+		{
+			if (position < begin() || position > end() || first > last)
+				throw std::logic_error("vector: error in range insert()");
+			size_type start = static_cast<size_type>(position - begin());
+			size_type count = static_cast<size_type>(last - first);
+			if (size_t_not_int + count > capacity_in_size_t)
+			{
+				size_type new_capacity = capacity_in_size_t * 2 >= size_t_not_int + count ? capacity_in_size_t * 2 : size_t_not_int + count;
+				pointer new_vec = allocator_kind.allocate(new_capacity);
+				uninitialized_copy(begin(), position, iterator(new_vec));
+				try
+				{
+					for (size_type i = 0; i < static_cast<size_type>(count); i++, first++)
+						allocator_kind.construct(new_vec + start + i, *first);
+				}
+				catch (...)
+				{
+					for (size_type i = 0; i < count + start; ++i)
+						allocator_kind.destroy(new_vec + i);
+					allocator_kind.deallocate(new_vec, new_capacity);
+					throw;
+				}
+				uninitialized_copy(position, end(), iterator(new_vec + start + count));
+				for (size_type i = 0; i < size_t_not_int; i++)
+					allocator_kind.destroy(ptr_first_elem + i);
+				allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
+				size_t_not_int += count;
+				capacity_in_size_t = new_capacity;
+				ptr_first_elem = new_vec;
+			}
+			else
+			{
+				for (size_type i = size_t_not_int; i > static_cast<size_type>(start); i--)
+				{
+					allocator_kind.destroy(ptr_first_elem + i + count - 1);
+					allocator_kind.construct(ptr_first_elem + i + count - 1, *(ptr_first_elem + i - 1));
+				}
+				for (size_type i = 0; i < static_cast<size_type>(count); i++, first++)
+				{
+					allocator_kind.destroy(ptr_first_elem + i + count);
+					allocator_kind.construct(ptr_first_elem + start + i, *first);
+				}
+				size_t_not_int += count;
+			}
+		}
+
+		iterator erase (iterator position) 
+		{
+			pointer temp = &(*position);
+
+			if (position + 1 == end()) {
+				allocator_kind.destroy(&(*position));
+			}
+			else {
+				difference_type dist = end() - position;
+
+				for (int i = 0; i < dist - 1; i++){
+					allocator_kind.construct(&(*position) + i, *(&(*position) + i + 1));
+					allocator_kind.destroy(&(*position) + i + 1);
+				}
+			}
+			size_t_not_int--;
+
+			return (iterator(temp));
+		}
+
+		iterator erase (iterator first, iterator last) 
+		{
+			iterator iter = begin();
+			difference_type start = first - iter;
+			size_type size = last - first;
+			size_type counter = start;
+			for (; counter < start + size; counter++) {
+				allocator_kind.destroy(ptr_first_elem + counter);
+				size_t_not_int--;
+			}
+			size_type cnt = 0;
+			for (size_type i = start; i < size_t_not_int; i++) {
+				allocator_kind.construct(&ptr_first_elem[i], ptr_first_elem[counter + cnt]);
+				allocator_kind.destroy(&ptr_first_elem[counter + cnt]);
+				cnt++;
+			}
+			return (iterator(last));
+		}
+
+
+		
+		void swap (vector& x) 
+		{
+			if (*this == x)
+				return;
+
+			pointer ptr_first_elem_tmp = x.ptr_first_elem;
+			size_type capacity_in_size_t_tmp = x.capacity_in_size_t;
+			size_type size_t_not_int_temp = x.size_t_not_int;
+			allocator_type allocator_kind_temp = x.allocator_kind;
+
+			x.ptr_first_elem = ptr_first_elem;
+			x.capacity_in_size_t = capacity_in_size_t;
+			x.size_t_not_int = size_t_not_int;
+			x.allocator_kind = x.allocator_kind;
+
+			ptr_first_elem = ptr_first_elem_tmp;
+			capacity_in_size_t = capacity_in_size_t_tmp;
+			size_t_not_int = size_t_not_int_temp;
+			allocator_kind = allocator_kind_temp;
+		}
+
+		
+		void clear() 
+		{
+			resize(0);
+		}
 	
 
-
-
-
-	/* */
-
-
-
-
-		
-		
-			
 	};
+	
+	// non member methods, operator of class comparison
+	// this is need for swap ==
+	template< class T, class Alloc >
+	bool operator==( const ft::vector<T, Alloc>& lhs,
+					 const ft::vector<T, Alloc>& rhs ) {
+		if (lhs.size() == rhs.size()) {
+			for (size_t i = 0; i < lhs.size(); i++) {
+				if (lhs[i] != rhs[i])
+					return (false);
+			}
+			return (true);
+		}
+		return (false);
+	}
 }
 
 #endif

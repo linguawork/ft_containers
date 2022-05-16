@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/16 18:16:57 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/16 19:17:58 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,9 +431,9 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/insert/
   {
-    // std::cout << "\n" << "insert() test" << "\n";
-    // std::vector<int> myvector (3,100); //100 100 100
-    // std::vector<int>::iterator it;
+    std::cout << "\n" << "insert() test" << "\n";
+    std::vector<int> myvector (3,100); //100 100 100
+    std::vector<int>::iterator it;
     // it = myvector.begin();
     //     for (it=myvector.begin(); it<myvector.end(); it++)
     //   std::cout << ' ' << *it;
@@ -442,12 +442,12 @@ int main ()
 
   
 
-    // it = myvector.begin();
-    // it = myvector.insert ( it , 200 ); // it is one the first, inserted on the first place  
-    // //200 100 100 100
+    it = myvector.begin();
+    it = myvector.insert ( it , 200 ); // it is one the first, inserted on the first place  
+    //200 100 100 100
 
-    // myvector.insert (it,2,300); // it is on the first  and inserts two elements from the pos of it
-    // //  300 300 200 100 100 100
+    myvector.insert (it,2,300); // it is on the first  and inserts two elements from the pos of it
+    //  300 300 200 100 100 100
    
     // for (it=myvector.begin(); it < myvector.end(); it++) // it went to the last position
     //   std::cout << ' ' << *it;
@@ -455,23 +455,26 @@ int main ()
 
 
     // // "it" no longer valid, get a new one: we returned it to the beginning
-    // it = myvector.begin();
+    it = myvector.begin();
 
-    // std::vector<int> anothervector (2,400); // new vec 
-    // myvector.insert (it+2,anothervector.begin(),anothervector.end()); 
-    // //inserted the new vec from it+2: 300 300 400 400 200 100 100 100
+    std::vector<int> anothervector (2,400); // new vec 
+    myvector.insert (it+2,anothervector.begin(),anothervector.end()); 
+    //inserted the new vec from it+2: 300 300 400 400 200 100 100 100
 
 
 
-    // int myarray [] = { 501,502,503 };// one more new vec
-    // myvector.insert (myvector.begin(), myarray, myarray+3);
-    // // insert the whole vec from the beginning of the vector where we insert
-    // // myarray - beginning of the vector
-    // // myarray + 3 - inserting 3 elements of myarray
-    // std::cout << "myvector contains:";
-    // for (it=myvector.begin(); it<myvector.end(); it++)
-    //   std::cout << ' ' << *it;
-    // std::cout << '\n';
+    int myarray [] = { 501,502,503 };// one more new vec
+    myvector.insert (myvector.begin(), myarray, myarray+3);
+    // insert the whole vec from the beginning of the vector where we insert
+    // myarray - beginning of the vector
+    // myarray + 3 - inserting 3 elements of myarray
+    std::cout << "myvector contains:";
+    for (it=myvector.begin(); it<myvector.end(); it++)
+      std::cout << ' ' << *it;
+    std::cout << '\n';
+
+
+
 
 
     ft::vector<int> ft_vector (3,100);
@@ -495,11 +498,127 @@ int main ()
     for (it1=ft_vector.begin(); it1<ft_vector.end(); it1++)
       std::cout << ' ' << *it1;
     std::cout << '\n';
-
-
-    
   }
 
+
+  //https://www.cplusplus.com/reference/vector/vector/erase/
+  {
+    std::cout << "\n" << "erase() test" << "\n";
+    std::vector<int> myvector;
+
+    // set some values (from 1 to 10)
+    for (int i=1; i<=10; i++) 
+      myvector.push_back(i);
+
+    // erase the 6th element
+    myvector.erase (myvector.begin()+5);//1 2 3 4 5 [] 7 8 9 10
+
+    // erase the first 3 elements:
+    myvector.erase (myvector.begin(),myvector.begin()+3); //[] [] [] 4 5 [] 7 8 9 10
+
+    std::cout << "myvector contains:";
+    for (unsigned i=0; i<myvector.size(); ++i)
+      std::cout << ' ' << myvector[i];
+    std::cout << '\n';
+
+
+    ft::vector<int> myvector1;
+    // set some values (from 1 to 10)
+    for (int i=1; i<=10; i++) 
+      myvector1.push_back(i);
+
+    // erase the 6th element
+    myvector1.erase (myvector1.begin()+5);//1 2 3 4 5 [] 7 8 9 10
+
+    // erase the first 3 elements:
+    myvector1.erase (myvector1.begin(),myvector1.begin()+3); //[] [] [] 4 5 [] 7 8 9 10
+
+    std::cout << "ft_vector contains:";
+    for (unsigned i=0; i<myvector1.size(); ++i)
+      std::cout << ' ' << myvector1[i];
+    std::cout << '\n';
+      
+  }
+
+// https://www.cplusplus.com/reference/vector/vector/swap/
+  {
+    std::cout << "\n" << "swap() test" << "\n";
+    std::vector<int> foo (3,100);   // three ints with a value of 100
+    std::vector<int> bar (5,200);   // five ints with a value of 200
+
+    foo.swap(bar);
+
+    std::cout << "foo contains:";
+    for (unsigned i=0; i<foo.size(); i++)
+      std::cout << ' ' << foo[i];
+    std::cout << '\n';
+
+    std::cout << "bar contains:";
+    for (unsigned i=0; i<bar.size(); i++)
+      std::cout << ' ' << bar[i];
+    std::cout << '\n';
+    
+
+
+    ft::vector<int> foo1 (3,100);   // three ints with a value of 100
+    ft::vector<int> bar1 (5,200);   // five ints with a value of 200
+
+    foo1.swap(bar1);
+
+    std::cout << "ft foo contains:";
+    for (unsigned i=0; i<foo1.size(); i++)
+      std::cout << ' ' << foo1[i];
+    std::cout << '\n';
+
+    std::cout << "ft bar contains:";
+    for (unsigned i=0; i<bar1.size(); i++)
+      std::cout << ' ' << bar1[i];
+    std::cout << '\n';
+  }
+
+//https://www.cplusplus.com/reference/vector/vector/clear/
+  {
+      std::cout << "\n" << "clear() test" << "\n";
+      std::vector<int> myvector;
+      myvector.push_back (100);
+      myvector.push_back (200);
+      myvector.push_back (300);
+
+      std::cout << "myvector contains:";
+      for (unsigned i=0; i<myvector.size(); i++)
+        std::cout << ' ' << myvector[i];
+      std::cout << '\n';
+
+      myvector.clear(); // clear the whole vector
+      myvector.push_back (1101);
+      myvector.push_back (2202);
+
+      std::cout << "vector contains:";
+      for (unsigned i=0; i<myvector.size(); i++)
+        std::cout << ' ' << myvector[i];
+      std::cout << '\n';
+
+
+      ft::vector<int> myvector1;
+      myvector1.push_back (100);
+      myvector1.push_back (200);
+      myvector1.push_back (300);
+
+      std::cout << "myvector contains:";
+      for (unsigned i=0; i<myvector1.size(); i++)
+        std::cout << ' ' << myvector1[i];
+      std::cout << '\n';
+
+      myvector1.clear(); // clear the whole vector
+      myvector1.push_back (1101);
+      myvector1.push_back (2202);
+
+      std::cout << "vector contains:";
+      for (unsigned i=0; i<myvector1.size(); i++)
+        std::cout << ' ' << myvector1[i];
+      std::cout << '\n';
+    
+  }
       
   return 0;
 }
