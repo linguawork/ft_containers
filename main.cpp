@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/16 16:08:48 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/16 18:16:57 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,16 +480,16 @@ int main ()
     it1 = ft_vector.begin();
     it1 = ft_vector.insert ( it1 , 200 ); // insert one element
 
-    // ft_vector.insert (it1,2,300);
+    ft_vector.insert (it1,2,300); // insert fill with 2 
 
     // "it" no longer valid, get a new one:
-    // it1 = ft_vector.begin();
+    it1 = ft_vector.begin();
 
-    // std::vector<int> anothervector1 (2,400);
-    // ft_vector.insert (it+2,anothervector1.begin(),anothervector1.end());
+    std::vector<int> anothervector1 (2,400);
+    ft_vector.insert (it1+2,anothervector1.begin(),anothervector1.end());
 
-    // int myarray1 [] = { 501,502,503 };
-    // ftvector.insert (ftvector.begin(), myarray1, myarray1+3);
+    int myarray1 [] = { 501,502,503 };
+    ft_vector.insert (ft_vector.begin(), myarray1, myarray1+3);
 
     std::cout << "ft_vector contains:";
     for (it1=ft_vector.begin(); it1<ft_vector.end(); it1++)
