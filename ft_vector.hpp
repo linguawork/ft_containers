@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: areggie <areggie@student.21-school.ru >    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/16 19:14:02 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/17 12:21:45 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -710,10 +710,20 @@ namespace ft
 		{
 			resize(0);
 		}
-	
+		//get allocator, call allocator_type inside the original Allocator
+
+		allocator_type get_allocator() const
+		{
+			return(allocator_type()); //we use () to show that there should be value
+		}
+
+
+
 
 	};
-	
+
+	//relational operators
+	//https://www.cplusplus.com/reference/vector/vector/operators/
 	// non member methods, operator of class comparison
 	// this is need for swap ==
 	template< class T, class Alloc >
@@ -728,6 +738,9 @@ namespace ft
 		}
 		return (false);
 	}
+
+
+	
 }
 
 #endif

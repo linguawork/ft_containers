@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: areggie <areggie@student.21-school.ru >    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/16 19:17:58 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/17 12:06:02 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -618,6 +618,47 @@ int main ()
         std::cout << ' ' << myvector1[i];
       std::cout << '\n';
     
+  }
+
+// https://www.cplusplus.com/reference/vector/vector/get_allocator/
+  {
+      std::cout << "\n" << "get_allocator() test" << "\n";
+      std::vector<int> myvector;
+      int * p;
+      unsigned int i;
+
+      // allocate an array with space for 5 elements using vector's allocator:
+      p = myvector.get_allocator().allocate(5);
+
+      // construct values in-place on the array:
+      for (i=0; i<5; i++) myvector.get_allocator().construct(&p[i],i);
+
+      std::cout << "The allocated array contains:";
+      for (i=0; i<5; i++) std::cout << ' ' << p[i];
+      std::cout << '\n';
+
+      // destroy and deallocate:
+      for (i=0; i<5; i++) myvector.get_allocator().destroy(&p[i]);
+      myvector.get_allocator().deallocate(p,5);
+
+
+      ft::vector<int> ft_vector;
+      int * p1;
+      unsigned int a;
+
+      // allocate an array with space for 5 elements using vector's allocator:
+      p1 = ft_vector.get_allocator().allocate(5);
+
+      // construct values in-place on the array:
+      for (a=0; a<5; a++) ft_vector.get_allocator().construct(&p1[a],a);
+
+      std::cout << "The allocated array contains:";
+      for (a=0; a<5; a++) std::cout << ' ' << p1[a];
+      std::cout << '\n';
+
+      // destroy and deallocate:
+      for (a=0; a<5; a++) ft_vector.get_allocator().destroy(&p1[a]);
+      ft_vector.get_allocator().deallocate(p1,5);
   }
       
   return 0;
