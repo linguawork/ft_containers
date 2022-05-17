@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.21-school.ru >    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/17 12:21:45 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/17 21:01:50 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -737,6 +737,36 @@ namespace ft
 			return (true);
 		}
 		return (false);
+	}
+
+		template<class T, class Alloc>
+	bool operator!=(const ft::vector<T,Alloc>& lhs,
+					 const ft::vector<T,Alloc>& rhs) {
+		return (!(lhs == rhs));
+	}
+
+	template<class T, class Alloc>
+	bool operator<(const ft::vector<T,Alloc>& lhs,
+					const ft::vector<T,Alloc>& rhs) {
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template<class T, class Alloc>
+	bool operator<=(const ft::vector<T,Alloc>& lhs,
+					 const ft::vector<T,Alloc>& rhs) {
+		return (!(rhs < lhs));
+	}
+
+	template<class T, class Alloc>
+	bool operator>(const ft::vector<T,Alloc>& lhs,
+					const ft::vector<T,Alloc>& rhs) {
+		return (rhs < lhs);
+	}
+
+	template<class T, class Alloc>
+	bool operator>=(const ft::vector<T,Alloc>& lhs,
+					 const ft::vector<T,Alloc>& rhs) {
+		return (!(lhs < rhs));
 	}
 
 

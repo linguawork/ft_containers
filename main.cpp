@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.21-school.ru >    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/17 12:06:02 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/17 21:07:14 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -659,6 +659,21 @@ int main ()
       // destroy and deallocate:
       for (a=0; a<5; a++) ft_vector.get_allocator().destroy(&p1[a]);
       ft_vector.get_allocator().deallocate(p1,5);
+  }
+
+  
+  {
+     std::cout << "\n" << "relational operators() test" << "\n";
+      ft::vector<int> foo (3,100);   // three ints with a value of 100
+      ft::vector<int> bar (2,200);   // two ints with a value of 200
+
+      if (foo==bar) std::cout << "foo and bar are equal\n";
+      if (foo!=bar) std::cout << "foo and bar are not equal\n";
+      if (foo< bar) std::cout << "foo is less than bar\n";
+      if (foo> bar) std::cout << "foo is greater than bar\n";
+      if (foo<=bar) std::cout << "foo is less than or equal to bar\n";
+      if (foo>=bar) std::cout << "foo is greater than or equal to bar\n";
+    
   }
       
   return 0;
