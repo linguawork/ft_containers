@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vector.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: areggie <areggie@student.21-school.ru >    +#+  +:+       +#+        */
+/*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/17 21:01:50 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/18 19:02:42 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -745,6 +745,10 @@ namespace ft
 		return (!(lhs == rhs));
 	}
 
+	//https://www.cplusplus.com/reference/algorithm/lexicographical_compare/
+
+	/*
+	*/
 	template<class T, class Alloc>
 	bool operator<(const ft::vector<T,Alloc>& lhs,
 					const ft::vector<T,Alloc>& rhs) {
@@ -752,25 +756,22 @@ namespace ft
 	}
 
 	template<class T, class Alloc>
+	bool operator>(const ft::vector<T,Alloc>& lhs,
+					const ft::vector<T,Alloc>& rhs) {
+		return (rhs < lhs); // make it the other way and it is wrong
+	}
+
+	template<class T, class Alloc>
 	bool operator<=(const ft::vector<T,Alloc>& lhs,
 					 const ft::vector<T,Alloc>& rhs) {
 		return (!(rhs < lhs));
 	}
-
-	template<class T, class Alloc>
-	bool operator>(const ft::vector<T,Alloc>& lhs,
-					const ft::vector<T,Alloc>& rhs) {
-		return (rhs < lhs);
-	}
-
+	
 	template<class T, class Alloc>
 	bool operator>=(const ft::vector<T,Alloc>& lhs,
 					 const ft::vector<T,Alloc>& rhs) {
 		return (!(lhs < rhs));
 	}
-
-
-	
 }
 
 #endif
