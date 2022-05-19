@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/19 17:21:55 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/19 18:40:12 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -439,19 +439,23 @@ namespace ft
 		//fill assign
 		void assign (size_type n, const value_type& val) 
 		{
-			// clear(0);
+			// clear();
 			resize(0);
 			if (n >= capacity_in_size_t)
 				reallocate(n); // dealoc is inside the method
-			int i;
+			// int i;
 			
-			i = 0;
-			while (i < n) 
+			// i = 0;
+			while (size_t_not_int < n) 
 			{
 				allocator_kind.construct(ptr_first_elem + size_t_not_int, val);
-				i++;
+				size_t_not_int++;
 			}
-			size_t_not_int = n;
+			// size_t_not_int = n;
+			// for (;size_t_not_int < n;) {
+			// 	allocator_kind.construct(ptr_first_elem + size_t_not_int, val);
+			// 	size_t_not_int++;
+			// }
 			
 		}
 		
