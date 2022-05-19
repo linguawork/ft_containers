@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/18 19:02:42 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/19 17:21:55 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,25 +387,26 @@ namespace ft
 		
 		const_reference operator[] (size_type n) const
 		{
-			// return(*(ptr_first_elem + n));
+			//  return(*(ptr_first_elem + n));
 			return ( *( this->ptr_first_elem + n ) );
 		}
 
 		void check_boundaries( size_type position ) const {
-			if ((position < 0 ||position >= this->size() || empty()))
+			if (position < 0 || position >= size() )
 				throw ::std::out_of_range( "ft::vector::at() out of range" );
 		}	
 
 		reference at( size_type position ) 
 		{
 			check_boundaries( position );
-			return ( ( *this )[position] );
+			// return ( ( *this )[position] );
+			return(this->ptr_first_elem[position]);
 		}
 
 		const_reference at( size_type position ) const
 		{
 			check_boundaries( position );
-			return ( ( *this )[position] );
+			return(this->ptr_first_elem[position]);
 		}
 
 		reference front( void )

@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/18 19:00:12 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/19 17:16:52 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -673,6 +673,32 @@ int main ()
       if (foo> bar) std::cout << "foo is greater than bar\n";
       if (foo<=bar) std::cout << "foo is less than or equal to bar\n";
       if (foo>=bar) std::cout << "foo is greater than or equal to bar\n";
+    
+  }
+
+
+  {
+     std::cout << "\n" << "DEBUGGING AT() from the tests" << "\n";
+
+    int _ratio = 10000;
+    std::vector<int> vector;
+      
+    vector.assign(9900 * _ratio, 1); //99 000 000 elements with 1 value in each
+    
+    
+    std::cout << "The vector elements is : ";
+    std::cout << vector.at(354 * _ratio) << ' '; //printout the 3 540 000th elem
+    // why mine is zero, should be 1
+    std::cout <<  std::endl;;
+
+
+
+    ft::vector<int> ft_vector;
+    ft_vector.assign(9900 * _ratio, 1); //99 000 000 elements with 1 value in each
+    std::cout << "The ft_vector elements is : ";
+    std::cout << ft_vector.at(354 * _ratio) << ' '; //printout the 3 540 000th elem
+    // why mine is zero, should be 1
+    std::cout <<  std::endl;;
     
   }
       
