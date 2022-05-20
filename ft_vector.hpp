@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/19 18:40:12 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/20 16:14:26 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -569,7 +569,7 @@ namespace ft
 			if (size_t_not_int + n > capacity_in_size_t)
 			{
 				size_type new_capacity = capacity_in_size_t * 2 >= size_t_not_int + n ? capacity_in_size_t * 2 : size_t_not_int + n;
-				pointer new_vec = allocator_kind.allocate(capacity_in_size_t);
+				pointer new_vec = allocator_kind.allocate(new_capacity);
 				uninitialized_copy(begin(), position, iterator(new_vec));
 				for (size_type i = 0; i < n; i++)
 					allocator_kind.construct(new_vec + start + i, val);

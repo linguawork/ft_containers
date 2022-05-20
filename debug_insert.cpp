@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 12:31:33 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/20 13:05:28 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/20 16:16:02 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,3 +119,7 @@ int main() {
 
     exit(run_vector_unit_test<int>("insert(fill)", insert_test_2, insert_test_2));
 }
+
+/*
+debug success, the bug was in the allocation, I forgot to allocate for NEW_CAPACITY
+*/
