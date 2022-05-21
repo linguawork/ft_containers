@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 18:32:57 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/21 19:23:53 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/21 20:24:50 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 template <typename T>
 std::vector<int> swap_test(std::vector<T> vector) // подаем вектор и возвращаем вектор
 {
-    std::vector<int> v; // создаем новы	й вектор
+    std::vector<int> v; // создаем новый вектор
 
     vector.assign(1100 * _ratio, 11); // в подаваемый вектор засовываем 11000 000 elem cо знач 11
 
@@ -56,7 +56,7 @@ std::vector<int> swap_test(std::vector<T> vector) // подаем вектор �
     std::swap(vector, tmp2); // 15 млн по 15 поменял на 10 млн по 10
     v.push_back(vector[2]); //11 элемент - [10]
     v.push_back(vector.size()); //12 - [10 000 000]
-    v.push_back(vector.capacity()); // 13 - [10 000 000]
+    v.push_back(vector.capacity()); // 13 - [10 000 000]!!!
     std::swap(vector, tmp4);  // vector принял 30mln по 30
     // g_end1 = timer();
     v.push_back(vector[2]); // 14 элемент - [30]
@@ -64,7 +64,7 @@ std::vector<int> swap_test(std::vector<T> vector) // подаем вектор �
     v.push_back(vector.capacity()); // 16 - [capacity]
     return v;
 }
-//  11, 11000000, 11000000, 1, 5, 5 000 000, 5 000 000, 15, 15000000, 15000000, 10, 1000000, 10000000, 30, 30000000, 30000000
+//  11, 11000000, 11000000, 1, 5, 5000000, 5000000, 15, 15000000, 15000000, 10, 1000000, 10000000, 30, 30000000, 30000000
 
 
 
@@ -73,7 +73,7 @@ std::vector<int> swap_test(_vector<T> vector) {
     std::vector<int> v;
     vector.assign(1100 * _ratio, 11);
     _vector<int> tmp(500 * _ratio, 5), tmp2(1000 * _ratio, 10), tmp3(1500 * _ratio, 15), tmp4(3000 * _ratio, 30);
-    g_start2 = timer();
+    // g_start2 = timer();
     v.push_back(vector[2]);
     v.push_back(vector.size());
     v.push_back(vector.capacity());
@@ -92,9 +92,9 @@ std::vector<int> swap_test(_vector<T> vector) {
     std::swap(vector, tmp2);
     v.push_back(vector[2]);
     v.push_back(vector.size());
-    v.push_back(vector.capacity());
+    v.push_back(vector.capacity());// 13 - [10 000 000]!!!
     std::swap(vector, tmp4);
-    g_end2 = timer();
+    // g_end2 = timer();
     v.push_back(vector[2]);
     v.push_back(vector.size());
     v.push_back(vector.capacity());
@@ -125,7 +125,7 @@ int run_vector_unit_test(std::string test_name, std::vector<int> (func1)(std::ve
         std::cout << res1.at(i) << ' ';
        std::cout <<  std::endl;;
 
-        std::cout << "The vector elements are : ";
+        std::cout << "The ft_vect elements are: ";
         for(int i=0; i < res2.size(); i++)
         std::cout << res2.at(i) << ' ';
         std::cout <<  std::endl;;

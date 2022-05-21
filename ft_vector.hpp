@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/20 16:14:26 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/21 21:35:34 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ namespace ft
 			see print_size.c file
 			Stepanov wrote about ptrdiff_t as difference_type in typedef for STL at page 72 (about iterators, iterator_traits)
 			*/
-			typedef		std::size_t 							size_type; // 8bytes not 4 bytes for signed int(which is not enough for objects)
+			 typedef		std::size_t 							size_type; // 8bytes not 4 bytes for signed int(which is not enough for objects)
+			// typedef		unsigned long 							size_type; // 8bytes not 4 bytes for signed int(which is not enough for objects)
 
+			
 		private:
 			pointer			ptr_first_elem; // pointer from allocator
 			size_type 		size_t_not_int;
@@ -181,7 +183,7 @@ namespace ft
 	{
 		size_type i;
 		
-		if (this == &x)
+		if (*this == x)
 			return *this;
 		for (i = 0; i < size_t_not_int; i++)
 			allocator_kind.destroy(ptr_first_elem + i);
@@ -193,10 +195,28 @@ namespace ft
 			capacity_in_size_t = size_t_not_int;
 			ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
 		}
-		for ( i = 0; i < size_t_not_int; i++)
+		for ( size_type i = 0; i < size_t_not_int; i++)
 			allocator_kind.construct(ptr_first_elem + i, x[i]); // the operator [] is not working yet
 		return *this;
 	}
+
+	// vector &operator=(const vector &x) {
+	// 		if (*this == x)
+	// 			return (*this);
+
+	// 		resize(0);
+	// 		allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
+	// 		size_t_not_int = 0;
+	// 		capacity_in_size_t = x.capacity_in_size_t;
+	// 		allocator_kind = x.allocator_kind;
+	// 		ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
+	// 		insert(begin(), x.begin(), x.end());
+
+	// 		return (*this);
+	// 	}
+
+
+	
 
 	//copy constructor
 	vector (const vector& x) :  size_t_not_int (0), capacity_in_size_t (0)
@@ -353,7 +373,7 @@ namespace ft
 		}
 		
 		//https://www.cplusplus.com/reference/vector/vector/capacity/
-		size_type capacity(void) const
+		size_type capacity() const
 		{
 			return (capacity_in_size_t);
 		}
@@ -481,6 +501,12 @@ namespace ft
 		//https://www.cplusplus.com/reference/vector/vector/push_back/
 		void push_back (const value_type& val)
 		{
+			// if(size_t_not_int == 0 &&  size_t_not_int == capacity_in_size_t)
+			// 	reallocate(1);
+			// else if(size_t_not_int + 1 > capacity_in_size_t )
+			// 	reallocate (size_t_not_int);
+			// allocator_kind.construct(ptr_first_elem + size_t_not_int, val);
+			// size_t_not_int++;
 			if(size_t_not_int == capacity_in_size_t)
 				reallocate(capacity_in_size_t == 0 ? 1 : capacity_in_size_t * 2);
 			allocator_kind.construct(ptr_first_elem + size_t_not_int, val);
@@ -607,7 +633,7 @@ namespace ft
 				throw std::logic_error("vector: error in range insert()");
 			size_type start = static_cast<size_type>(position - begin());
 			size_type count = static_cast<size_type>(last - first);
-			if (size_t_not_int + count > capacity_in_size_t)
+			if (size_t_not_int + count >= capacity_in_size_t)
 			{
 				size_type new_capacity = capacity_in_size_t * 2 >= size_t_not_int + count ? capacity_in_size_t * 2 : size_t_not_int + count;
 				pointer new_vec = allocator_kind.allocate(new_capacity);
@@ -702,7 +728,7 @@ namespace ft
 			x.ptr_first_elem = ptr_first_elem;
 			x.capacity_in_size_t = capacity_in_size_t;
 			x.size_t_not_int = size_t_not_int;
-			x.allocator_kind = x.allocator_kind;
+			x.allocator_kind = allocator_kind;
 
 			ptr_first_elem = ptr_first_elem_tmp;
 			capacity_in_size_t = capacity_in_size_t_tmp;
