@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/22 18:17:17 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/22 18:37:21 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,71 +178,81 @@ namespace ft
 				allocator_kind.construct(ptr_first_elem + i, *(first + i));
 		}
 		
-	//operator of assignation=
+
+	//operator of assignation= (I deleted the capacity in if)
 	vector& operator=(const vector& x)
 	{
 		size_type i;
 		
-		// if (c)
-		
 		if (*this == x)
 			return *this;
-		
-
 		for (i = 0; i < size_t_not_int; i++)
 			allocator_kind.destroy(ptr_first_elem + i);
-
-		this->allocator_kind = x.allocator_kind;//
-		allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
-		// allocator_kind.dealloca
-			
 		this->size_t_not_int = x.size_t_not_int;
-		this->capacity_in_size_t = x.capacity_in_size_t;
 		// if(capacity_in_size_t < size_t_not_int)
 		// {
-		// 	if (capacity_in_size_t != 0)
-				
-			// capacity_in_size_t = size_t_not_int;
-		ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
+			if (capacity_in_size_t != 0)
+				allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
+			capacity_in_size_t = size_t_not_int;
+			ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
 		// }
 		for ( size_type i = 0; i < size_t_not_int; i++)
 			allocator_kind.construct(ptr_first_elem + i, x[i]); // the operator [] is not working yet
 		return *this;
 	}
 
-	// vector &operator=(const vector &x) {
-	// 		if (*this == x)
-	// 			return (*this);
-
-	// 		resize(0);
-	// 		allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
-	// 		size_t_not_int = 0;
-	// 		capacity_in_size_t = x.capacity_in_size_t;
-	// 		allocator_kind = x.allocator_kind;
-	// 		ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
-	// 		insert(begin(), x.begin(), x.end());
-
-	// 		return (*this);
-	// 	}
-
-
 	
+		
+	//operator of assignation= (K helped to debug, but there were leaks)
+	// vector& operator=(const vector& x)
+	// {
+	// 	size_type i;
+		
+	// 	// if (c)
+		
+	// 	if (*this == x)
+	// 		return *this;
+		
+
+	// 	for (i = 0; i < size_t_not_int; i++)
+	// 		allocator_kind.destroy(ptr_first_elem + i);
+
+	// 	this->allocator_kind = x.allocator_kind;//
+	// 	allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
+	// 	// allocator_kind.dealloca
+			
+	// 	this->size_t_not_int = x.size_t_not_int;
+	// 	this->capacity_in_size_t = x.capacity_in_size_t;
+	// 	// if(capacity_in_size_t < size_t_not_int)
+	// 	// {
+	// 	// 	if (capacity_in_size_t != 0)
+				
+	// 		// capacity_in_size_t = size_t_not_int;
+	// 	ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
+	// 	// }
+	// 	for ( size_type i = 0; i < size_t_not_int; i++)
+	// 		allocator_kind.construct(ptr_first_elem + i, x[i]); // the operator [] is not working yet
+	// 	return *this;
+	// }
+
 
 	//copy constructor
-	// vector (const vector& x) :  size_t_not_int (0), capacity_in_size_t (0)
-	// {
-	// 	std::cout << "copy of ft_vector constructor called" << std::endl;
-	// 	*this = x; // we need to use operator = 
-	// }
-	vector (const vector& x) : allocator_kind(x.allocator_kind)
+	vector (const vector& x) :  size_t_not_int (0), capacity_in_size_t (0)
 	{
-		this->size_t_not_int = x.size_t_not_int;
-		this->capacity_in_size_t = x.capacity_in_size_t;
-		this->ptr_first_elem = this->allocator_kind.allocate(this->capacity_in_size_t);
-		for (size_type i = 0; i < this->size_t_not_int; i++){
-			this->allocator_kind.construct(this->ptr_first_elem + i, x.ptr_first_elem[i]);
-		}
+		std::cout << "copy of ft_vector constructor called" << std::endl;
+		*this = x; // we need to use operator = 
 	}
+	
+	//K helped to debug but there were leaks
+	// vector (const vector& x) : allocator_kind(x.allocator_kind)
+	// {
+	// 	this->size_t_not_int = x.size_t_not_int;
+	// 	this->capacity_in_size_t = x.capacity_in_size_t;
+	// 	this->ptr_first_elem = this->allocator_kind.allocate(this->capacity_in_size_t);
+	// 	for (size_type i = 0; i < this->size_t_not_int; i++){
+	// 		this->allocator_kind.construct(this->ptr_first_elem + i, x.ptr_first_elem[i]);
+	// 	}
+	// }
 
 	//destructor
 	~vector()
@@ -744,11 +754,6 @@ namespace ft
 			size_type size_t_not_int_temp = x.size_t_not_int;
 			allocator_type allocator_kind_temp = x.allocator_kind;
 
-			// std::cout << "The capacity is: ";
-		
-			// std::cout << capacity_in_size_t << ' ';
-			// std::cout <<  std::endl;;
-
 			x.ptr_first_elem = ptr_first_elem;
 			x.capacity_in_size_t = capacity_in_size_t;
 			x.size_t_not_int = size_t_not_int;
@@ -759,15 +764,6 @@ namespace ft
 			size_t_not_int = size_t_not_int_temp;
 			allocator_kind = allocator_kind_temp;
 
-			// std::cout << "The capacity is: ";
-		
-			// std::cout << capacity_in_size_t << ' ';
-			// std::cout <<  std::endl;;
-
-			// std::swap(ptr_first_elem, x.ptr_first_elem);
-			// std::swap(capacity_in_size_t, x.capacity_in_size_t);
-			// std::swap(size_t_not_int, x.size_t_not_int);
-			// std::swap(allocator_kind, x.allocator_kind);
 		}
 
 		
@@ -839,11 +835,12 @@ namespace ft
 	}
 
 	
-	template<class T, class Alloc>
-	void swap(ft::vector<T, Alloc>&x, ft::vector<T, Alloc>&y)
-	{
-		x.swap(y);
-	}
+	// no need for overload, just deleted the condition with capacity in operator=
+	// template<class T, class Alloc>
+	// void swap(ft::vector<T, Alloc>&x, ft::vector<T, Alloc>&y)
+	// {
+	// 	x.swap(y);
+	// }
 	
 }
 
