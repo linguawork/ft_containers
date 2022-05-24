@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/24 19:31:12 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/24 19:32:57 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -489,6 +489,12 @@ namespace ft
 		return !(lhs < rhs);
 	}
 
+	//make pair method
+	template <class T1, class T2>
+	pair<T1, T2> make_pair(T1 x, T2 y)
+	{
+		return (pair<T1, T2>(x, y));
+	}
 
 
 
