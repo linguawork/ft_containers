@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/24 19:17:28 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/24 19:25:18 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,6 +418,20 @@ namespace ft
 		}
 		return (first1 == last1) && (first2 != last2);
 	}
+
+	//struct remove_const
+	template<class T> 
+	struct remove_const 
+	{ typedef T type; };
+
+	template<class T> 
+	struct remove_const <const T>
+	 { typedef T type; };
+
+
+
+
+	
 }
 
 
