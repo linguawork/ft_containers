@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/24 19:32:57 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/24 19:44:26 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -448,7 +448,7 @@ namespace ft
 			return (*this);
 		}
 
-	
+	};
 
 
 	//operators of comparison with pair 
@@ -498,13 +498,23 @@ namespace ft
 
 
 
+	//equal
+	template <class InputIterator1, class InputIterator2>
+  	bool equal ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2 )
+	{
+		while (first1!=last1)
+		{
+			if (!(*first1 == *first2))
+				return false;
+			++first1; ++first2;
+		}
+			return true;
+	}
 
 
 
 
 
-		
-	};
 	
 }
 
