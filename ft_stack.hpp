@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 14:52:48 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/24 15:43:54 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/24 16:00:16 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,58 @@ namespace ft {
 		typedef typename Container::const_reference		const_reference;
 		typedef	Container								container_type;
 
-		stack( const container_type &cont_ = container_type() );
-		stack( const stack &src_ );
-		stack	&operator=( const stack &rhs_ );
 
-		~stack( void );
+	explicit stack( const container_type &cont_ = container_type()) : c( cont_ ) 
+	{
+		
+	}
 
-		reference			top( void );
-		const_reference		top( void ) const;
+	stack( const stack &src_ ) : c( src_.c ) 
+	{
+		
+	}
 
-		bool 				empty( void ) const;
-		size_type 			size( void ) const;
+	stack<T,Container>& operator=( const stack<T,Container> &rhs_ ) //return value
+	{
+		if (this != &rhs_) 
+			this->c = rhs_.c;
+		return ( *this );
+	}
 
-		void 				push( const value_type &val_ );
-		void 				pop( void );
+	~stack( void ) // namespace of destructor
+	{
+		
+	}
+
+	typename stack<T,Container>::reference top( void ) // return_data_type namespace,where the method is, method
+	{
+		return ( this->c.back() );
+	}
+
+	typename stack<T,Container>::const_reference top( void ) const
+	{
+		return ( this->c.back() );
+	}
+
+	bool empty( void ) const 
+	{
+		return ( this->c.empty() );
+	}
+
+	typename stack<T,Container>::size_type /* returning data_type */ size( void ) const /*location of the method*/
+	{
+		return ( this->c.size() );
+	}
+
+	void push( const value_type &val_ ) 
+	{
+		this->c.push_back( val_ );
+	}
+
+	void pop( void ) 
+	{
+		this->c.pop_back();
+	}
 
 	protected:
 		container_type		c;
@@ -53,69 +91,6 @@ namespace ft {
 		operator<( const stack<T_,Cont_> &, const stack<T_,Cont_> & );
 	};
 
-	/************************* * Implementation: * *************************/
-
-	template<typename T, typename Container>
-	stack<T,Container>::stack( const container_type &cont_ ) : c( cont_ ) 
-	{
-		
-	}
-
-	template<typename T, typename Container>
-	stack<T,Container>::stack( const stack &src_ ) : c( src_.c ) 
-	{
-		
-	}
-
-	template<typename T, typename Container>
-	stack<T,Container>& stack<T,Container>::operator=( const stack<T,Container> &rhs_ ) //return value
-	{
-		if (this != &rhs_) 
-			this->c = rhs_.c;
-		return ( *this );
-	}
-
-	template<typename T, typename Container>
-	stack<T,Container>::~stack( void ) // namespace of destructor
-	{
-		
-	}
-
-	template<typename T, typename Container>
-	typename stack<T,Container>::reference stack<T,Container>::top( void ) // return_data_type namespace,where the method is, method
-	{
-		return ( this->c.back() );
-	}
-
-	template<typename T, typename Container>
-	typename stack<T,Container>::const_reference stack<T,Container>::top( void ) const
-	{
-		return ( this->c.back() );
-	}
-
-	template<typename T, typename Container>
-	bool stack<T,Container>::empty( void ) const 
-	{
-		return ( this->c.empty() );
-	}
-
-	template<typename T, typename Container> // templates to work with
-	typename stack<T,Container>::size_type /* returning data_type */ stack<T,Container>::size( void ) const /*location of the method*/
-	{
-		return ( this->c.size() );
-	}
-
-	template<typename T, typename Container>
-	void stack<T,Container>::push( const value_type &val_ ) 
-	{
-		this->c.push_back( val_ );
-	}
-
-	template<typename T, typename Container>
-	void stack<T,Container>::pop( void ) 
-	{
-		this->c.pop_back();
-	}
 
 	/*	
 	Compares the contents of the underlying containers of two container
