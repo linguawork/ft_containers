@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/24 19:27:36 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/24 19:31:12 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -447,11 +447,58 @@ namespace ft
 			second = pr.second;
 			return (*this);
 		}
+
+	
+
+
+	//operators of comparison with pair 
+	template <class T1, class T2>
+	bool operator==(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return lhs.first == rhs.first && lhs.second == rhs.second;
+	}
+
+	template <class T1, class T2>
+	bool operator!=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class T1, class T2>
+	bool operator<(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return lhs.first < rhs.first ||
+			(!(rhs.first < lhs.first) && lhs.second < rhs.second);
+	}
+
+	template <class T1, class T2>
+	bool operator<=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class T1, class T2>
+	bool operator>(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return rhs < lhs;
+	}
+
+	template <class T1, class T2>
+	bool operator>=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+
+
+
+
+
+
+
+
+		
 	};
-
-
-
-
 	
 }
 
