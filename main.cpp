@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/19 18:49:28 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/24 19:04:31 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -728,10 +728,10 @@ int main ()
       
     ft_vector.assign(2 * _ratio, 1); //99 000 000 elements with 1 value in each
 
-            std::cout << "The vector elements are : ";
+        std::cout << "The vector elements are : ";
         for(int i=0; i < vector.size(); i++)
         std::cout << vector.at(i) << ' ';
-       std::cout <<  std::endl;;
+        std::cout <<  std::endl;;
 
         std::cout << "The ft_vector elements are : ";
         for(int i=0; i < ft_vector.size(); i++)
@@ -739,10 +739,6 @@ int main ()
         std::cout <<  std::endl;
     
   }   
-  
-
-
-  
-      
+       
   return 0;
 }
