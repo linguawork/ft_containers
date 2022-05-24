@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/24 19:25:18 by areggie          ###   ########.fr       */
+/*   Updated: 2022/05/24 19:27:36 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -388,8 +388,6 @@ namespace ft {
 	}
 
 
-
-
 }
 
 
@@ -427,6 +425,29 @@ namespace ft
 	template<class T> 
 	struct remove_const <const T>
 	 { typedef T type; };
+
+
+
+	// struct pair
+	template<class T1, class T2> struct pair
+	{
+		typedef T1 first_type;
+		typedef T2 second_type;
+
+		first_type	first;
+		second_type	second;
+		pair() : first(), second() {}
+		template <class U, class V>
+		pair(const pair<U, V> &pr) : first(pr.first), second(pr.second) {}
+		pair(const pair & pr) : first(pr.first), second(pr.second) {}
+		pair(const first_type &a, const second_type &b) : first(a), second(b) {}
+		pair &operator=(const pair &pr)
+		{
+			first = pr.first;
+			second = pr.second;
+			return (*this);
+		}
+	};
 
 
 
