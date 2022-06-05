@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 14:52:48 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/24 16:00:16 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 17:03:07 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ namespace ft {
 	}
 
 	protected:
-		container_type		c;
+		container_type	c; // init
+	// if we dont add private friend methods of compare, we can not access protected c in the class
+	// so we need to have friend prototypes which will call for the methods outside the class 
 	private:
 		template<typename T_, typename Cont_>
 		friend bool
@@ -92,9 +94,9 @@ namespace ft {
 	};
 
 
-	/*	
-	Compares the contents of the underlying containers of two container
-	adaptors. 
+	/*
+	Non member functions	
+	comparison operators
 	*/
 
 	template<typename T, typename Cont>

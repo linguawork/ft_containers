@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 15:35:21 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 15:43:27 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -740,8 +740,23 @@ int main ()
       if (foo> bar) std::cout << "foo is greater than bar\n";
       if (foo<=bar) std::cout << "foo is less than or equal to bar\n";
       if (foo>=bar) std::cout << "foo is greater than or equal to bar\n";
+
+      
     
   }
+
+  std::cout << "\n" << "VECTOR cases finished" << "\n";
+  /**************VECTOR cases finished******************/
+
+
+  /*****************STACK test cases start************************/
+  std::cout << "\n" << "STACK test cases start" << "\n";
+
+{
+  
+}
+
+  
 
 
 
