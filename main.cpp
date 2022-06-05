@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 18:40:53 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 18:56:19 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -828,6 +828,39 @@ int main ()
       for (int i = 0; i < 7; ++i)
           container2.push(i);
       std::cout << "After adding elements, ft::stack container.size(): " << container2.size() << '\n';
+    }
+
+    {
+      //https://m.cplusplus.com/reference/stack/stack/push/
+      std::cout << "\n" << "STACK push() test" << "\n";
+      //Pushes the given element value to the top of the stack.
+      std::stack<int> mystack;
+
+      for (int i=0; i<5; ++i)
+        mystack.push(i);
+
+      std::cout << "Popping out elements std::stack...";
+      while (!mystack.empty())
+      {
+        std::cout << ' ' << mystack.top();
+        mystack.pop();
+      }
+      std::cout << '\n';
+
+
+      ft::stack<int> mystack1;
+
+      for (int i=0; i<5; ++i)
+        mystack1.push(i);
+
+      std::cout << "Popping out elements of ft::stack...";
+      while (!mystack1.empty())
+      {
+        std::cout << ' ' << mystack1.top();
+        mystack1.pop();
+      }
+      std::cout << '\n';
+      
 
       
     }
