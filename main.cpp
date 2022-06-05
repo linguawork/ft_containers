@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 18:02:22 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 18:40:53 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -786,31 +786,49 @@ int main ()
       std::cout << "Top element of ft::stack is: " << s.top() << '\n';
     }
 
+
     {
       //https://en.cppreference.com/w/cpp/container/stack/empty
       //Checks if the underlying container has no elements, i.e. whether c.empty()
-        std::cout << "\n" << "STACK empty() test" << "\n";
-        std::cout << std::boolalpha;
+      std::cout << "\n" << "STACK empty() test" << "\n";
+      std::cout << std::boolalpha;
 
-        std::stack<int> container;
-    
-        std::cout << "Initially, std::stack container.empty(): " << container.empty() << '\n';
-    
-        container.push(42);
-        std::cout << "After adding elements, std::stack container.empty(): " << container.empty() << '\n';
-        std::cout << "\n";
+      std::stack<int> container;
+  
+      std::cout << "Initially, std::stack container.empty(): " << container.empty() << '\n';
+  
+      container.push(42);
+      std::cout << "After adding elements, std::stack container.empty(): " << container.empty() << '\n';
+      std::cout << "\n";
 
-        
-        std::cout << std::boolalpha;
-        ft::stack<int> container2;
-        std::cout << "Initially, ft::stackcontainer.empty(): " << container2.empty() << '\n';
-    
-        container2.push(42);
-        std::cout << "After adding elements, ft::container.empty(): " << container2.empty() << '\n';
-    
+      
+      std::cout << std::boolalpha;
+      ft::stack<int> container2;
+      std::cout << "Initially, ft::stack container.empty(): " << container2.empty() << '\n';
+  
+      container2.push(42);
+      std::cout << "After adding elements, ft::stack container.empty(): " << container2.empty() << '\n';
     }
 
-    {
+
+      
+    { 
+      std::cout << "\n" << "STACK size() test" << "\n";
+      //https://en.cppreference.com/w/cpp/container/stack/size
+      //Returns the number of elements in the underlying container, that is, c.size()
+      std::stack<int> container;
+      std::cout << "Initially, std::stack container.size(): " << container.size() << '\n';
+      for (int i = 0; i < 7; ++i)
+          container.push(i);
+      std::cout << "After adding elements, std::stack container.size(): " << container.size() << '\n';
+      std::cout << "\n";
+
+      ft::stack<int> container2;
+      std::cout << "Initially, ft::stack container.size(): " << container2.size() << '\n';
+      for (int i = 0; i < 7; ++i)
+          container2.push(i);
+      std::cout << "After adding elements, ft::stack container.size(): " << container2.size() << '\n';
+
       
     }
 
