@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 19:01:47 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 19:55:53 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 #include <iostream>
 #include "ft_vector.hpp"
 #include "ft_stack.hpp"
+#include "ft_map.hpp"
 
 // for running tests
 #include <iterator> // for printing out vector contents
 #include <vector> // for comparative test
 #include <stack> 
+#include <map>
 
 
 
@@ -872,9 +874,34 @@ int main ()
 
     }
 
-
     {
-      
+       std::cout << "\n" << "MAP default constructor test" << "\n";
+      //https://en.cppreference.com/w/cpp/container/map/map
+
+      // (1) Default constructor
+      std::map<std::string, int> map1;
+      map1["something"] = 69;
+      map1["anything"] = 199;
+      map1["that thing"] = 50;
+      std::cout << "map1 = "; 
+      // print_map(map1);
+      std::cout << '{';
+      for(auto& p: map1)
+            std::cout << p.first << ':' << p.second << ' ';
+      std::cout << "}\n";
+
+      ft::map<std::string, int> map2;
+      map2["something"] = 69;
+      map2["anything"] = 199;
+      map2["that thing"] = 50;
+      std::cout << "map2 = "; 
+      // print_map(map1);
+      std::cout << '{';
+      for(auto& p: map2)
+            std::cout << p.first << ':' << p.second << ' ';
+      std::cout << "}\n";
+
+      //clang++ ft_map.hpp ft_stack.hpp main.cpp
     }
 
    
