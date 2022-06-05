@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 17:12:37 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 17:35:49 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 // constructing vectors
 #include <iostream>
 #include "ft_vector.hpp"
+#include "ft_stack.hpp"
 
 // for running tests
 #include <iterator> // for printing out vector contents
 #include <vector> // for comparative test
+#include <stack> 
 
 
 
@@ -745,49 +747,39 @@ int main ()
     
   }
 
-  std::cout << "\n" << "VECTOR cases finished" << "\n";
-  /**************VECTOR cases finished******************/
-
-
+  {
+    std::cout << "\n" << "VECTOR cases finished" << "\n";
+    /**************VECTOR cases finished******************/
+    
     /*****************STACK test cases start************************/
     std::cout << "\n" << "STACK test cases start" << "\n";
     //https://en.cppreference.com/w/cpp/container/stack/top
+  }
+
+
+
     {
       std::cout << "\n" << "STACK top() test" << "\n";
-      void reportStackSize(const std::stack<int>& s)
-      {
-          std::cout << s.size() << " elements on stack\n";
-      }
       
-      void reportStackTop(const std::stack<int>& s)
-      {
-          // Leaves element on stack
-          std::cout << "Top element: " << s.top() << '\n';
-      }
-
       std::stack<int> s;
       s.push(2);
       s.push(6);
       s.push(51);
-  
-      reportStackSize(s);
-      reportStackTop(s);
-  
-      reportStackSize(s);
-      s.pop();
-  
-      reportStackSize(s);
-      reportStackTop(s);
+
+      std::cout << s.size() << " elements on std::stack\n";
+      s.pop();// kicks out one element
+      std::cout << "Top element of std::stack: " << s.top() << '\n';
+
+
+      ft::stack<int> s2;
+      s2.push(2);
+      s2.push(6);
+      s2.push(51);
+
+      std::cout << s2.size() << " elements on ft::stack\n";
+      s2.pop(); // kicks out one element
+      std::cout << "Top element of ft::stack is: " << s.top() << '\n';
     }
-
-
-    
-  }
-
-  
-
-
-
 
 
    
