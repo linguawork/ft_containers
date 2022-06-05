@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 15:43:27 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 17:12:37 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -749,12 +749,40 @@ int main ()
   /**************VECTOR cases finished******************/
 
 
-  /*****************STACK test cases start************************/
-  std::cout << "\n" << "STACK test cases start" << "\n";
+    /*****************STACK test cases start************************/
+    std::cout << "\n" << "STACK test cases start" << "\n";
+    //https://en.cppreference.com/w/cpp/container/stack/top
+    {
+      std::cout << "\n" << "STACK top() test" << "\n";
+      void reportStackSize(const std::stack<int>& s)
+      {
+          std::cout << s.size() << " elements on stack\n";
+      }
+      
+      void reportStackTop(const std::stack<int>& s)
+      {
+          // Leaves element on stack
+          std::cout << "Top element: " << s.top() << '\n';
+      }
 
-{
+      std::stack<int> s;
+      s.push(2);
+      s.push(6);
+      s.push(51);
   
-}
+      reportStackSize(s);
+      reportStackTop(s);
+  
+      reportStackSize(s);
+      s.pop();
+  
+      reportStackSize(s);
+      reportStackTop(s);
+    }
+
+
+    
+  }
 
   
 
@@ -762,7 +790,6 @@ int main ()
 
 
 
-  
-       
+   
   return 0;
-}
+  }
