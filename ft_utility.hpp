@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/24 19:44:26 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 15:06:28 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ namespace ft {
 /*
 	https://www.cplusplus.com/reference/iterator/reverse_iterator/?kw=reverse_iterator
 
-	implementation of iterator for vector -  random_access_iterator
+	implementation of iterator for vector, which inher  random_access_iterator
 */
 
 namespace ft {
