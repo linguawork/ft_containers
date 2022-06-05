@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 18:56:19 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 19:01:47 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -832,8 +832,9 @@ int main ()
 
     {
       //https://m.cplusplus.com/reference/stack/stack/push/
-      std::cout << "\n" << "STACK push() test" << "\n";
+      std::cout << "\n" << "STACK push() and pop() test" << "\n";
       //Pushes the given element value to the top of the stack.
+      //Removes the element on top of the stack, effectively reducing its size by one.
       std::stack<int> mystack;
 
       for (int i=0; i<5; ++i)
@@ -860,8 +861,19 @@ int main ()
         mystack1.pop();
       }
       std::cout << '\n';
-      
+    }
 
+    {
+      std::cout << "\n" << "STACK TESTS finished" << "\n";
+      /**************VECTOR cases finished******************/
+      
+      /*****************MAP test cases start************************/
+      std::cout << "\n" << "MAP TESTS start" << "\n";
+
+    }
+
+
+    {
       
     }
 
