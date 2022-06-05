@@ -377,7 +377,9 @@ namespace ft {
 
 }
 
-
+/*
+lexicographical compare
+*/
 
 namespace ft 
 {
