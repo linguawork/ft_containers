@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:18 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 17:17:07 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 19:30:53 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 # define FT_TREE_ITERATOR_HPP// need to have a gap
 
 
+
+//declaring struct NODE with a template just like Rob taught
 template<class Value>
 struct Node
 {
 
 	public:
+	// default constructor 
 	explicit Node(Value *srcval = 0) :	value(srcval),
 										parent(0),
 										left(0),
 										right(0),
-										is_black(false),
+										is_black(false), // by default is fault
 										is_nil(0){}
 
-	Value	*value;
-	Node*	parent;
+	Value	*value; // ptr to template
+	Node*	parent; // P node ptr
 	Node*	left;
 	Node*	right;
 	bool	is_black;
 	bool	is_nil;
 
+// copy constructor
 	Node( Node const & other)
 	{
 		this->is_black = other.is_black;
@@ -43,6 +47,7 @@ struct Node
 		this->left = other.left;
 	};
 
+// assign operator
 	Node& operator=(const Node& other)
 	{
 		this->is_black = other.is_black;
@@ -53,9 +58,15 @@ struct Node
 		this->left = other.left;
 		return *this;
 	}
-	virtual ~Node(){}
+	//virtual distructor
+	virtual ~Node()
+	{
+		
+	}
 };
 
+
+//tree iterator with template, it runs bidirectional iterator
 template<typename T>
 class TreeIter
 {
@@ -66,10 +77,10 @@ class TreeIter
 		typedef typename ft::iterator_traits<T*>::pointer			pointer;
 		typedef typename ft::iterator_traits<T*>::difference_type	difference_type;
 		typedef Node<typename ft::remove_const<value_type>::type >* node_pointer;
-
+		//remove_const makes incoming const just a type, which is defined as node_ptr
 
 	private:
-		node_pointer _node;
+		node_pointer _node; // making a node ptr
 
 		node_pointer tree_min(node_pointer n) const
 		{
@@ -86,9 +97,15 @@ class TreeIter
 		}
 
 	public:
-		TreeIter() {}
+		TreeIter() 
+		{
+			
+		}
 
-		TreeIter(void *node): _node(static_cast<node_pointer>(node)) {}
+		TreeIter(void *node): _node(static_cast<node_pointer>(node)) 
+		{
+			
+		}
 
 		TreeIter(const TreeIter<typename ft::remove_const<value_type>::type > & other)
 		{
@@ -132,15 +149,15 @@ class TreeIter
 
 		TreeIter operator++(int)
 		{
-			TreeIter<value_type> temp = *this;
+			TreeIter<value_type> temp = *this; //tmp
 			if (!_node->right->is_nil)
 			{
 				_node = tree_min(_node->right);
 			}
 			else
 			{
-				node_pointer y = _node->parent;
-				while (y != NULL && _node == y->right)
+				node_pointer y = _node->parent; //like tmp ptr
+				while (y != NULL && _node == y->right) //  changing parents
 				{
 					_node = y;
 					y = y->parent;
