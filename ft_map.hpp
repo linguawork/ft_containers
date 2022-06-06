@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 19:49:02 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/06 18:43:53 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,14 @@ namespace ft
 			return (*((this->insert(ft::make_pair(key,mapped_type()))).first)).second;
 		}
 
+
+		//https://m.cplusplus.com/reference/map/map/get_allocator/
 		allocator_type get_allocator() const
 		{
 			return (_tree.get_allocator());
 		}
 
+		//https://m.cplusplus.com/reference/map/map/size/
 		size_type size() const
 		{
 			return (_tree.size());
@@ -214,7 +217,7 @@ namespace ft
 				throw std::out_of_range("map::at: key not found");
 			return (res->second);
 		}
-
+		//https://m.cplusplus.com/reference/map/map/operator=/
 		template<class _Key, class _T, class _Compare, class _Alloc>
 		friend bool operator==(const map<_Key, _T, _Compare, _Alloc> & lhs,
 				const map<_Key, _T, _Compare, _Alloc>& rhs);

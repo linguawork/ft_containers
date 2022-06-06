@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/06 17:19:50 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/06 18:49:13 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 #include "ft_vector.hpp"
 #include "ft_stack.hpp"
 #include "ft_map.hpp"
+// #include "ft_utility.hpp"
 
 // for running tests
 #include <iterator> // for printing out vector contents
@@ -950,6 +951,121 @@ int main ()
 
     {
       //write methods
+       std::cout << "\n" << "MAP operator = test" << "\n";
+      //https://m.cplusplus.com/reference/map/map/operator=/
+        std::map<char,int> first;
+        std::map<char,int> second;
+
+        first['x']=8;
+        first['y']=16;
+        first['z']=32;
+
+        second=first;                // second now contains 3 ints
+        first=std::map<char,int>();  // and first is now empty
+
+        std::cout << "Size of std::map first: " << first.size() << '\n';
+        std::cout << "Size of std::map second: " << second.size() << '\n';
+
+        
+        
+        ft::map<char,int> first1;
+        ft::map<char,int> second1;
+
+
+        first1['x']=8;
+        first1['y']=16;
+        first1['z']=32;
+
+        //the operator = works here
+        second1=first1; // second had zero elements now contains 3 ints
+        first1 = ft::map<char,int>();
+
+        std::cout << "Size of ft::map first: " << first.size() << '\n';
+        std::cout << "Size of ft::map second: " << second.size() << '\n';
+      
+    }
+
+
+    {
+        std::cout << "\n" << "MAP get_allocator() test" << "\n";
+        //https://m.cplusplus.com/reference/map/map/get_allocator/
+        int psize;
+        std::map<char,int> mymap;
+        std::pair<const char,int>* p;
+
+        // allocate an array of 5 elements using mymap's allocator:
+        p=mymap.get_allocator().allocate(5);
+
+        // assign some values to array
+        psize = sizeof(std::map<char,int>::value_type)*5;
+
+        std::cout << "The allocated std::map has a size of " << psize << " bytes.\n";
+
+        mymap.get_allocator().deallocate(p,5);
+
+
+
+        int psize1;
+        ft::map<char,int> mymap1;
+        ft::pair<const char,int>* p1;
+
+        // allocate an array of 5 elements using mymap's allocator:
+        p1=mymap1.get_allocator().allocate(5);
+
+        // assign some values to array
+        psize1 = sizeof(ft::map<char,int>::value_type)*5;
+
+        std::cout << "The allocated ft::map has a size of " << psize1 << " bytes.\n";
+
+        mymap1.get_allocator().deallocate(p1,5);
+    }
+
+
+    {
+      //https://m.cplusplus.com/reference/map/map/size/
+      std::cout << "\n" << "MAP size() test" << "\n";
+      
+      std::map<char,int> mymap;
+      mymap['a']=101;
+      mymap['b']=202;
+      mymap['c']=302;
+
+      std::cout << "std::map mymap.size() is " << mymap.size() << '\n';
+
+
+      ft::map<char,int> mymap1;
+      mymap1['a']=101;
+      mymap1['b']=202;
+      mymap1['c']=302;
+
+      std::cout << "ft::map mymap.size() is " << mymap1.size() << '\n';
+      
+    }
+
+    {
+      std::cout << "\n" << "MAP max_size() test" << "\n";
+      //https://m.cplusplus.com/reference/map/map/max_size/
+          int i;
+          std::map<int,int> mymap;
+
+          if (mymap.max_size()>1000)
+          {
+            for (i=0; i<1000; i++) mymap[i]=0;
+            std::cout << "The std::map contains 1000 elements.\n";
+          }
+          else std::cout << "The std::map could not hold 1000 elements.\n";
+      
+
+
+          int i1;
+          ft::map<int,int> mymap1;
+
+          if (mymap1.max_size()>1000)
+          {
+            for (i1=0; i1<1000; i1++) mymap[i1]=0;
+            std::cout << "The ft::map contains 1000 elements.\n";
+          }
+          else std::cout << "The ft::map could not hold 1000 elements.\n";
       
     }
 
