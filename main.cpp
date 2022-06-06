@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/06 15:29:20 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/06 17:19:50 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -884,17 +884,7 @@ int main ()
       map1["anything"] = 199;
       map1["that thing"] = 50;
       std::cout << "map1 = "; 
-      // print_map(map1);
       std::cout << '{';
-      // this code is working but I want to get rid of auto 
-      // for(auto& p: map1)
-      //       std::cout << p.first << ':' << p.second << ' ';
-
-      //https://stackoverflow.com/questions/36767292/how-to-print-map-in-c-without-using-iterator
-      // for(int i = 0; i<map1.size(); i++)
-      //     std::cout << map1[i]; 
-      
-      // https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/
       std::map<std::string, int>::iterator itr;  
       for (itr = map1.begin(); itr != map1.end(); ++itr) 
         std::cout << itr->first << ':' << itr->second << ' ';      
@@ -905,18 +895,62 @@ int main ()
       map2["anything"] = 199;
       map2["that thing"] = 50;
       std::cout << "map2 = "; 
-      // print_map(map1);
+
       std::cout << '{';
-      // for(auto& p: map2)
-      //       std::cout << p.first << ':' << p.second << ' ';
-      // std::cout << "}\n";
-      //https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/
       ft::map<std::string, int>::iterator itr2;  
       for (itr2 = map2.begin(); itr2 != map2.end(); ++itr2) 
         std::cout << itr2->first << ':' << itr2->second << ' ';      
       std::cout << "}\n";
 
       //clang++ ft_map.hpp ft_stack.hpp main.cpp
+    }
+      
+    {
+    //   // (2) Range constructor
+      std::cout << "\n" << "Range constructor to make" << "\n";
+
+    //   std::map<std::string, int> map3;
+    //   map3["something"] = 69;
+    //   map3["anything"] = 199;
+    //   map3["that thing"] = 50;
+
+    //   // here is range constructor used
+    //   std::map<std::string, int> iter(map3.find("something"), map3.end());
+
+    //   // std::cout << "map3 (key found) = "; 
+    //   //       std::cout << '{';
+    //   // std::map<std::string, int>::iterator itr2;  
+    //   // for (itr2 = map3.find("something"); itr2 != map3.end(); ++itr2) 
+    //   //   std::cout << itr2->first << ':' << itr2->second << ' ';      
+    //   // std::cout << "}\n";
+
+
+
+    //  ft::map<std::string, int> map4;
+    //   map4["something"] = 69;
+    //   map4["anything"] = 199;
+    //   map4["that thing"] = 50;
+
+    //   // here is range constructor used
+    //   ft::map<std::string, int> iter2(map4.find("something"), map4.end());
+    //   std::cout << "range constructor works" << "\n";
+        
+    //   // std::cout << "map3 (key found) = "; 
+    //   //       std::cout << '{';
+    //   // ft::map<std::string, int>::iterator it;  
+    //   // for (it = map4.find("something"); it != map4.end(); ++it) 
+    //   //   std::cout << it->first << ':' << it->second << ' ';      
+    //   // std::cout << "}\n";
+
+
+    }
+
+
+
+
+    {
+      //write methods
+      
     }
 
    
