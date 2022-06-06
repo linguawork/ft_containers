@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 19:55:53 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/06 15:29:20 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -886,8 +886,18 @@ int main ()
       std::cout << "map1 = "; 
       // print_map(map1);
       std::cout << '{';
-      for(auto& p: map1)
-            std::cout << p.first << ':' << p.second << ' ';
+      // this code is working but I want to get rid of auto 
+      // for(auto& p: map1)
+      //       std::cout << p.first << ':' << p.second << ' ';
+
+      //https://stackoverflow.com/questions/36767292/how-to-print-map-in-c-without-using-iterator
+      // for(int i = 0; i<map1.size(); i++)
+      //     std::cout << map1[i]; 
+      
+      // https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/
+      std::map<std::string, int>::iterator itr;  
+      for (itr = map1.begin(); itr != map1.end(); ++itr) 
+        std::cout << itr->first << ':' << itr->second << ' ';      
       std::cout << "}\n";
 
       ft::map<std::string, int> map2;
@@ -897,8 +907,13 @@ int main ()
       std::cout << "map2 = "; 
       // print_map(map1);
       std::cout << '{';
-      for(auto& p: map2)
-            std::cout << p.first << ':' << p.second << ' ';
+      // for(auto& p: map2)
+      //       std::cout << p.first << ':' << p.second << ' ';
+      // std::cout << "}\n";
+      //https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/
+      ft::map<std::string, int>::iterator itr2;  
+      for (itr2 = map2.begin(); itr2 != map2.end(); ++itr2) 
+        std::cout << itr2->first << ':' << itr2->second << ' ';      
       std::cout << "}\n";
 
       //clang++ ft_map.hpp ft_stack.hpp main.cpp
