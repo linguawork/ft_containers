@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 13:29:03 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 14:19:52 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -911,45 +911,45 @@ int main ()
       //clang++ ft_map.hpp ft_stack.hpp main.cpp
     }
       
-    // {
-    // //   // (2) Range constructor
-    //   std::cout << "\n" << "Range constructor to make" << "\n";
+    {
+    //   // (2) Range constructor
+      std::cout << "\n" << "!!!Range constructor to make!!!" << "\n";
 
-    //   std::map<std::string, int> map3;
-    //   map3["something"] = 69;
-    //   map3["anything"] = 199;
-    //   map3["that thing"] = 50;
+      std::map<std::string, int> map3;
+      map3["something"] = 69;
+      map3["anything"] = 199;
+      map3["that thing"] = 50;
 
-    //   // here is range constructor used
-    //   std::map<std::string, int> iter(map3.find("something"), map3.end());
+      // here is range constructor used
+      std::map<std::string, int> iter(map3.find("anything"), map3.end());
 
-    //   // std::cout << "map3 (key found) = "; 
-    //   //       std::cout << '{';
-    //   // std::map<std::string, int>::iterator itr2;  
-    //   // for (itr2 = map3.find("something"); itr2 != map3.end(); ++itr2) 
-    //   //   std::cout << itr2->first << ':' << itr2->second << ' ';      
-    //   // std::cout << "}\n";
+      std::cout << "map3 (key found) = "; 
+            std::cout << '{';
+      std::map<std::string, int>::iterator itr2;  
+      for (itr2 = map3.find("anything"); itr2 != map3.end(); ++itr2) 
+        std::cout << itr2->first << ':' << itr2->second << ' ';      
+      std::cout << "}\n";
 
 
 
-    //  ft::map<std::string, int> map4;
-    //   map4["something"] = 69;
-    //   map4["anything"] = 199;
-    //   map4["that thing"] = 50;
+     ft::map<std::string, int> map4;
+      map4["something"] = 69;
+      map4["anything"] = 199;
+      map4["that thing"] = 50;
 
-    //   // here is range constructor used
-    //   ft::map<std::string, int> iter2(map4.find("something"), map4.end());
-    //   std::cout << "range constructor works" << "\n";
+      // here is range constructor used
+      ft::map<std::string, int> iter2(map4.find("anything"), map4.end());
+      std::cout << "range constructor works" << "\n";
         
-    //   // std::cout << "map3 (key found) = "; 
-    //   //       std::cout << '{';
-    //   // ft::map<std::string, int>::iterator it;  
-    //   // for (it = map4.find("something"); it != map4.end(); ++it) 
-    //   //   std::cout << it->first << ':' << it->second << ' ';      
-    //   // std::cout << "}\n";
+      std::cout << "map3 (key found) = "; 
+            std::cout << '{';
+      ft::map<std::string, int>::iterator it;  
+      for (it = map4.find("anything"); it != map4.end(); ++it) 
+        std::cout << it->first << ':' << it->second << ' ';      
+      std::cout << "}\n";
 
 
-    // }
+    }
 
 
 

@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 13:14:03 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 14:13:24 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ namespace ft
 
 		iterator	find(const Key& key)
 		{
-			return _tree.find(make_pair(key, mapped_type()));
+			return _tree.find(ft::make_pair(key, mapped_type())); // it was ambiguous in range constructor of ft_map, so added ft::
 		}
 
 		size_type count( const Key& key ) const
