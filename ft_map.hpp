@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 15:29:02 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 15:59:28 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,18 +176,19 @@ namespace ft
 		{
 			_tree.insert(first, last);
 		}
-
-		void erase(iterator pos)
+		
+		//https://m.cplusplus.com/reference/map/map/erase/
+		void erase(iterator iter_pos)  // 1 case: erase where by iter position
 		{
-			_tree.erase(pos);
+			_tree.erase(iter_pos);
 		}
 
-		size_type erase(const Key& key)
+		size_type erase(const Key& key) // erasing a key
 		{
 			return (_tree.erase(make_pair(key, mapped_type())));
 		}
 
-		void erase(iterator first, iterator last)
+		void erase(iterator first, iterator last) // erasing range
 		{
 			_tree.erase(first, last);
 		}

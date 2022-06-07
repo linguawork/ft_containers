@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 15:44:21 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 15:57:20 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1276,8 +1276,60 @@ int main ()
         std::cout << it1->first << " => " << it1->second << '\n';
     }
 
+
+
     {
-      
+       std::cout << "\n" << "MAP modifier method: erase() test" << "\n";
+       //https://m.cplusplus.com/reference/map/map/erase/
+        std::map<char,int> mymap;
+        std::map<char,int>::iterator it;
+
+        // assign some values:
+        mymap['a']=10;
+        mymap['b']=20;
+        mymap['c']=30;
+        mymap['d']=40;
+        mymap['e']=50;
+        mymap['f']=60;
+
+        it=mymap.find('b');
+        mymap.erase (it);                   // erasing by iterator
+
+        mymap.erase ('c');                  // erasing by key
+
+        it=mymap.find ('e');
+        mymap.erase ( it, mymap.end() );    // erasing by range
+
+        // show content: a and d keys should be left
+         std::cout << "std::map mymap has after erasing b, c, e - f" << "\n";
+        for (it=mymap.begin(); it!=mymap.end(); ++it)
+          std::cout << it->first << " => " << it->second << '\n';
+
+
+
+        ft::map<char,int> mymap1;
+        ft::map<char,int>::iterator it1;
+
+        // assign some values:
+        mymap1['a']=10;
+        mymap1['b']=20;
+        mymap1['c']=30;
+        mymap1['d']=40;
+        mymap1['e']=50;
+        mymap1['f']=60;
+
+        it1=mymap1.find('b');
+        mymap1.erase (it1);                   // erasing by iterator
+
+        mymap1.erase ('c');                  // erasing by key
+
+        it1=mymap1.find ('e');
+        mymap1.erase ( it1, mymap1.end() );    // erasing by range
+
+        // show content: a and d keys should be left
+        std::cout << "ft::map mymap1 has after erasing b, c, e - f" << "\n";
+        for (it1=mymap1.begin(); it1!=mymap1.end(); ++it1)
+          std::cout << it1->first << " => " << it1->second << '\n';
     }
     
     // clang++ ft_map.hpp ft_stack.hpp  main.cpp
