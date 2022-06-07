@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 17:04:51 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 18:00:44 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1430,6 +1430,76 @@ int main ()
       for (ft::map<char,int>::iterator it2=mymap1.begin(); it2!=mymap1.end(); ++it2)
         std::cout << it2->first << " => " << it2->second << '\n';
      
+    }
+
+    /***************MAP OBSERVERS methods************/
+
+    {   		
+      //https://m.cplusplus.com/reference/map/map/key_comp/
+      /*
+        Returns a copy of the comparison object used by the container to compare keys.
+      */ 
+      std::cout << "\n" << "MAP observer method: key_comp() test" << "\n";
+      std::map<char,int> mymap;
+
+      std::map<char,int>::key_compare mycomp = mymap.key_comp();
+
+      mymap['a']=100;
+      mymap['b']=200;
+      mymap['c']=300;
+      
+
+      std::cout << "std::map mymap contains:\n";
+
+      char highest = mymap.rbegin()->first;     // key value of last element: 300
+
+      std::map<char,int>::iterator it = mymap.begin();
+      do {
+        std::cout << it->first << " is less than or equal to => " << it->second << '\n';
+      } while ( mycomp((*it++).first, highest) ); //print out while the first iter value is less than the second
+      // https://www.cplusplus.com/reference/functional/less/
+      /*
+        Binary function object class 
+        whose call returns whether its first argument compares less 
+        than the second (as returned by operator <).
+
+        Generically, function objects are instances of a class with member function operator() defined. 
+        This member function allows the object to be used with the same syntax as a function call
+      */
+
+      std::cout << '\n';
+
+
+
+  
+      ft::map<char,int> mymap1;
+
+      ft::map<char,int>::key_compare mycomp1 = mymap1.key_comp();
+
+      mymap1['a']=100;
+      mymap1['b']=200;
+      mymap1['c']=300;
+      
+
+      std::cout << "ft::map mymap1 contains:\n";
+
+      char highest1 = mymap1.rbegin()->first;     // key value of last element: 300
+
+      ft::map<char,int>::iterator it1 = mymap1.begin();
+      do {
+        std::cout << it1->first << " is less than or equal to => " << it1->second << '\n';
+      } while ( mycomp1((*it1++).first, highest1) ); //print out while the first iter value is less than the second
+      // https://www.cplusplus.com/reference/functional/less/
+      /*
+        Binary function object class 
+        whose call returns whether its first argument compares less 
+        than the second (as returned by operator <).
+
+        Generically, function objects are instances of a class with member function operator() defined. 
+        This member function allows the object to be used with the same syntax as a function call
+      */
+
+      std::cout << '\n';
     }
     
         

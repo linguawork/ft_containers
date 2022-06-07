@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 16:56:03 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 17:46:31 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ namespace ft
 			key_compare _compare;
 
 			public:
-				pair_compare(const key_compare & compare) : _compare(compare) {}
+				pair_compare(const key_compare & compare) : _compare(compare) 
+				{
+					
+				}
 
 				bool operator()(const value_type & x, const value_type & y) const
 				{
@@ -109,15 +112,6 @@ namespace ft
 
 		
 
-		value_compare value_comp() const
-		{
-			return (_tree.value_comp());
-		}
-
-		key_compare key_comp() const
-		{
-			return (_compare);
-		}
 
 		iterator begin()
 		{
@@ -139,9 +133,13 @@ namespace ft
 			return(_tree.rend());
 		}
 
+		/*
+        Removes all elements from the map container (which are destroyed), leaving the container with a size of 0.
+      	*/
+      	//https://m.cplusplus.com/reference/map/map/clear/
 		void clear()
 		{
-			_tree.clear();
+			_tree.clear(); //method of RBT
 		}
 
 		//https://m.cplusplus.com/reference/map/map/insert/
@@ -210,6 +208,33 @@ namespace ft
 			_tree.swap(other._tree);
 		}
 
+		/***************MAP OBSERVERS methods************/
+		//https://m.cplusplus.com/reference/map/map/key_comp/
+		/*
+			Returns a copy of the comparison object used by the container to compare keys.
+		*/
+		// https://www.cplusplus.com/reference/functional/less/
+		/*
+			Binary function object class 
+			whose call returns whether its first argument compares less 
+			than the second (as returned by operator <).
+
+			Generically, function objects are instances of a class with member function operator() defined. 
+			This member function allows the object to be used with the same syntax as a function call
+		*/
+	
+		key_compare key_comp() const
+		{
+			return (_compare); // returns whether its first argument compares less than the second
+		}
+		
+		value_compare value_comp() const
+		{
+			return (_tree.value_comp());
+		}
+
+
+		
 		iterator lower_bound(const key_type& key)
 		{
 			return (_tree.lower_bound(make_pair(key, mapped_type())));
@@ -240,6 +265,7 @@ namespace ft
 			return (_tree.equal_range(make_pair(key, mapped_type())));
 		}
 
+		//https://www.cplusplus.com/reference/vector/vector/at/
 		T& at(const Key &key)
 		{
 			iterator res = _tree.find(ft::make_pair(key, mapped_type()));
