@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/06 18:49:13 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 13:29:03 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 #include "ft_vector.hpp"
 #include "ft_stack.hpp"
 #include "ft_map.hpp"
-// #include "ft_utility.hpp"
+#include "ft_tree_iterator.hpp"
+#include "ft_utility.hpp"
 
 // for running tests
 #include <iterator> // for printing out vector contents
@@ -870,6 +871,10 @@ int main ()
       std::cout << "\n" << "STACK TESTS finished" << "\n";
       /**************VECTOR cases finished******************/
       
+
+
+
+
       /*****************MAP test cases start************************/
       std::cout << "\n" << "MAP TESTS start" << "\n";
 
@@ -906,9 +911,9 @@ int main ()
       //clang++ ft_map.hpp ft_stack.hpp main.cpp
     }
       
-    {
-    //   // (2) Range constructor
-      std::cout << "\n" << "Range constructor to make" << "\n";
+    // {
+    // //   // (2) Range constructor
+    //   std::cout << "\n" << "Range constructor to make" << "\n";
 
     //   std::map<std::string, int> map3;
     //   map3["something"] = 69;
@@ -944,7 +949,7 @@ int main ()
     //   // std::cout << "}\n";
 
 
-    }
+    // }
 
 
 
@@ -1020,10 +1025,10 @@ int main ()
         mymap1.get_allocator().deallocate(p1,5);
     }
 
-
+    
     {
       //https://m.cplusplus.com/reference/map/map/size/
-      std::cout << "\n" << "MAP size() test" << "\n";
+      std::cout << "\n" << "MAP capacity: size() test" << "\n";
       
       std::map<char,int> mymap;
       mymap['a']=101;
@@ -1043,32 +1048,137 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "MAP max_size() test" << "\n";
+      std::cout << "\n" << "MAP capacity: max_size() test" << "\n";
       //https://m.cplusplus.com/reference/map/map/max_size/
-          int i;
-          std::map<int,int> mymap;
+        int i;
+        std::map<int,int> mymap;
 
-          if (mymap.max_size()>1000)
-          {
-            for (i=0; i<1000; i++) mymap[i]=0;
-            std::cout << "The std::map contains 1000 elements.\n";
-          }
-          else std::cout << "The std::map could not hold 1000 elements.\n";
+        if (mymap.max_size()>1000)
+        {
+          for (i=0; i<1000; i++) mymap[i]=0;
+          std::cout << "The std::map contains 1000 elements.\n";
+        }
+        else std::cout << "The std::map could not hold 1000 elements.\n";
+    
+
+
+        int i1;
+        ft::map<int,int> mymap1;
+
+        if (mymap1.max_size()>1000)
+        {
+          for (i1=0; i1<1000; i1++) mymap1[i1]=0;
+          std::cout << "The ft::map contains 1000 elements.\n";
+        }
+        else std::cout << "The ft::map could not hold 1000 elements.\n";
+        //clang++ ft_map.hpp ft_stack.hpp main.cpp 
+    } 
+    
+    {
+      std::cout << "\n" << "MAP capacity: empty() test" << "\n";
+      //https://m.cplusplus.com/reference/map/map/empty/
+      std::map<char,int> mymap;
+
+      mymap['a']=10;
+      mymap['b']=20;
+      mymap['c']=30;
       
+      std::cout << "The std::map is not empty and has 3 pairs of elements\n";
+      while (!mymap.empty())
+      {
+        std::cout << mymap.begin()->first << " => " << mymap.begin()->second << '\n';
+        mymap.erase(mymap.begin());
+      }
 
-
-          int i1;
-          ft::map<int,int> mymap1;
-
-          if (mymap1.max_size()>1000)
-          {
-            for (i1=0; i1<1000; i1++) mymap[i1]=0;
-            std::cout << "The ft::map contains 1000 elements.\n";
-          }
-          else std::cout << "The ft::map could not hold 1000 elements.\n";
       
+      ft::map<char,int> mymap1;
+
+      mymap1['a']=10;
+      mymap1['b']=20;
+      mymap1['c']=30;
+
+      std::cout << "The ft::map is not empty and has 3 pairs of elements\n";
+      while (!mymap1.empty())
+      {
+        std::cout << mymap1.begin()->first << " => " << mymap1.begin()->second << '\n';
+        mymap1.erase(mymap1.begin());
+      }
     }
 
-   
+    {
+      std::cout << "\n" << "MAP element access method: operator[] test" << "\n";
+      //https://m.cplusplus.com/reference/map/map/operator[]/
+      std::map<char,std::string> mymap;
+
+      mymap['a']="an element";
+      mymap['b']="another element";
+      mymap['c']=mymap['b'];
+
+      std::cout << "mymap['a'] is " << mymap['a'] << '\n';
+      std::cout << "mymap['b'] is " << mymap['b'] << '\n';
+      std::cout << "mymap['c'] is " << mymap['c'] << '\n';
+      std::cout << "mymap['d'] is " << mymap['d'] << '\n';// has no elements
+
+      std::cout << "std::map mymap now contains " << mymap.size() << " elements.\n";
+
+
+      ft::map<char,std::string> mymap1;
+
+      mymap1['a']="an element";
+      mymap1['b']="another element";
+      mymap1['c']=mymap1['b'];
+
+      std::cout << "mymap1['a'] is " << mymap1['a'] << '\n';
+      std::cout << "mymap1['b'] is " << mymap1['b'] << '\n';
+      std::cout << "mymap1['c'] is " << mymap1['c'] << '\n';
+      std::cout << "mymap1['d'] is " << mymap1['d'] << '\n';// has no elements
+
+      std::cout << "ft::map mymap1 now contains " << mymap1.size() << " elements.\n"; 
+    }
+
+    {
+      std::cout << "\n" << "MAP element access method: at() test" << "\n";
+      //https://m.cplusplus.com/reference/map/map/at/
+      std::map<std::string, int> map1;
+      map1["alpha"] = 0;
+      map1["beta"] = 0;
+      map1["gamma"] = 0;
+
+      map1.at("alpha") = 10;
+      map1.at("beta") = 20;
+      map1.at("gamma") = 30;
+
+      
+      std::cout << "map1 = "; 
+      std::cout << '{';
+      std::map<std::string, int>::iterator itr;  
+      for (itr = map1.begin(); itr != map1.end(); ++itr) 
+        std::cout << itr->first << ':' << itr->second << ' ';      
+      std::cout << "}\n";
+
+
+
+      ft::map<std::string, int> map2;
+      map2["alpha"] = 0;
+      map2["beta"] = 0;
+      map2["gamma"] = 0;
+
+      map2.at("alpha") = 10;
+      map2.at("beta") = 20;
+      map2.at("gamma") = 30;
+
+      
+      std::cout << "map1 = "; 
+      std::cout << '{';
+      ft::map<std::string, int>::iterator it; // dont forget to use ft:: 
+      for (it = map2.begin(); it != map2.end(); ++it) 
+        std::cout << it->first << ':' << it->second << ' ';      
+      std::cout << "}\n";
+    }
+
+    {
+
+    }
+    
   return 0;
-  }
+}

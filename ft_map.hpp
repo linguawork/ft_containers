@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/06 18:43:53 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 13:14:03 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,6 @@ namespace ft
 		map(InputIt first, InputIt last, const Compare& compare = Compare(), const Allocator& alloc = Allocator()):
 			_alloc(alloc), _tree(first, last, compare, _alloc), _compare(compare) {}
 
-		mapped_type& operator[](const key_type& key)
-		{
-			return (*((this->insert(ft::make_pair(key,mapped_type()))).first)).second;
-		}
 
 
 		//https://m.cplusplus.com/reference/map/map/get_allocator/
@@ -81,7 +77,9 @@ namespace ft
 		{
 			return (_tree.get_allocator());
 		}
-
+		
+		/***************MAP CAPACITY methods************/
+		
 		//https://m.cplusplus.com/reference/map/map/size/
 		size_type size() const
 		{
@@ -89,14 +87,27 @@ namespace ft
 		}
 
 		size_type max_size() const
+		//https://m.cplusplus.com/reference/map/map/max_size/
 		{
 			return (_tree.max_size());
 		}
 
 		bool empty() const
+		//https://m.cplusplus.com/reference/map/map/empty/
 		{
 			return (_tree.empty());
 		}
+		
+		/***************MAP ELEMENT ACCESS methods************/
+		
+		//https://m.cplusplus.com/reference/map/map/operator[]/
+		mapped_type& operator[](const key_type& key)
+		{
+			return (*((this->insert(ft::make_pair(key,mapped_type()))).first)).second;
+		}
+
+
+		
 
 		value_compare value_comp() const
 		{
