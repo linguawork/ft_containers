@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 16:57:12 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 17:04:51 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1387,7 +1387,49 @@ int main ()
     }
 
     {
-      
+      /*
+        Removes all elements from the map container (which are destroyed), leaving the container with a size of 0.
+      */
+      //https://m.cplusplus.com/reference/map/map/clear/
+      std::cout << "\n" << "MAP modifier method: clear() test" << "\n";
+
+      std::map<char,int> mymap;
+
+      mymap['x']=100;
+      mymap['y']=200;
+      mymap['z']=300;
+
+      std::cout << "std::map mymap contains:\n";
+      for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+        std::cout << it->first << " => " << it->second << '\n';
+
+      mymap.clear(); // cleared everything
+      mymap['a']=1101;
+      mymap['b']=2202;
+
+      std::cout << "std::map mymap contains:\n";
+      for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+        std::cout << it->first << " => " << it->second << '\n';
+
+
+      ft::map<char,int> mymap1;
+
+      mymap1['x']=100;
+      mymap1['y']=200;
+      mymap1['z']=300;
+
+      std::cout << "ft::map mymap contains:\n";
+      for (ft::map<char,int>::iterator it1=mymap1.begin(); it1!=mymap1.end(); ++it1)
+        std::cout << it1->first << " => " << it1->second << '\n';
+
+      mymap1.clear(); // cleared everything
+      mymap1['a']=1101;
+      mymap1['b']=2202;
+
+      std::cout << "ft::map mymap contains:\n";
+      for (ft::map<char,int>::iterator it2=mymap1.begin(); it2!=mymap1.end(); ++it2)
+        std::cout << it2->first << " => " << it2->second << '\n';
+     
     }
     
         
