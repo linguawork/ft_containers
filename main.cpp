@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 14:19:52 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 15:44:21 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1176,9 +1176,110 @@ int main ()
       std::cout << "}\n";
     }
 
-    {
 
+     /***************MAP MODIFIERS********************/ 
+    {
+      //https://m.cplusplus.com/reference/map/map/insert/
+     /*
+      Extends the container by inserting new elements,
+      effectively increasing the container size by the number of elements inserted.
+
+      Because element keys in a map are unique, the insertion operation checks
+      whether each inserted element has a key equivalent to the one of an element already in the container, 
+      and if so, the element is not inserted, 
+      returning an iterator to this existing element (if the function returns a value)
+     */
+
+      std::cout << "\n" << "MAP modifier method: insert() test" << "\n";
+      //https://m.cplusplus.com/reference/map/map/insert/
+
+      std::map<char,int> mymap;
+
+      // first insert function version (single parameter):
+      /*
+      The single element versions (1) return a pair, 
+      with its member pair::first set to an iterator pointing to either the newly inserted element or
+      to the element with an equivalent key in the map. 
+      The pair::second element in the pair is set to true 
+      if a new element was inserted or false if an equivalent key already existed
+      */
+      mymap.insert ( std::pair<char,int>('a',100) );
+      mymap.insert ( std::pair<char,int>('z',200) );
+
+      std::pair<std::map<char,int>::iterator,bool> ret;
+      ret = mymap.insert ( std::pair<char,int>('z',500) );
+      if (ret.second==false) {
+        std::cout << "element 'z' already existed";
+        std::cout << " with a value of " << ret.first->second << '\n';
+      }
+
+      // second insert function version (with hint position):
+      /*
+        The versions with a hint (2) return an iterator 
+        pointing to either the newly inserted element or 
+        to the element that already had an equivalent key in the map.
+      */
+      std::map<char,int>::iterator it = mymap.begin();
+      mymap.insert (it, std::pair<char,int>('b',300));  // max efficiency inserting
+      mymap.insert (it, std::pair<char,int>('c',400));  // no max efficiency inserting
+
+      // third insert function version (range insertion):
+      /*
+        Member type iterator is a bidirectional iterator type that points to elements.
+        pair is a class template declared in <utility> (see pair).
+      */
+      std::map<char,int> anothermap;
+      anothermap.insert(mymap.begin(),mymap.find('c')); // inserted up to c key (but excluding it)
+
+      // showing contents:
+      std::cout << "std::map mymap contains:\n";
+      for (it=mymap.begin(); it!=mymap.end(); ++it)
+        std::cout << it->first << " => " << it->second << '\n';
+
+      std::cout << "ft::map anothermap contains:\n";
+      for (it=anothermap.begin(); it!=anothermap.end(); ++it)
+        std::cout << it->first << " => " << it->second << '\n';
+
+
+
+
+
+      ft::map<char,int> mymap1;
+
+      // first insert function version (single parameter):
+      mymap1.insert ( ft::pair<char,int>('a',100) );
+      mymap1.insert ( ft::pair<char,int>('z',200) );
+
+      ft::pair<ft::map<char,int>::iterator,bool> ret1;
+      ret1 = mymap1.insert ( ft::pair<char,int>('z',500) );
+      if (ret1.second==false) {
+        std::cout << "element 'z' already existed";
+        std::cout << " with a value of " << ret1.first->second << '\n'; // the second element in the pair
+      }
+
+      // second insert function version (with hint position):
+      ft::map<char,int>::iterator it1 = mymap1.begin();
+      mymap1.insert (it1, ft::pair<char,int>('b',300));  // max efficiency inserting
+      mymap1.insert (it1, ft::pair<char,int>('c',400));  // no max efficiency inserting
+
+      // third insert function version (range insertion):
+      ft::map<char,int> anothermap1;
+      anothermap1.insert(mymap1.begin(),mymap1.find('c')); // inserted up to c key (but excluding it)
+
+      // showing contents:
+      std::cout << "ft::map mymap1 contains:\n";
+      for (it1=mymap1.begin(); it1!=mymap1.end(); ++it1)
+        std::cout << it1->first << " => " << it1->second << '\n';
+
+      std::cout << "ft::map anothermap1 contains:\n";
+      for (it1=anothermap1.begin(); it1!=anothermap1.end(); ++it1)
+        std::cout << it1->first << " => " << it1->second << '\n';
+    }
+
+    {
+      
     }
     
+    // clang++ ft_map.hpp ft_stack.hpp  main.cpp
   return 0;
 }

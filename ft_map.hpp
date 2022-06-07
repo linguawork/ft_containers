@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 14:13:24 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 15:29:02 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,16 +144,33 @@ namespace ft
 			_tree.clear();
 		}
 
+		//https://m.cplusplus.com/reference/map/map/insert/
+		/*
+		 The single element versions (1) return a pair, 
+		 with its member pair::first set to an iterator pointing to either the newly inserted element or
+		 to the element with an equivalent key in the map. 
+		 The pair::second element in the pair is set to true 
+		 if a new element was inserted or false if an equivalent key already existed
+		*/
 		pair<iterator, bool> insert(const value_type& value)
 		{
 			return (_tree.insert(value));
 		}
 
-		iterator insert(iterator hint, const value_type& value)
+		/*
+			The versions with a hint (2) return an iterator 
+			pointing to either the newly inserted element or 
+			to the element that already had an equivalent key in the map.
+		*/
+		iterator insert(iterator pos, const value_type& value)
 		{
-			return (_tree.insert(hint, value));
+			return (_tree.insert(pos, value));
 		}
 
+		/*
+			Member type iterator is a bidirectional iterator type that points to elements.
+			pair is a class template declared in <utility> (see pair).
+		*/
 		template<class InputIt>
 		void insert(typename enable_if< !is_integral<InputIt>::value, InputIt >::type first, InputIt last)
 		{
