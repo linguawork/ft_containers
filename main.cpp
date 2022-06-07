@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 15:57:20 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 16:57:12 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1331,7 +1331,66 @@ int main ()
         for (it1=mymap1.begin(); it1!=mymap1.end(); ++it1)
           std::cout << it1->first << " => " << it1->second << '\n';
     }
+
+    {
+        std::cout << "\n" << "MAP modifier method: swap() test" << "\n";
+        //https://m.cplusplus.com/reference/map/map/swap/
+        /*
+        Another map container of the same type as this (i.e., with the same template parameters, Key, T, Compare and Alloc) 
+        whose content is swapped with that of this container.
+
+        swaps maps
+        */
+        std::map<char,int> foo,bar;
+
+        foo['x']=100;
+        foo['y']=200;
+
+        bar['a']=11;
+        bar['b']=22;
+        bar['c']=33;
+
+        foo.swap(bar);
+
+        std::cout << "std::map foo contains:\n";
+        for (std::map<char,int>::iterator it=foo.begin(); it!=foo.end(); ++it)
+          std::cout << it->first << " => " << it->second << '\n';
+
+        std::cout << "std::map bar contains:\n";
+        for (std::map<char,int>::iterator it=bar.begin(); it!=bar.end(); ++it)
+          std::cout << it->first << " => " << it->second << '\n';
+
+
+
+
+       
+        ft::map<char,int> foo1;
+        ft::map<char,int> bar1;
+        
+
+        foo1['x']=100;
+        foo1['y']=200;
+
+        bar1['a']=11;
+        bar1['b']=22;
+        bar1['c']=33;
+
+        foo1.swap(bar1);
+
+        std::cout << "ft::map foo1 contains:\n";
+        for (ft::map<char,int>::iterator it1=foo1.begin(); it1!=foo1.end(); ++it1)
+          std::cout << it1->first << " => " << it1->second << '\n';
+
+        std::cout << "ft::map bar1 contains:\n";
+        for (ft::map<char,int>::iterator it2=bar1.begin(); it2!=bar1.end(); ++it2)
+          std::cout << it2->first << " => " << it2->second << '\n';
+    }
+
+    {
+      
+    }
     
+        
     // clang++ ft_map.hpp ft_stack.hpp  main.cpp
   return 0;
 }

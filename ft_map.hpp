@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 15:59:28 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 16:56:03 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,8 @@ namespace ft
 		{
 			return (_tree.count(ft::make_pair(key, mapped_type())));
 		}
-
+		
+		//https://m.cplusplus.com/reference/map/map/swap/
 		void swap(map & other)
 		{
 			std::swap(this->_compare, other._compare);
