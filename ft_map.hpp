@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 17:46:31 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 18:02:45 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ namespace ft
 		}
 
 		/***************MAP OBSERVERS methods************/
-		//https://m.cplusplus.com/reference/map/map/key_comp/
+
 		/*
 			Returns a copy of the comparison object used by the container to compare keys.
 		*/
@@ -222,7 +222,7 @@ namespace ft
 			Generically, function objects are instances of a class with member function operator() defined. 
 			This member function allows the object to be used with the same syntax as a function call
 		*/
-	
+		//https://m.cplusplus.com/reference/map/map/key_comp/
 		key_compare key_comp() const
 		{
 			return (_compare); // returns whether its first argument compares less than the second

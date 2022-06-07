@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 18:00:44 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 19:19:35 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1500,6 +1500,48 @@ int main ()
       */
 
       std::cout << '\n';
+    }
+
+    {
+      std::cout << "\n" << "MAP observer method: value_comp() test" << "\n";
+      //https://m.cplusplus.com/reference/map/map/value_comp/
+
+      /* this method is also based on less  https://www.cplusplus.com/reference/functional/less/  so the code is almost the same here */
+      std::map<char,int> mymap;
+
+      mymap['x']=1001;
+      mymap['y']=2002;
+      mymap['z']=3003;
+
+      std::cout << "std::map mymap contains:\n";
+
+      std::pair<char,int> highest = *mymap.rbegin();          // last element
+
+      std::map<char,int>::iterator it = mymap.begin();
+      do {
+        std::cout << it->first << " => " << it->second << '\n';
+      } while ( mymap.value_comp()(*it++, highest) );
+
+
+ 
+      ft::map<char,int> mymap1;
+
+      mymap1['x']=1001;
+      mymap1['y']=2002;
+      mymap1['z']=3003;
+
+      std::cout << "ft::map mymap contains:\n";
+
+      ft::pair<char,int> highest1 = *mymap1.rbegin();// last element
+
+      ft::map<char,int>::iterator it1 = mymap1.begin();
+      do {
+        std::cout << it1->first << " => " << it1->second << '\n';
+      } while ( mymap1.value_comp()(*it1++, highest1) );
+    }
+
+    {
+      
     }
     
         
