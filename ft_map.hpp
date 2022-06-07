@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 18:02:45 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 19:30:34 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,8 @@ namespace ft
 		{
 			_tree.erase(first, last);
 		}
-
+		
+		//https://m.cplusplus.com/reference/map/map/find/
 		iterator	find(const Key& key)
 		{
 			return _tree.find(ft::make_pair(key, mapped_type())); // it was ambiguous in range constructor of ft_map, so added ft::
@@ -228,9 +229,10 @@ namespace ft
 			return (_compare); // returns whether its first argument compares less than the second
 		}
 		
+		//https://m.cplusplus.com/reference/map/map/value_comp/
 		value_compare value_comp() const
 		{
-			return (_tree.value_comp());
+			return (_tree.value_comp()); // uses method of RBT
 		}
 
 

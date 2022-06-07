@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:19:35 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/07 19:29:38 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1540,8 +1540,49 @@ int main ()
       } while ( mymap1.value_comp()(*it1++, highest1) );
     }
 
+
+    /***************MAP OPERATIONS methods************/
     {
-      
+       /*Searches the container for an element with a key equivalent to k 
+       and returns an iterator to it if found, otherwise it returns an iterator to map::end. */
+       // https://m.cplusplus.com/reference/map/map/find/
+      std::cout << "\n" << "MAP OPERATIONS method: find() test" << "\n";
+      std::map<char,int> mymap;
+      std::map<char,int>::iterator it;
+
+      mymap['a']=50;
+      mymap['b']=100;
+      mymap['c']=150;
+      mymap['d']=200;
+
+      it = mymap.find('b');
+      if (it != mymap.end())
+        mymap.erase (it);
+
+      // print content:
+      std::cout << "elements in std::map mymap:" << '\n';
+      std::cout << "a => " << mymap.find('a')->second << '\n';
+      std::cout << "c => " << mymap.find('c')->second << '\n';
+      std::cout << "d => " << mymap.find('d')->second << '\n';
+
+
+      ft::map<char,int> mymap1;
+      ft::map<char,int>::iterator it1;
+
+      mymap1['a']=50;
+      mymap1['b']=100;
+      mymap1['c']=150;
+      mymap1['d']=200;
+
+      it1 = mymap1.find('b');
+      if (it1 != mymap1.end())
+        mymap1.erase (it1);
+
+      // print content:
+      std::cout << "elements in ft::map mymap:" << '\n';
+      std::cout << "a => " << mymap1.find('a')->second << '\n';
+      std::cout << "c => " << mymap1.find('c')->second << '\n';
+      std::cout << "d => " << mymap1.find('d')->second << '\n';
     }
     
         
