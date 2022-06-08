@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:29:38 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/08 14:52:08 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1584,6 +1584,60 @@ int main ()
       std::cout << "c => " << mymap1.find('c')->second << '\n';
       std::cout << "d => " << mymap1.find('d')->second << '\n';
     }
+
+
+    {
+      //https://m.cplusplus.com/reference/map/map/count/
+      std::cout << "\n" << "MAP OPERATIONS method: count() test" << "\n";
+      /*
+        Searches the container for elements with a key equivalent to k and returns the number of matches.
+
+        Because all elements in a map container are unique, 
+        the function can only return 1 (if the element is found) or zero (otherwise).
+
+        Two keys are considered equivalent if the container's comparison object returns false reflexively 
+        (i.e., no matter the order in which the keys are passed as arguments).
+      */
+      
+      std::map<char,int> mymap;
+      char c;
+
+      mymap ['a']=101;
+      mymap ['c']=202;
+      mymap ['f']=303;
+
+      for (c='a'; c<'h'; c++)
+      {
+        std::cout << c;
+        if (mymap.count(c)>0) // if found it will return 1
+          std::cout << " is an element of std::map mymap.\n";
+        else // returns 0
+          std::cout << " is not an element of std::map mymap.\n";
+      }
+       std::cout << '\n';
+
+      ft::map<char,int> mymap1;
+      char c1;
+
+      mymap1 ['a']=101;
+      mymap1 ['c']=202;
+      mymap1 ['f']=303;
+
+      for (c1='a'; c1<'h'; c1++) // up to h but excluding h
+      {
+        std::cout << c1;
+        if (mymap1.count(c1)>0) // if found it will return 1
+          std::cout << " is an element of ft::map mymap.\n";
+        else // returns 0
+          std::cout << " is not an element of ft::map mymap.\n";
+      }
+      std::cout << '\n';
+
+
+    }
+
+
+    
     
         
     // clang++ ft_map.hpp ft_stack.hpp  main.cpp
