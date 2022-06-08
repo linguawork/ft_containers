@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/08 15:06:54 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/08 15:52:03 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1689,6 +1689,63 @@ int main ()
         // print content:
         for (ft::map<char,int>::iterator it1=mymap1.begin(); it1!=mymap1.end(); ++it1)
           std::cout << it1->first << " => " << it1->second << '\n';
+    }
+
+    {
+        std::cout << "\n" << "MAP OPERATIONS method: equal_range() test" << "\n";
+        /*
+        https://m.cplusplus.com/reference/map/map/equal_range/
+        
+        Returns the bounds of a range that includes all the elements in the container which have a key equivalent to k.
+
+        Because the elements in a map container have unique keys, the range returned will contain a single element at most.
+
+        If no matches are found, the range returned has a length of zero, with both iterators pointing to the first element that has a key considered to go after k according to the container's internal comparison object (key_comp).
+
+        Two keys are considered equivalent if the container's comparison object returns false reflexively (i.e., no matter the order in which the keys are passed as arguments).
+
+          
+        The function returns a pair, whose member pair::first is the lower bound of the range 
+        (the same as lower_bound), and pair::second is the upper bound (the same as upper_bound).
+
+        If the map object is const-qualified, the function returns a pair of const_iterator. 
+        Otherwise, it returns a pair of iterator.
+
+        Member types iterator and const_iterator are bidirectional iterator types
+         pointing to elements (of type value_type).
+        Notice that value_type in map containers 
+        is itself also a pair type: pair<const key_type, mapped_type>.
+        */
+        std::map<char,int> mymap;
+
+        mymap['a']=10;
+        mymap['b']=20; 
+        mymap['c']=30;
+
+        std::pair<std::map<char,int>::iterator,std::map<char,int>::iterator> ret;
+        ret = mymap.equal_range('b'); //iterator will point to 20
+
+        std::cout << "std::map lower bound points to: ";
+        std::cout << ret.first->first << " => " << ret.first->second << '\n';
+
+        std::cout << "std::map upper bound points to: ";
+        std::cout << ret.second->first << " => " << ret.second->second << '\n';
+
+
+        ft::map<char,int> mymap1;
+
+        mymap1['a']=10;
+        mymap1['b']=20; 
+        mymap1['c']=30;
+
+        ft::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> ret1;
+        ret1 = mymap1.equal_range('b'); //iterator will point to 20
+
+        std::cout << "ft::map lower bound points to: ";
+        std::cout << ret1.first->first << " => " << ret1.first->second << '\n';
+
+        std::cout << "ft::map upper bound points to: ";
+        std::cout << ret1.second->first << " => " << ret1.second->second << '\n';
     }
 
 

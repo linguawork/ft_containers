@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/08 14:56:46 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/08 16:13:02 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,43 +75,9 @@ namespace ft
 
 
 
-		//https://m.cplusplus.com/reference/map/map/get_allocator/
-		allocator_type get_allocator() const
-		{
-			return (_tree.get_allocator());
-		}
-		
-		/***************MAP CAPACITY methods************/
-		
-		//https://m.cplusplus.com/reference/map/map/size/
-		size_type size() const
-		{
-			return (_tree.size());
-		}
-
-		size_type max_size() const
-		//https://m.cplusplus.com/reference/map/map/max_size/
-		{
-			return (_tree.max_size());
-		}
-
-		bool empty() const
-		//https://m.cplusplus.com/reference/map/map/empty/
-		{
-			return (_tree.empty());
-		}
-		
-		/***************MAP ELEMENT ACCESS methods************/
-		
-		//https://m.cplusplus.com/reference/map/map/operator[]/
-		mapped_type& operator[](const key_type& key)
-		{
-			return (*((this->insert(ft::make_pair(key,mapped_type()))).first)).second;
-		}
-
-
 		
 
+	/***************ITERATORS methods************/
 
 		iterator begin()
 		{
@@ -133,14 +99,51 @@ namespace ft
 			return(_tree.rend());
 		}
 
-		/*
-        Removes all elements from the map container (which are destroyed), leaving the container with a size of 0.
-      	*/
-      	//https://m.cplusplus.com/reference/map/map/clear/
-		void clear()
+
+
+	/***************MAP CAPACITY methods************/
+		
+		//https://m.cplusplus.com/reference/map/map/size/
+		size_type size() const
 		{
-			_tree.clear(); //method of RBT
+			return (_tree.size());
 		}
+
+		size_type max_size() const
+		//https://m.cplusplus.com/reference/map/map/max_size/
+		{
+			return (_tree.max_size());
+		}
+
+		bool empty() const
+		//https://m.cplusplus.com/reference/map/map/empty/
+		{
+			return (_tree.empty());
+		}
+
+
+
+	/***************MAP ELEMENT ACCESS methods************/
+		
+		//https://m.cplusplus.com/reference/map/map/operator[]/
+		mapped_type& operator[](const key_type& key)
+		{
+			return (*((this->insert(ft::make_pair(key,mapped_type()))).first)).second;
+		}
+
+		//https://www.cplusplus.com/reference/vector/vector/at/
+		T& at(const Key &key)
+		{
+			iterator res = _tree.find(ft::make_pair(key, mapped_type()));
+			if (res == _tree.end())
+				throw std::out_of_range("map::at: key not found");
+			return (res->second);
+		}
+		
+
+	/***************MODIFIERS methods************/
+
+		
 
 		//https://m.cplusplus.com/reference/map/map/insert/
 		/*
@@ -190,36 +193,24 @@ namespace ft
 		{
 			_tree.erase(first, last);
 		}
-		
-		//https://m.cplusplus.com/reference/map/map/find/
-		iterator	find(const Key& key)
-		{
-			return _tree.find(ft::make_pair(key, mapped_type())); // it was ambiguous in range constructor of ft_map, so added ft::
-		}
 
-		//https://m.cplusplus.com/reference/map/map/count/
-		/*
-			Searches the container for elements with a key equivalent to k and returns the number of matches.
-
-			Because all elements in a map container are unique, 
-			the function can only return 1 (if the element is found) or zero (otherwise).
-
-			Two keys are considered equivalent if the container's comparison object returns false reflexively 
-			(i.e., no matter the order in which the keys are passed as arguments).
-		*/	
-		size_type count( const Key& key ) const
-		{
-			return (_tree.count(ft::make_pair(key, mapped_type())));
-		}
-		
 		//https://m.cplusplus.com/reference/map/map/swap/
 		void swap(map & other)
 		{
 			std::swap(this->_compare, other._compare);
 			_tree.swap(other._tree);
 		}
+		
+				/*
+        Removes all elements from the map container (which are destroyed), leaving the container with a size of 0.
+      	*/
+      	//https://m.cplusplus.com/reference/map/map/clear/
+		void clear()
+		{
+			_tree.clear(); //method of RBT
+		}
 
-		/***************MAP OBSERVERS methods************/
+	/***************MAP OBSERVERS methods************/
 
 		/*
 			Returns a copy of the comparison object used by the container to compare keys.
@@ -246,7 +237,38 @@ namespace ft
 		}
 
 
+
+	/***************MAP OPERATIONS methods************/
+		//https://m.cplusplus.com/reference/map/map/find/
+		iterator	find(const Key& key)
+		{
+			return _tree.find(ft::make_pair(key, mapped_type())); // it was ambiguous in range constructor of ft_map, so added ft::
+		}
+
+		//https://m.cplusplus.com/reference/map/map/count/
+		/*
+			Searches the container for elements with a key equivalent to k and returns the number of matches.
+
+			Because all elements in a map container are unique, 
+			the function can only return 1 (if the element is found) or zero (otherwise).
+
+			Two keys are considered equivalent if the container's comparison object returns false reflexively 
+			(i.e., no matter the order in which the keys are passed as arguments).
+		*/	
+		size_type count( const Key& key ) const
+		{
+			return (_tree.count(ft::make_pair(key, mapped_type())));
+		}
 		
+		/*
+        https://m.cplusplus.com/reference/map/map/lower_bound/
+        
+        upper_bound, has the same behavior as lower_bound,
+         except in the case that the map contains an element with a key equivalent to k: 
+         In this case, lower_bound returns an iterator pointing to that element, 
+         whereas upper_bound returns an iterator pointing to the next element.
+        
+        */
 		iterator lower_bound(const key_type& key)
 		{
 			return (_tree.lower_bound(make_pair(key, mapped_type())));
@@ -267,6 +289,29 @@ namespace ft
 			return (_tree.upper_bound(make_pair(key, mapped_type())));
 		}
 
+		/*
+        https://m.cplusplus.com/reference/map/map/equal_range/
+        
+        Returns the bounds of a range that includes all the elements in the container which have a key equivalent to k.
+
+        Because the elements in a map container have unique keys, the range returned will contain a single element at most.
+
+        If no matches are found, the range returned has a length of zero, with both iterators pointing to the first element that has a key considered to go after k according to the container's internal comparison object (key_comp).
+
+        Two keys are considered equivalent if the container's comparison object returns false reflexively (i.e., no matter the order in which the keys are passed as arguments).
+
+          
+        The function returns a pair, whose member pair::first is the lower bound of the range 
+        (the same as lower_bound), and pair::second is the upper bound (the same as upper_bound).
+
+        If the map object is const-qualified, the function returns a pair of const_iterator. 
+        Otherwise, it returns a pair of iterator.
+
+        Member types iterator and const_iterator are bidirectional iterator types
+         pointing to elements (of type value_type).
+        Notice that value_type in map containers 
+        is itself also a pair type: pair<const key_type, mapped_type>.
+        */
 		pair<iterator, iterator> equal_range(const key_type & key)
 		{
 			return (_tree.equal_range(make_pair(key, mapped_type())));
@@ -277,14 +322,16 @@ namespace ft
 			return (_tree.equal_range(make_pair(key, mapped_type())));
 		}
 
-		//https://www.cplusplus.com/reference/vector/vector/at/
-		T& at(const Key &key)
+	/***************ALLOCATOR method************/
+
+		//https://m.cplusplus.com/reference/map/map/get_allocator/
+		allocator_type get_allocator() const
 		{
-			iterator res = _tree.find(ft::make_pair(key, mapped_type()));
-			if (res == _tree.end())
-				throw std::out_of_range("map::at: key not found");
-			return (res->second);
+			return (_tree.get_allocator());
 		}
+
+		/***************FRIEND methods************/
+
 		//https://m.cplusplus.com/reference/map/map/operator=/
 		template<class _Key, class _T, class _Compare, class _Alloc>
 		friend bool operator==(const map<_Key, _T, _Compare, _Alloc> & lhs,
@@ -294,6 +341,10 @@ namespace ft
 		friend bool operator<(const map<_Key, _T, _Compare, _Alloc> & lhs,
 				const map<_Key, _T, _Compare, _Alloc>& rhs);
 	};
+	
+
+	
+	/***************OUT OF CLASS methods************/
 
 	template<class Key, class T, class Compare, class Alloc>
 	bool operator==(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
@@ -331,12 +382,13 @@ namespace ft
 		return !(lhs < rhs);
 	}
 
-
-	template<class Key, class T, class Compare, class Alloc>
-	void swap(const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs)
-	{
-		lhs.swap(rhs);
-	}
+	/*REDUNDANT METHOD*/
+	
+	// template<class Key, class T, class Compare, class Alloc>
+	// void swap(const map<Key, T, Compare, Alloc>& lhs, const map<Key, T, Compare, Alloc>& rhs)
+	// {
+	// 	lhs.swap(rhs);
+	// }
 };
 
 #endif
