@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/08 16:13:02 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/08 17:28:21 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,7 +342,6 @@ namespace ft
 				const map<_Key, _T, _Compare, _Alloc>& rhs);
 	};
 	
-
 	
 	/***************OUT OF CLASS methods************/
 
