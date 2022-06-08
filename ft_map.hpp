@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:30:34 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/08 14:56:46 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,16 @@ namespace ft
 			return _tree.find(ft::make_pair(key, mapped_type())); // it was ambiguous in range constructor of ft_map, so added ft::
 		}
 
+		//https://m.cplusplus.com/reference/map/map/count/
+		/*
+			Searches the container for elements with a key equivalent to k and returns the number of matches.
+
+			Because all elements in a map container are unique, 
+			the function can only return 1 (if the element is found) or zero (otherwise).
+
+			Two keys are considered equivalent if the container's comparison object returns false reflexively 
+			(i.e., no matter the order in which the keys are passed as arguments).
+		*/	
 		size_type count( const Key& key ) const
 		{
 			return (_tree.count(ft::make_pair(key, mapped_type())));

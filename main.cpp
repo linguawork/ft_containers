@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/08 14:52:08 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/08 15:06:54 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1588,6 +1588,7 @@ int main ()
 
     {
       //https://m.cplusplus.com/reference/map/map/count/
+      // T think this method should be called search (not count)
       std::cout << "\n" << "MAP OPERATIONS method: count() test" << "\n";
       /*
         Searches the container for elements with a key equivalent to k and returns the number of matches.
@@ -1634,6 +1635,60 @@ int main ()
       std::cout << '\n';
 
 
+    }
+
+    {
+       std::cout << "\n" << "MAP OPERATIONS method: lower/upper_bound() test" << "\n";
+        /*
+        https://m.cplusplus.com/reference/map/map/lower_bound/
+        
+        upper_bound, has the same behavior as lower_bound,
+         except in the case that the map contains an element with a key equivalent to k: 
+         In this case, lower_bound returns an iterator pointing to that element, 
+         whereas upper_bound returns an iterator pointing to the next element.
+        
+        */
+       
+        std::map<char,int> mymap;
+        std::map<char,int>::iterator itlow,itup;
+
+        mymap['a']=20;
+        mymap['b']=40;
+        mymap['c']=60;
+        mymap['d']=80;
+        mymap['e']=100;
+
+        //returns a pointer to the key
+        itlow=mymap.lower_bound ('b');  // itlow points to b 
+        //returns a pointer next to the key
+        itup=mymap.upper_bound ('d');   // itup points to e (not d!)
+
+        mymap.erase(itlow,itup);        // erases [itlow,itup)
+
+        // print content:
+        for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+          std::cout << it->first << " => " << it->second << '\n';
+
+
+        ft::map<char,int> mymap1;
+        ft::map<char,int>::iterator itlow1,itup1;
+
+        mymap1['a']=20;
+        mymap1['b']=40;
+        mymap1['c']=60;
+        mymap1['d']=80;
+        mymap1['e']=100;
+
+        //returns a pointer to the key
+        itlow1 =mymap1.lower_bound ('b');  // itlow points to b 
+        //returns a pointer next to the key
+        itup1=mymap1.upper_bound ('d');   // itup points to e (not d!)
+
+        mymap1.erase(itlow1,itup1);        // erases [itlow,itup)
+
+        // print content:
+        for (ft::map<char,int>::iterator it1=mymap1.begin(); it1!=mymap1.end(); ++it1)
+          std::cout << it1->first << " => " << it1->second << '\n';
     }
 
 
