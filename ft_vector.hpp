@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/22 18:37:21 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/05 15:15:46 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,6 +440,7 @@ namespace ft
 			return ( *( this->ptr_first_elem + n ) );
 		}
 
+		// auxiliary function to at()
 		void check_boundaries( size_type position ) const {
 			if (position < 0 || position >= size() )
 				throw ::std::out_of_range( "ft::vector::at() out of range" );
