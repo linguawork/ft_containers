@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/10 15:49:36 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/10 16:18:23 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1831,6 +1831,104 @@ int main ()
 
         std::cout << "Size of ft::first: " << int (first1.size()) << '\n';
         std::cout << "Size of ft::second: " << int (second1.size()) << '\n';
+      
+    }
+
+    {
+        std::cout << "\n" << "SET CAPACITY empty() test" << "\n";
+        //https://cplusplus.com/reference/set/set/empty/
+        std::set<int> myset;
+
+        myset.insert(20);
+        myset.insert(30);
+        myset.insert(10);
+
+        std::cout << "std::set myset contains:";
+        while (!myset.empty())
+        {
+          std::cout << ' ' << *myset.begin();
+          myset.erase(myset.begin());
+        }
+        std::cout << '\n';
+
+
+        ft::set<int> myset1;
+
+        myset1.insert(20);
+        myset1.insert(30);
+        myset1.insert(10);
+
+        std::cout << "ft::set myset contains:";
+        while (!myset1.empty())
+        {
+          std::cout << ' ' << *myset1.begin();
+          myset1.erase(myset1.begin());
+        }
+        std::cout << '\n';    
+    }
+
+    {
+      std::cout << "\n" << "SET CAPACITY size() test" << "\n";
+      //https://cplusplus.com/reference/set/set/size/
+
+        std::set<int> myints;
+        std::cout << "0. size: " << myints.size() << '\n';
+
+        for (int i=0; i<10; ++i) myints.insert(i);
+        std::cout << "1. size: " << myints.size() << '\n';
+
+        myints.insert (100);
+        std::cout << "2. size: " << myints.size() << '\n';
+
+        myints.erase(5);
+        std::cout << "3. size: " << myints.size() << '\n';
+
+
+        ft::set<int> myints1;
+        std::cout << "ft:set 0. size: " << myints1.size() << '\n';
+
+        for (int i = 0; i < 10; ++i) myints1.insert(i);
+        std::cout << "ft:set 1. size: " << myints1.size() << '\n';
+
+        myints1.insert (100);
+        std::cout << "ft:set 2. size: " << myints1.size() << '\n';
+
+        myints1.erase(5);
+        std::cout << "ft:set 3. size: " << myints1.size() << '\n';
+    }
+
+    {
+        std::cout << "\n" << "SET CAPACITY max_size() test" << "\n";
+        //https://cplusplus.com/reference/set/set/max_size/
+        int i;
+        std::set<int> myset;
+
+        if (myset.max_size()>1000) 
+        //Here, member max_size is used to check beforehand whether the set will allow for 1000 elements to be inserted.
+        {
+          for (i=0; i<1000; i++) 
+            myset.insert(i);
+          std::cout << "The set contains 1000 elements.\n";
+        }
+        else 
+          std::cout << "The set could not hold 1000 elements.\n";
+        std::cout << '\n';
+        
+
+        ft::set<int> myset1;
+        if (myset1.max_size()>1000) 
+        //Here, member max_size is used to check beforehand whether the set will allow for 1000 elements to be inserted.
+        {
+          for (i = 0; i < 1000; i++) 
+            myset1.insert(i);
+          std::cout << "The ft::set myset contains 1000 elements.\n";
+        }
+        else 
+          std::cout << "The ft::set myset could not hold 1000 elements.\n";
+    }
+
+    {
+        std::cout << "\n" << "SET MODIFIERS max_size() test" << "\n";
       
     }
 
