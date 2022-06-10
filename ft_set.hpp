@@ -6,12 +6,12 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:13 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/08 19:14:56 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/10 13:42:04 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
+#ifndef FT_SET_HPP
+# define FT_SET_HPP
 #include "ft_redblacktree.hpp"
 #include "ft_utility.hpp"
 
@@ -274,3 +274,5 @@ namespace std
 		lhs.swap(rhs);
 	}
 }
+
+#endif

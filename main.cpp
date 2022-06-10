@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/08 15:52:03 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/10 14:02:30 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 #include "ft_map.hpp"
 #include "ft_tree_iterator.hpp"
 #include "ft_utility.hpp"
+#include "ft_set.hpp"
 
 // for running tests
 #include <iterator> // for printing out vector contents
 #include <vector> // for comparative test
 #include <stack> 
 #include <map>
+#include <set>
+
 
 
 
@@ -991,40 +994,6 @@ int main ()
     }
 
 
-    {
-        std::cout << "\n" << "MAP get_allocator() test" << "\n";
-        //https://m.cplusplus.com/reference/map/map/get_allocator/
-        int psize;
-        std::map<char,int> mymap;
-        std::pair<const char,int>* p;
-
-        // allocate an array of 5 elements using mymap's allocator:
-        p=mymap.get_allocator().allocate(5);
-
-        // assign some values to array
-        psize = sizeof(std::map<char,int>::value_type)*5;
-
-        std::cout << "The allocated std::map has a size of " << psize << " bytes.\n";
-
-        mymap.get_allocator().deallocate(p,5);
-
-
-
-        int psize1;
-        ft::map<char,int> mymap1;
-        ft::pair<const char,int>* p1;
-
-        // allocate an array of 5 elements using mymap's allocator:
-        p1=mymap1.get_allocator().allocate(5);
-
-        // assign some values to array
-        psize1 = sizeof(ft::map<char,int>::value_type)*5;
-
-        std::cout << "The allocated ft::map has a size of " << psize1 << " bytes.\n";
-
-        mymap1.get_allocator().deallocate(p1,5);
-    }
-
     
     {
       //https://m.cplusplus.com/reference/map/map/size/
@@ -1747,6 +1716,72 @@ int main ()
         std::cout << "ft::map upper bound points to: ";
         std::cout << ret1.second->first << " => " << ret1.second->second << '\n';
     }
+
+
+    {
+        std::cout << "\n" << "MAP get_allocator() test" << "\n";
+        //https://m.cplusplus.com/reference/map/map/get_allocator/
+        int psize;
+        std::map<char,int> mymap;
+        std::pair<const char,int>* p;
+
+        // allocate an array of 5 elements using mymap's allocator:
+        p=mymap.get_allocator().allocate(5);
+
+        // assign some values to array
+        psize = sizeof(std::map<char,int>::value_type)*5;
+
+        std::cout << "The allocated std::map has a size of " << psize << " bytes.\n";
+
+        mymap.get_allocator().deallocate(p,5);
+
+
+
+        int psize1;
+        ft::map<char,int> mymap1;
+        ft::pair<const char,int>* p1;
+
+        // allocate an array of 5 elements using mymap's allocator:
+        p1=mymap1.get_allocator().allocate(5);
+
+        // assign some values to array
+        psize1 = sizeof(ft::map<char,int>::value_type)*5;
+
+        std::cout << "The allocated ft::map has a size of " << psize1 << " bytes.\n";
+
+        mymap1.get_allocator().deallocate(p1,5);
+    }
+
+
+    /**************SET container tests start*******************/
+
+    {
+      
+      std::cout << "\n" << "SET constructors test" << "\n";
+      std::set<int> first;                           // empty set of ints
+
+      int myints[]= {10,20,30,40,50};
+      std::set<int> second(myints,myints+5);        // range
+
+      std::set<int> third(second);                  // a copy of second
+
+      std::set<int> fourth(second.begin(), second.end());  // iterator ctor.
+
+      std::set<int>::iterator iter = second.begin();
+      std::cout << "the set array second (used range constructor with iterators from myints) is" << std::endl;
+      for(; iter != second.end(); iter++)
+        std::cout << *iter << " ";
+      std::cout << '\n';
+
+
+      std::set<int>::iterator iter2 = third.begin();
+      std::cout << "the set array third (used copy constructor from second) is" << std::endl;
+      for(; iter2 != third.end(); iter2++)
+          std::cout << *iter2 << " ";
+      
+    }
+
+
 
 
     
