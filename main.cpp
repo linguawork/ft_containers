@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/10 16:18:23 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/10 16:40:47 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1928,15 +1928,63 @@ int main ()
     }
 
     {
-        std::cout << "\n" << "SET MODIFIERS max_size() test" << "\n";
-      
+        std::cout << "\n" << "SET MODIFIERS insert() test" << "\n";
+        //https://cplusplus.com/reference/set/set/insert/
+
+        std::set<int> myset;
+        std::set<int>::iterator it;
+        std::pair<std::set<int>::iterator,bool> ret;
+
+        // set some initial values:
+        for (int i=1; i<=5; ++i) 
+          myset.insert(i*10);    // set: 10 20 30 40 50
+
+        ret = myset.insert(20);               // no new element inserted
+        
+        //The pair::second element in the pair is set to true if a new element was inserted or false if an equivalent element already existed.
+        if (ret.second==false)     
+          it=ret.first;  // "it" now points to element 20
+
+        myset.insert (it,25);                 // max efficiency inserting
+        myset.insert (it,24);                 // max efficiency inserting
+        myset.insert (it,26);                 // no max efficiency inserting
+
+        int myints[]= {5,10,15};              // 10 already in set, not inserted
+        myset.insert (myints,myints+3);
+
+        std::cout << "std::set myset contains:";
+        for (it=myset.begin(); it!=myset.end(); ++it)
+          std::cout << ' ' << *it;
+        std::cout << '\n';
+        
+
+        ft::set<int> myset1;
+        ft::set<int>::iterator it1;
+        ft::pair<ft::set<int>::iterator,bool> ret1;
+
+        // set some initial values:
+        for (int i=1; i<=5; ++i) 
+          myset1.insert(i*10);    // set: 10 20 30 40 50
+
+        ret1 = myset1.insert(20);               // no new element inserted
+        
+        //The pair::second element in the pair is set to true if a new element was inserted or false if an equivalent element already existed.
+        if (ret1.second==false)     
+          it1=ret1.first;  // "it" now points to element 20
+
+        myset1.insert (it1,25);                 // max efficiency inserting
+        myset1.insert (it1,24);                 // max efficiency inserting
+        myset1.insert (it1,26);                 // no max efficiency inserting
+
+        int myints1[]= {5,10,15};              // 10 already in set, not inserted
+        myset1.insert (myints1,myints1+3);
+
+        std::cout << "ft::set myset1 contains:";
+        for (it1=myset1.begin(); it1!=myset1.end(); ++it1)
+          std::cout << ' ' << *it1;
+        std::cout << '\n';
     }
 
-
-
-    
-    
-        
     // clang++ ft_map.hpp ft_stack.hpp  main.cpp
   return 0;
 }
