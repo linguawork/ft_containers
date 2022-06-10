@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/10 16:40:47 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/10 18:40:12 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1983,6 +1983,54 @@ int main ()
         for (it1=myset1.begin(); it1!=myset1.end(); ++it1)
           std::cout << ' ' << *it1;
         std::cout << '\n';
+    }
+
+    {
+      std::cout << "\n" << "SET MODIFIERS erase() test" << "\n";
+      // https://m.cplusplus.com/reference/set/set/erase/
+      std::set<int> myset;
+      std::set<int>::iterator it;
+
+      // insert some values:
+      for (int i=1; i<10; i++) myset.insert(i*10);  // 10 20 30 40 50 60 70 80 90
+
+      it = myset.begin();
+      ++it;                                         // "it" points now to 20
+
+      myset.erase (it);
+
+      myset.erase (40);
+
+      it = myset.find (60);
+      myset.erase (it, myset.end());
+
+      std::cout << "std::set myset contains:";
+      for (it=myset.begin(); it!=myset.end(); ++it)
+        std::cout << ' ' << *it;
+      std::cout << '\n';
+
+
+      ft::set<int> myset1;
+      ft::set<int>::iterator it1;
+
+      // insert some values:
+      for (int i=1; i<10; i++) 
+        myset1.insert(i*10);  // 10 20 30 40 50 60 70 80 90
+
+      it1 = myset1.begin();
+      ++it1;                               // "it" points now to 20
+
+      //myset1.erase (it1); //		void erase_fixup(node_pointer x) there is segfault
+
+      myset1.erase (40);
+
+      it1 = myset1.find(60);
+      myset1.erase (it1, myset1.end());
+
+      std::cout << "ft::set myset contains:";
+      for (it1=myset1.begin(); it1!=myset1.end(); ++it1)
+        std::cout << ' ' << *it1;
+      std::cout << '\n';
     }
 
     // clang++ ft_map.hpp ft_stack.hpp  main.cpp
