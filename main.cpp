@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/10 14:02:30 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/10 14:32:45 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1758,6 +1758,7 @@ int main ()
     {
       
       std::cout << "\n" << "SET constructors test" << "\n";
+      // https://m.cplusplus.com/reference/set/set/set/
       std::set<int> first;                           // empty set of ints
 
       int myints[]= {10,20,30,40,50};
@@ -1768,16 +1769,47 @@ int main ()
       std::set<int> fourth(second.begin(), second.end());  // iterator ctor.
 
       std::set<int>::iterator iter = second.begin();
-      std::cout << "the set array second (used range constructor with iterators from myints) is" << std::endl;
+      std::cout << "std::set array second (used range constructor with iterators from myints) is" << std::endl;
       for(; iter != second.end(); iter++)
         std::cout << *iter << " ";
       std::cout << '\n';
-
-
+      
       std::set<int>::iterator iter2 = third.begin();
-      std::cout << "the set array third (used copy constructor from second) is" << std::endl;
+      std::cout << "std::set array third (used copy constructor from second) is" << std::endl;
       for(; iter2 != third.end(); iter2++)
           std::cout << *iter2 << " ";
+       std::cout << '\n';
+
+
+
+
+      
+      
+      
+      ft::set<int> first1;                           // empty set of ints
+
+      int myints1[]= {10,20,30,40,50};
+      ft::set<int> second1(myints1,myints1+5);        // range
+
+      ft::set<int> third1(second1);                  // a copy of second
+
+      ft::set<int> fourth1(second1.begin(), second1.end());  // iterator ctor.
+
+      ft::set<int>::iterator iter1 = second1.begin();
+      std::cout << "ft::set array second (used range constructor with iterators from myints) is" << std::endl;
+      for(; iter1 != second1.end(); iter1++)
+        std::cout << *iter1 << " ";
+      std::cout << '\n';
+
+
+      ft::set<int>::iterator iter21 = third1.begin();
+      std::cout << "ft::set array third (used copy constructor from second) is" << std::endl;
+      for(; iter21 != third1.end(); iter21++)
+          std::cout << *iter21 << " ";
+      std::cout << '\n';
+
+
+
       
     }
 
