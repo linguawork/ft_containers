@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/10 14:32:45 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/10 15:49:36 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1781,10 +1781,6 @@ int main ()
        std::cout << '\n';
 
 
-
-
-      
-      
       
       ft::set<int> first1;                           // empty set of ints
 
@@ -1807,12 +1803,36 @@ int main ()
       for(; iter21 != third1.end(); iter21++)
           std::cout << *iter21 << " ";
       std::cout << '\n';
-
-
-
       
     }
 
+    {
+        std::cout << "\n" << "SET operator= test" << "\n";
+        //https://m.cplusplus.com/reference/set/set/operator=/
+      
+        int myints[]={ 12,82,37,64,15 };
+        std::set<int> first (myints,myints+5);   // set with 5 ints
+        std::set<int> second;                    // empty set
+
+        second = first;                          // now second contains the 5 ints
+        first = std::set<int>();                 // and first is empty
+
+        std::cout << "Size of std::first: " << int (first.size()) << '\n';
+        std::cout << "Size of std::second: " << int (second.size()) << '\n';
+        std::cout << '\n';
+        
+
+        int myints1[]={ 12,82,37,64,15 };
+        std::set<int> first1 (myints1,myints1+5);   // set with 5 ints
+        std::set<int> second1;                    // empty set
+
+        second1 = first1;                          // now second contains the 5 ints
+        first1 = std::set<int>();                 // and first is empty
+
+        std::cout << "Size of ft::first: " << int (first1.size()) << '\n';
+        std::cout << "Size of ft::second: " << int (second1.size()) << '\n';
+      
+    }
 
 
 
