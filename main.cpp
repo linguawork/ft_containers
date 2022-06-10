@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/10 18:40:12 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/10 18:51:27 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2032,6 +2032,47 @@ int main ()
         std::cout << ' ' << *it1;
       std::cout << '\n';
     }
+
+    {
+        std::cout << "\n" << "SET MODIFIERS swap() test" << "\n";
+        //https://m.cplusplus.com/reference/set/set/swap/
+
+        int myints[]={12,75,10,32,20,25};
+        std::set<int> first (myints,myints+3);     // 10,12,75
+        std::set<int> second (myints+3,myints+6);  // 20,25,32
+
+        first.swap(second);
+
+        std::cout << "first contains:";
+        for (std::set<int>::iterator it=first.begin(); it!=first.end(); ++it)
+          std::cout << ' ' << *it;
+        std::cout << '\n';
+
+        std::cout << "second contains:";
+        for (std::set<int>::iterator it=second.begin(); it!=second.end(); ++it)
+          std::cout << ' ' << *it;
+        std::cout << '\n';
+
+
+
+        int myints1[]={12,75,10,32,20,25};
+        ft::set<int> first1 (myints1,myints1+3);     // 10,12,75
+        ft::set<int> second1 (myints1+3,myints1+6);  // 20,25,32
+
+        first1.swap(second1);
+
+        std::cout << "ft::set first contains:";
+        for (ft::set<int>::iterator it1=first1.begin(); it1!=first1.end(); ++it1)
+          std::cout << ' ' << *it1;
+        std::cout << '\n';
+
+        std::cout << "ft::set second contains:";
+        for (ft::set<int>::iterator it1=second1.begin(); it1!=second1.end(); ++it1)
+          std::cout << ' ' << *it1;
+        std::cout << '\n';  
+    }
+
+    
 
     // clang++ ft_map.hpp ft_stack.hpp  main.cpp
   return 0;
