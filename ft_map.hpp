@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/08 17:28:21 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/12 16:59:43 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ namespace ft
 
 	private:
 		allocator_type	_alloc;
-		tree_type		_tree;
+		tree_type		rbtree_;
 		key_compare		_compare;
 
 	public:
 
 		explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()):
-			_alloc(alloc), _tree(tree_type(comp, alloc)), _compare(comp) {}
+			_alloc(alloc), rbtree_(tree_type(comp, alloc)), _compare(comp) {}
 
 		template< class InputIt >
 		map(InputIt first, InputIt last, const Compare& compare = Compare(), const Allocator& alloc = Allocator()):
-			_alloc(alloc), _tree(first, last, compare, _alloc), _compare(compare) {}
+			_alloc(alloc), rbtree_(first, last, compare, _alloc), _compare(compare) {}
 
 
 
@@ -81,22 +81,22 @@ namespace ft
 
 		iterator begin()
 		{
-			return (_tree.begin());
+			return (rbtree_.begin());
 		}
 
 		iterator end()
 		{
-			return (_tree.end());
+			return (rbtree_.end());
 		}
 
 		reverse_iterator rbegin()
 		{
-			return(_tree.rbegin());
+			return(rbtree_.rbegin());
 		}
 
 		reverse_iterator rend()
 		{
-			return(_tree.rend());
+			return(rbtree_.rend());
 		}
 
 
@@ -106,19 +106,19 @@ namespace ft
 		//https://m.cplusplus.com/reference/map/map/size/
 		size_type size() const
 		{
-			return (_tree.size());
+			return (rbtree_.size());
 		}
 
 		size_type max_size() const
 		//https://m.cplusplus.com/reference/map/map/max_size/
 		{
-			return (_tree.max_size());
+			return (rbtree_.max_size());
 		}
 
 		bool empty() const
 		//https://m.cplusplus.com/reference/map/map/empty/
 		{
-			return (_tree.empty());
+			return (rbtree_.empty());
 		}
 
 
@@ -134,8 +134,8 @@ namespace ft
 		//https://www.cplusplus.com/reference/vector/vector/at/
 		T& at(const Key &key)
 		{
-			iterator res = _tree.find(ft::make_pair(key, mapped_type()));
-			if (res == _tree.end())
+			iterator res = rbtree_.find(ft::make_pair(key, mapped_type()));
+			if (res == rbtree_.end())
 				throw std::out_of_range("map::at: key not found");
 			return (res->second);
 		}
@@ -155,7 +155,7 @@ namespace ft
 		*/
 		pair<iterator, bool> insert(const value_type& value)
 		{
-			return (_tree.insert(value));
+			return (rbtree_.insert(value));
 		}
 
 		/*
@@ -165,7 +165,7 @@ namespace ft
 		*/
 		iterator insert(iterator pos, const value_type& value)
 		{
-			return (_tree.insert(pos, value));
+			return (rbtree_.insert(pos, value));
 		}
 
 		/*
@@ -175,30 +175,30 @@ namespace ft
 		template<class InputIt>
 		void insert(typename enable_if< !is_integral<InputIt>::value, InputIt >::type first, InputIt last)
 		{
-			_tree.insert(first, last);
+			rbtree_.insert(first, last);
 		}
 		
 		//https://m.cplusplus.com/reference/map/map/erase/
 		void erase(iterator iter_pos)  // 1 case: erase where by iter position
 		{
-			_tree.erase(iter_pos);
+			rbtree_.erase(iter_pos);
 		}
 
 		size_type erase(const Key& key) // erasing a key
 		{
-			return (_tree.erase(make_pair(key, mapped_type())));
+			return (rbtree_.erase(make_pair(key, mapped_type())));
 		}
 
 		void erase(iterator first, iterator last) // erasing range
 		{
-			_tree.erase(first, last);
+			rbtree_.erase(first, last);
 		}
 
 		//https://m.cplusplus.com/reference/map/map/swap/
 		void swap(map & other)
 		{
 			std::swap(this->_compare, other._compare);
-			_tree.swap(other._tree);
+			rbtree_.swap(other.rbtree_);
 		}
 		
 				/*
@@ -207,7 +207,7 @@ namespace ft
       	//https://m.cplusplus.com/reference/map/map/clear/
 		void clear()
 		{
-			_tree.clear(); //method of RBT
+			rbtree_.clear(); //method of RBT
 		}
 
 	/***************MAP OBSERVERS methods************/
@@ -233,7 +233,7 @@ namespace ft
 		//https://m.cplusplus.com/reference/map/map/value_comp/
 		value_compare value_comp() const
 		{
-			return (_tree.value_comp()); // uses method of RBT
+			return (rbtree_.value_comp()); // uses method of RBT
 		}
 
 
@@ -242,7 +242,7 @@ namespace ft
 		//https://m.cplusplus.com/reference/map/map/find/
 		iterator	find(const Key& key)
 		{
-			return _tree.find(ft::make_pair(key, mapped_type())); // it was ambiguous in range constructor of ft_map, so added ft::
+			return rbtree_.find(ft::make_pair(key, mapped_type())); // it was ambiguous in range constructor of ft_map, so added ft::
 		}
 
 		//https://m.cplusplus.com/reference/map/map/count/
@@ -257,7 +257,7 @@ namespace ft
 		*/	
 		size_type count( const Key& key ) const
 		{
-			return (_tree.count(ft::make_pair(key, mapped_type())));
+			return (rbtree_.count(ft::make_pair(key, mapped_type())));
 		}
 		
 		/*
@@ -271,22 +271,22 @@ namespace ft
         */
 		iterator lower_bound(const key_type& key)
 		{
-			return (_tree.lower_bound(make_pair(key, mapped_type())));
+			return (rbtree_.lower_bound(make_pair(key, mapped_type())));
 		}
 
 		const_iterator lower_bound(const key_type& key) const
 		{
-			return (_tree.lower_bound(make_pair(key, mapped_type())));
+			return (rbtree_.lower_bound(make_pair(key, mapped_type())));
 		}
 
 		iterator upper_bound(const key_type& key)
 		{
-			return (_tree.upper_bound(make_pair(key, mapped_type())));
+			return (rbtree_.upper_bound(make_pair(key, mapped_type())));
 		}
 
 		const_iterator upper_bound(const key_type& key) const
 		{
-			return (_tree.upper_bound(make_pair(key, mapped_type())));
+			return (rbtree_.upper_bound(make_pair(key, mapped_type())));
 		}
 
 		/*
@@ -314,12 +314,12 @@ namespace ft
         */
 		pair<iterator, iterator> equal_range(const key_type & key)
 		{
-			return (_tree.equal_range(make_pair(key, mapped_type())));
+			return (rbtree_.equal_range(make_pair(key, mapped_type())));
 		}
 
 		pair<const_iterator, const_iterator> equal_range(const key_type & key) const
 		{
-			return (_tree.equal_range(make_pair(key, mapped_type())));
+			return (rbtree_.equal_range(make_pair(key, mapped_type())));
 		}
 
 	/***************ALLOCATOR method************/
@@ -327,7 +327,7 @@ namespace ft
 		//https://m.cplusplus.com/reference/map/map/get_allocator/
 		allocator_type get_allocator() const
 		{
-			return (_tree.get_allocator());
+			return (rbtree_.get_allocator());
 		}
 
 		/***************FRIEND methods************/
@@ -348,7 +348,7 @@ namespace ft
 	template<class Key, class T, class Compare, class Alloc>
 	bool operator==(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
 	{
-		return (lhs._tree == rhs._tree);
+		return (lhs.rbtree_ == rhs.rbtree_);
 	}
 
 	template<class Key, class T, class Compare, class Alloc>
@@ -360,7 +360,7 @@ namespace ft
 	template<class Key, class T, class Compare, class Alloc>
 	bool operator<(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
 	{
-		return (lhs._tree < rhs._tree);
+		return (lhs.rbtree_ < rhs.rbtree_);
 	}
 
 	template<class Key, class T, class Compare, class Alloc>
