@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/12 17:10:21 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/12 19:38:01 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,19 +133,19 @@ int main ()
 
         myvector.resize(5); //5 zeros
         std::cout << "myvector contains:";
-        for (int i=0;i<myvector.size();i++)
+        for (unsigned long i=0;i<myvector.size();i++)
           std::cout << ' ' << myvector[i];
         std::cout << '\n';
         
         myvector.resize(8,100); // added 3 elem of value 100 over 5
         std::cout << "myvector contains:";
-        for (int i=0;i<myvector.size();i++)
+        for (unsigned long i=0;i<myvector.size();i++)
           std::cout << ' ' << myvector[i];
         std::cout << '\n';
         
         myvector.resize(12, 3); // added 4 elem of value 3 over 8
         std::cout << "myvector contains:";
-        for (int i=0;i<myvector.size();i++)
+        for (unsigned long i=0;i<myvector.size();i++)
           std::cout << ' ' << myvector[i];
         std::cout << '\n';
     }
@@ -404,12 +404,12 @@ int main ()
     ft_vector.assign(2 * _ratio, 1); //99 000 000 elements with 1 value in each
 
         std::cout << "The vector elements are : ";
-        for(int i=0; i < vector.size(); i++)
+        for(unsigned long i=0; i < vector.size(); i++)
         std::cout << vector.at(i) << ' ';
         std::cout <<  std::endl;;
 
         std::cout << "The ft_vector elements are : ";
-        for(int i=0; i < ft_vector.size(); i++)
+        for(unsigned long i=0; i < ft_vector.size(); i++)
         std::cout << ft_vector.at(i) << ' ';
         std::cout <<  std::endl;
       
