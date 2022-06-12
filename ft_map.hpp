@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/12 16:59:43 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/12 17:09:09 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,24 +79,24 @@ namespace ft
 
 	/***************ITERATORS methods************/
 
-		iterator begin()
+		iterator begin(void)
 		{
-			return (rbtree_.begin());
+			return (this->rbtree_.begin());
 		}
 
-		iterator end()
+		iterator end(void)
 		{
-			return (rbtree_.end());
+			return (this->rbtree_.end());
 		}
 
-		reverse_iterator rbegin()
+		reverse_iterator rbegin(void)
 		{
-			return(rbtree_.rbegin());
+			return(this->rbtree_.rbegin());
 		}
 
-		reverse_iterator rend()
+		reverse_iterator rend(void)
 		{
-			return(rbtree_.rend());
+			return(this->rbtree_.rend());
 		}
 
 
@@ -104,21 +104,21 @@ namespace ft
 	/***************MAP CAPACITY methods************/
 		
 		//https://m.cplusplus.com/reference/map/map/size/
-		size_type size() const
+		size_type size(void) const
 		{
-			return (rbtree_.size());
+			return (this->rbtree_.size());
 		}
 
-		size_type max_size() const
+		size_type max_size(void) const
 		//https://m.cplusplus.com/reference/map/map/max_size/
 		{
-			return (rbtree_.max_size());
+			return (this->rbtree_.max_size());
 		}
 
-		bool empty() const
+		bool empty(void) const
 		//https://m.cplusplus.com/reference/map/map/empty/
 		{
-			return (rbtree_.empty());
+			return (this->rbtree_.empty());
 		}
 
 
@@ -155,7 +155,7 @@ namespace ft
 		*/
 		pair<iterator, bool> insert(const value_type& value)
 		{
-			return (rbtree_.insert(value));
+			return (this->rbtree_.insert(value));
 		}
 
 		/*
@@ -165,7 +165,7 @@ namespace ft
 		*/
 		iterator insert(iterator pos, const value_type& value)
 		{
-			return (rbtree_.insert(pos, value));
+			return (this->rbtree_.insert(pos, value));
 		}
 
 		/*
@@ -175,39 +175,39 @@ namespace ft
 		template<class InputIt>
 		void insert(typename enable_if< !is_integral<InputIt>::value, InputIt >::type first, InputIt last)
 		{
-			rbtree_.insert(first, last);
+			this->rbtree_.insert(first, last);
 		}
 		
 		//https://m.cplusplus.com/reference/map/map/erase/
 		void erase(iterator iter_pos)  // 1 case: erase where by iter position
 		{
-			rbtree_.erase(iter_pos);
+			this->rbtree_.erase(iter_pos);
 		}
 
 		size_type erase(const Key& key) // erasing a key
 		{
-			return (rbtree_.erase(make_pair(key, mapped_type())));
+			return (this->rbtree_.erase(make_pair(key, mapped_type())));
 		}
 
 		void erase(iterator first, iterator last) // erasing range
 		{
-			rbtree_.erase(first, last);
+			this->rbtree_.erase(first, last);
 		}
 
 		//https://m.cplusplus.com/reference/map/map/swap/
 		void swap(map & other)
 		{
 			std::swap(this->_compare, other._compare);
-			rbtree_.swap(other.rbtree_);
+			this->rbtree_.swap(other.rbtree_);
 		}
 		
 				/*
         Removes all elements from the map container (which are destroyed), leaving the container with a size of 0.
       	*/
       	//https://m.cplusplus.com/reference/map/map/clear/
-		void clear()
+		void clear(void)
 		{
-			rbtree_.clear(); //method of RBT
+			this->rbtree_.clear(); //method of RBT
 		}
 
 	/***************MAP OBSERVERS methods************/
@@ -225,15 +225,15 @@ namespace ft
 			This member function allows the object to be used with the same syntax as a function call
 		*/
 		//https://m.cplusplus.com/reference/map/map/key_comp/
-		key_compare key_comp() const
+		key_compare key_comp(void) const
 		{
 			return (_compare); // returns whether its first argument compares less than the second
 		}
 		
 		//https://m.cplusplus.com/reference/map/map/value_comp/
-		value_compare value_comp() const
+		value_compare value_comp(void) const
 		{
-			return (rbtree_.value_comp()); // uses method of RBT
+			return (this->rbtree_.value_comp()); // uses method of RBT
 		}
 
 
@@ -242,7 +242,7 @@ namespace ft
 		//https://m.cplusplus.com/reference/map/map/find/
 		iterator	find(const Key& key)
 		{
-			return rbtree_.find(ft::make_pair(key, mapped_type())); // it was ambiguous in range constructor of ft_map, so added ft::
+			return (this->rbtree_.find(ft::make_pair(key, mapped_type()))); // it was ambiguous in range constructor of ft_map, so added ft::
 		}
 
 		//https://m.cplusplus.com/reference/map/map/count/
@@ -257,7 +257,7 @@ namespace ft
 		*/	
 		size_type count( const Key& key ) const
 		{
-			return (rbtree_.count(ft::make_pair(key, mapped_type())));
+			return (this->rbtree_.count(ft::make_pair(key, mapped_type())));
 		}
 		
 		/*
@@ -271,22 +271,22 @@ namespace ft
         */
 		iterator lower_bound(const key_type& key)
 		{
-			return (rbtree_.lower_bound(make_pair(key, mapped_type())));
+			return (this->rbtree_.lower_bound(make_pair(key, mapped_type())));
 		}
 
 		const_iterator lower_bound(const key_type& key) const
 		{
-			return (rbtree_.lower_bound(make_pair(key, mapped_type())));
+			return (this->rbtree_.lower_bound(make_pair(key, mapped_type())));
 		}
 
 		iterator upper_bound(const key_type& key)
 		{
-			return (rbtree_.upper_bound(make_pair(key, mapped_type())));
+			return (this->rbtree_.upper_bound(make_pair(key, mapped_type())));
 		}
 
 		const_iterator upper_bound(const key_type& key) const
 		{
-			return (rbtree_.upper_bound(make_pair(key, mapped_type())));
+			return (this->rbtree_.upper_bound(make_pair(key, mapped_type())));
 		}
 
 		/*
@@ -314,20 +314,20 @@ namespace ft
         */
 		pair<iterator, iterator> equal_range(const key_type & key)
 		{
-			return (rbtree_.equal_range(make_pair(key, mapped_type())));
+			return (this->rbtree_.equal_range(make_pair(key, mapped_type())));
 		}
 
 		pair<const_iterator, const_iterator> equal_range(const key_type & key) const
 		{
-			return (rbtree_.equal_range(make_pair(key, mapped_type())));
+			return (this->rbtree_.equal_range(make_pair(key, mapped_type())));
 		}
 
 	/***************ALLOCATOR method************/
 
 		//https://m.cplusplus.com/reference/map/map/get_allocator/
-		allocator_type get_allocator() const
+		allocator_type get_allocator(void) const
 		{
-			return (rbtree_.get_allocator());
+			return (this->rbtree_.get_allocator());
 		}
 
 		/***************FRIEND methods************/
@@ -346,37 +346,43 @@ namespace ft
 	/***************OUT OF CLASS methods************/
 
 	template<class Key, class T, class Compare, class Alloc>
-	bool operator==(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
+	bool operator==(const map<Key, T, Compare, Alloc> & lhs, 
+					const map<Key, T, Compare, Alloc> & rhs)
 	{
 		return (lhs.rbtree_ == rhs.rbtree_);
 	}
 
 	template<class Key, class T, class Compare, class Alloc>
-	bool operator!=(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
+	bool operator!=(const map<Key, T, Compare, Alloc> & lhs, 
+					const map<Key, T, Compare, Alloc> & rhs)
 	{
 		return !(lhs == rhs);
 	}
 
 	template<class Key, class T, class Compare, class Alloc>
-	bool operator<(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
+	bool operator<(const map<Key, T, Compare, Alloc> & lhs, 
+					const map<Key, T, Compare, Alloc> & rhs)
 	{
 		return (lhs.rbtree_ < rhs.rbtree_);
 	}
 
 	template<class Key, class T, class Compare, class Alloc>
-	bool operator>(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
+	bool operator>(const map<Key, T, Compare, Alloc> & lhs,
+					 const map<Key, T, Compare, Alloc> & rhs)
 	{
 		return (rhs < lhs);
 	}
 
 	template<class Key, class T, class Compare, class Alloc>
-	bool operator<=(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
+	bool operator<=(const map<Key, T, Compare, Alloc> & lhs, 
+					const map<Key, T, Compare, Alloc> & rhs)
 	{
 		return !(lhs > rhs);
 	}
 
 	template<class Key, class T, class Compare, class Alloc>
-	bool operator>=(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
+	bool operator>=(const map<Key, T, Compare, Alloc> & lhs, 
+					const map<Key, T, Compare, Alloc> & rhs)
 	{
 		return !(lhs < rhs);
 	}

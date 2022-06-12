@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/12 15:42:58 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/12 17:10:21 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -916,7 +916,7 @@ int main ()
       
     {
     //   // (2) Range constructor
-      std::cout << "\n" << "!!!Range constructor to make!!!" << "\n";
+      std::cout << "\n" << "Range constructor to make" << "\n";
 
       std::map<std::string, int> map3;
       map3["something"] = 69;
