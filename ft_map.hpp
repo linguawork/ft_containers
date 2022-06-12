@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/12 17:09:09 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/12 17:14:57 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,10 @@ namespace ft
 		//https://www.cplusplus.com/reference/vector/vector/at/
 		T& at(const Key &key)
 		{
-			iterator res = rbtree_.find(ft::make_pair(key, mapped_type()));
-			if (res == rbtree_.end())
+			iterator result = rbtree_.find(ft::make_pair(key, mapped_type()));
+			if (result == rbtree_.end())
 				throw std::out_of_range("map::at: key not found");
-			return (res->second);
+			return (result->second);
 		}
 		
 

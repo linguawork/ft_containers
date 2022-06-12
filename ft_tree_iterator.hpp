@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:18 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 13:26:54 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/12 18:44:10 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 
 
-//declaring struct NODE with a template just like Rob taught
+//declaring struct NODE with a template class just like Rob taught
 template<class Value>
 struct Node
 {
@@ -76,23 +76,25 @@ class TreeIter
 		typedef typename ft::iterator_traits<T*>::reference 		reference;
 		typedef typename ft::iterator_traits<T*>::pointer			pointer;
 		typedef typename ft::iterator_traits<T*>::difference_type	difference_type;
+		//here we use Node struct as node ptr
 		typedef Node<typename ft::remove_const<value_type>::type >* node_pointer;
 		//remove_const makes incoming const just a type, which is defined as node_ptr
 
 	private:
-		node_pointer _node; // making a node ptr
+		node_pointer _node; // making a node ptr 
 
-		node_pointer tree_min(node_pointer n) const
+		//min element in the node family triangle which is the left element
+		node_pointer tree_min(node_pointer n) const 
 		{
-			while(n->left != NULL && !n->left->is_nil)
-				n = n->left;
+			while(n->left != NULL && !n->left->is_nil) // no left and left has no NULL node
+				n = n->left; // then n will become Left element
 			return n;
 		}
 
-		node_pointer tree_max(node_pointer n) const
+		node_pointer tree_max(node_pointer n) const // the right elem is bigger than the left
 		{
-			while (!n->right->is_nil)
-				n = n->right;
+			while (!n->right->is_nil) // while there is no right node in the family triangle and no null node
+				n = n->right; // n becomes RIGHT (MAХ)
 			return n;
 		}
 
@@ -102,11 +104,13 @@ class TreeIter
 			
 		}
 
-		TreeIter(void *node): _node(static_cast<node_pointer>(node)) 
+		// init with the value of the NODE struct (static cast)	
+		TreeIter(void *node): _node(static_cast<node_pointer>(node))  
 		{
 			
 		}
-
+		
+		//copy constructor
 		TreeIter(const TreeIter<typename ft::remove_const<value_type>::type > & other)
 		{
 			*this = other;

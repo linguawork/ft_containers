@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:16:57 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/10 18:33:33 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/12 18:52:03 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ class RBTree
 		typedef typename allocator_type::const_pointer		const_pointer;
 		typedef std::ptrdiff_t	difference_type;
 		typedef std::size_t									size_type;
-		typedef TreeIter<Value>								iterator;
-		typedef TreeIter<const Value>						const_iterator;
+		typedef TreeIter<Value>								iterator; //tree iterator
+		typedef TreeIter<const Value>						const_iterator; //const iterator
 		typedef	ft::reverse_iterator<iterator>				reverse_iterator;
 		typedef	ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 	private:
@@ -135,7 +135,7 @@ class RBTree
 				_insert_to_node(where, new_node);
 			return (new_node);
 		}
-
+		//change color
 		void _insert_fixup(node_pointer node)
 		{
 			if (node != _root && node->parent != _root)
