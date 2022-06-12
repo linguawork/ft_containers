@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/12 15:39:49 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/12 15:42:58 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2383,8 +2383,6 @@ int main ()
         std::cout << '\n';
 
         myset1.get_allocator().deallocate(p1,5);
-        
-       
       
     }
 
