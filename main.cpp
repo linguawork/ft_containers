@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/10 19:07:19 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/12 15:39:49 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1986,7 +1986,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "SET MODIFIERS erase() test" << "\n";
+      std::cout << "\n" << "!!!SET MODIFIERS erase() test" << "\n";
       // https://m.cplusplus.com/reference/set/set/erase/
       std::set<int> myset;
       std::set<int>::iterator it;
@@ -1997,7 +1997,7 @@ int main ()
       it = myset.begin();
       ++it;                                         // "it" points now to 20
 
-      myset.erase (it);
+      myset.erase (it); 
 
       myset.erase (40);
 
@@ -2020,6 +2020,7 @@ int main ()
       it1 = myset1.begin();
       ++it1;                               // "it" points now to 20
 
+      //does not erase in upper_bound()
       //myset1.erase (it1); //		void erase_fixup(node_pointer x) there is segfault
 
       myset1.erase (40);
@@ -2118,6 +2119,273 @@ int main ()
         for (ft::set<int>::iterator it1=myset1.begin(); it1!=myset1.end(); ++it1)
           std::cout << ' ' << *it1;
         std::cout << '\n';
+    }
+
+    {
+      std::cout << "\n" << "SET OBSERVERS key_comp() test" << "\n";
+      // https://m.cplusplus.com/reference/set/set/key_comp/
+
+      std::set<int> myset;
+      int highest;
+
+      std::set<int>::key_compare mycomp = myset.key_comp();
+
+      for (int i=0; i<=5; i++) myset.insert(i);
+
+      std::cout << "std::set myset contains:";
+
+      highest=*myset.rbegin();
+      std::set<int>::iterator it=myset.begin();
+      do {
+        std::cout << ' ' << *it;
+      } while ( mycomp(*(++it),highest) );
+
+      std::cout << '\n';
+
+
+      ft::set<int> myset1;
+      int highest1;
+
+      ft::set<int>::key_compare mycomp1 = myset1.key_comp();
+
+      for (int i=0; i<=5; i++) myset1.insert(i);
+
+      std::cout << "ft::set myset contains:";
+
+      highest1=*myset1.rbegin();
+      ft::set<int>::iterator it1=myset1.begin();
+      do {
+        std::cout << ' ' << *it1;
+      } while ( mycomp1(*(++it1),highest1) );
+
+      std::cout << '\n';
+
+    }
+
+
+    {
+      std::cout << "\n" << "SET OBSERVERS value_comp() test" << "\n";//Returns a copy of the comparison object used by the container.
+      //https://m.cplusplus.com/reference/set/set/value_comp/
+      //key_comp defines the order of the keys in a container. value_comp defines the order of the values in a container.
+        std::set<int> myset;
+
+        std::set<int>::value_compare mycomp = myset.value_comp();
+
+        for (int i=0; i<=5; i++) myset.insert(i);
+
+        std::cout << "std::set myset contains:";
+
+        int highest=*myset.rbegin();
+        std::set<int>::iterator it=myset.begin();
+        do {
+          std::cout << ' ' << *it;
+        } while ( mycomp(*(++it),highest) );
+
+        std::cout << '\n';
+
+
+        ft::set<int> myset1;
+        ft::set<int>::value_compare mycomp1 = myset1.value_comp();
+        for (int i=0; i<=5; i++) myset1.insert(i);
+
+        std::cout << "ft::set myset contains:";
+
+        int highest1=*myset1.rbegin();
+        // int highest1=4; this is for test
+        
+        ft::set<int>::iterator it1=myset1.begin();
+        do {
+          std::cout << ' ' << *it1;
+        } while ( mycomp1(*(++it1),highest1) ); // while less that highest will print
+
+        std::cout << '\n'; 
+    }
+
+
+    {
+      std::cout << "\n" << "SET OPERATIONS find() test" << "\n";
+      //https://m.cplusplus.com/reference/set/set/find/
+      //Searches the container for an element equivalent to val and returns an iterator to it if found, otherwise it returns an iterator to set::end.
+
+        std::set<int> myset;
+        std::set<int>::iterator it;
+
+        // set some initial values:
+        for (int i=1; i<=5; i++) myset.insert(i*10);    // set: 10 20 30 40 50
+
+        it=myset.find(20);
+        myset.erase (it);
+        myset.erase (myset.find(40));
+
+        std::cout << "std::set myset contains:";
+        for (it=myset.begin(); it!=myset.end(); ++it)
+          std::cout << ' ' << *it;
+        std::cout << '\n';
+
+
+        ft::set<int> myset1;
+        ft::set<int>::iterator it1;
+
+        // set some initial values:
+        for (int i=1; i<=5; i++) 
+          myset1.insert(i*10);    // set: 10 20 30 40 50
+
+        it1=myset1.find(20);
+        myset1.erase(it1);
+        myset1.erase(myset1.find(40));
+
+        std::cout << "ft::set myset contains:";
+        for (it1 = myset1.begin(); it1 != myset1.end(); ++it1)
+          std::cout << ' ' << *it1;
+        std::cout << '\n';
+    }
+
+    {
+      std::cout << "\n" << "SET OPERATIONS count() test" << "\n";
+      //https://m.cplusplus.com/reference/set/set/count/
+      /*
+        Searches the container for elements equivalent to val and returns the number of matches.
+        Because all elements in a set container are unique,
+        the function can only return 1 (if the element is found) or zero (otherwise).
+        Two elements of a set are considered equivalent 
+        if the container's comparison object returns false reflexively 
+        (i.e., no matter the order in which the elements are passed as arguments).
+      */
+      
+      std::set<int> myset;
+
+      // set some initial values:
+      for (int i=1; i<5; ++i) 
+        myset.insert(i*3);    // set: 3 6 9 12
+
+      for (int i=0; i<10; ++i)
+      {
+        std::cout << i;
+        if (myset.count(i)!=0)
+          std::cout << " is an element of std::map myset.\n";
+        else
+          std::cout << " is not an element of std::map myset.\n";
+      }
+        std::cout << '\n';
+
+      ft::set<int> myset1;
+      // set some initial values:
+      for (int i=1; i<5; ++i) 
+        myset1.insert(i*3);    // set: 3 6 9 12
+
+      for (int i=0; i<10; ++i)
+      {
+        std::cout << i;
+        if (myset1.count(i)!=0)
+          std::cout << " is an element of ft::set myset.\n";
+        else
+          std::cout << " is not an element of ft::set myset.\n";
+      }
+      
+    }
+
+    {
+      std::cout << "\n" << "SET OPERATIONS lower/upper_bound() test" << "\n";
+      // https://m.cplusplus.com/reference/set/set/lower_bound/
+      //https://m.cplusplus.com/reference/set/set/upper_bound/
+      std::set<int> myset;
+      std::set<int>::iterator itlow,itup;
+
+      for (int i=1; i<10; i++) myset.insert(i*10); // 10 20 30 40 50 60 70 80 90
+
+      itlow=myset.lower_bound (30);                //       ^
+      itup=myset.upper_bound (60);                 //                   ^
+
+      myset.erase(itlow,itup);                     // 10 20 70 80 90
+
+      std::cout << "std::set myset contains:";
+      for (std::set<int>::iterator it=myset.begin(); it!=myset.end(); ++it)
+        std::cout << ' ' << *it;
+      std::cout << '\n';
+
+      
+      ft::set<int> myset1;
+      ft::set<int>::iterator itlow1,itup1;
+
+      for (int i=1; i<10; i++) 
+        myset1.insert(i*10); // 10 20 30 40 50 60 70 80 90
+
+      itlow1=myset1.lower_bound (30);                //       ^
+      itup1=myset1.upper_bound (60);                 //                   ^
+
+      //does not delete the last number in the range
+      myset1.erase(itlow1,itup1);                     // 10 20 70 80 90
+
+      std::cout << "!!!ft::set myset contains:";
+      for (ft::set<int>::iterator it=myset1.begin(); it!=myset1.end(); ++it)
+        std::cout << ' ' << *it;
+      std::cout << '\n';
+    }
+
+
+    {
+      std::cout << "\n" << "SET OPERATIONS equal_range() test" << "\n";
+      //https://m.cplusplus.com/reference/set/set/equal_range/
+      std::set<int> myset;
+
+      for (int i=1; i<=5; i++) myset.insert(i*10);   // myset: 10 20 30 40 50
+
+      std::pair<std::set<int>::const_iterator,std::set<int>::const_iterator> ret;
+      ret = myset.equal_range(30);
+
+      std::cout << "std::set the lower bound points to: " << *ret.first << '\n';
+      std::cout << "std::set the upper bound points to: " << *ret.second << '\n';
+
+
+      ft::set<int> myset1;
+      for (int i=1; i<=5; i++) myset1.insert(i*10);   // myset: 10 20 30 40 50
+
+      ft::pair<ft::set<int>::const_iterator,ft::set<int>::const_iterator> ret1;
+      ret1 = myset1.equal_range(30);
+
+      std::cout << "ft::set the lower bound points to: " << *ret1.first << '\n';
+      std::cout << "ft::set the upper bound points to: " << *ret1.second << '\n';
+    }
+
+    {
+       std::cout << "\n" << "SET OPERATIONS allocator() test" << "\n";
+        //https://m.cplusplus.com/reference/set/set/get_allocator/
+        std::set<int> myset;
+        int * p;
+        unsigned int i;
+
+        // allocate an array of 5 elements using myset's allocator:
+        p=myset.get_allocator().allocate(5);
+
+        // assign some values to array
+        for (i=0; i<5; i++) p[i]=(i+1)*10;
+
+        std::cout << "The allocated std::set array contains:";
+        for (i=0; i<5; i++) std::cout << ' ' << p[i];
+        std::cout << '\n';
+
+        myset.get_allocator().deallocate(p,5);
+
+
+        ft::set<int> myset1;
+        int * p1;
+        unsigned int j;
+
+        // allocate an array of 5 elements using myset's allocator:
+        p1=myset1.get_allocator().allocate(5);
+
+        // assign some values to array
+        for (j=0; j<5; j++) 
+          p1[j]=(j+1)*10;
+
+        std::cout << "The allocated ft::set array contains:";
+        for (j=0; j<5; j++) std::cout << ' ' << p1[j];
+        std::cout << '\n';
+
+        myset1.get_allocator().deallocate(p1,5);
+        
+       
+      
     }
 
     
