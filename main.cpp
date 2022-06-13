@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 16:16:26 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 16:18:34 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,39 +264,6 @@ int main ()
         std::cout << '\n';
     }
 
-    // {
-    //   std::cout << RED  << "\n" << "VECTOR DEBUGGING AT() from the tests" << "\n"<< DEFAULT;
-
-    //   int _ratio = 10000;
-    //   std::vector<int> vector;
-        
-    //   vector.assign(9900 * _ratio, 1); //99 000 000 elements with 1 value in each
-      
-      
-    //   std::cout << "The vector elements is : ";
-    //   std::cout << vector.at(354 * _ratio) << ' '; //printout the 3 540 000th elem
-    //   // why mine is zero, should be 1
-    //   std::cout <<  std::endl;;
-
-
-
-    //   ft::vector<int> ft_vector;
-    //   ft_vector.assign(9900 * _ratio, 1); //99 000 000 elements with 1 value in each
-    //   std::cout << "The ft_vector elements is : ";
-    //   std::cout << ft_vector.at(0) << ' '; //printout the 3 540 000th elem
-    //   std::cout << ft_vector.at(1) << ' '; 
-    //     std::cout << ft_vector.at(354 * _ratio) << ' '; 
-    //   // why mine is zero, should be 1
-    //   /* 
-    //   I printed out the values of different elements and it turns out that assign()
-    //   assigns only to the 1st element, so it is not the problem of at()
-    //   Method at() depends on the result of assign() in the test
-
-    //   So I need to run test for assign to see the problem
-    //   */
-    //   std::cout <<  std::endl;;
-      
-    // }
 
 
 //https://www.cplusplus.com/reference/vector/vector/front/
@@ -390,34 +357,6 @@ int main ()
       
     }   
 
-    // {
-    // std::cout << RED << "\n" << "VECTOR DEBUG of ASSIGN()" << "\n" << DEFAULT;
-    
-    // /*
-    // found problem in method reallocate in the cycle of construction
-    // */
-
-    // int _ratio = 3;
-    // std::vector<int> vector;
-      
-    // vector.assign(2 * _ratio, 1); //99 000 000 elements with 1 value in each
-
-
-    // ft::vector<int> ft_vector;
-      
-    // ft_vector.assign(2 * _ratio, 1); //99 000 000 elements with 1 value in each
-
-    //     std::cout << "The vector elements are : ";
-    //     for(unsigned long i=0; i < vector.size(); i++)
-    //     std::cout << vector.at(i) << ' ';
-    //     std::cout <<  std::endl;;
-
-    //     std::cout << "The ft_vector elements are : ";
-    //     for(unsigned long i=0; i < ft_vector.size(); i++)
-    //     std::cout << ft_vector.at(i) << ' ';
-    //     std::cout <<  std::endl;
-      
-    // }   
 
   //https://www.cplusplus.com/reference/vector/vector/push_back/
     {
