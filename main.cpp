@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 15:59:36 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 16:08:35 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 int main ()
 {
   
-#define RED "\033[1;31m" // green color
+#define RED "\033[1;31m" // red color
 #define DEFAULT "\033[0;37m"
 
     // CONSTRUCTOR TESTS used in the same order as described above:
