@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/12 19:38:01 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 11:41:53 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -2384,6 +2384,41 @@ int main ()
 
         myset1.get_allocator().deallocate(p1,5);
       
+    }
+
+    {
+      std::cout << "\n" << "VECTOR equal test" << "\n";
+
+      // bool mypredicate (int i, int j) 
+      // {
+      //    return (i==j);
+      // };
+      
+        int myints[] = {20,40,60,80,100};               //   myints: 20 40 60 80 100
+        std::vector<int>myvector (myints, myints+5);     // myvector: 20 40 60 80 100
+
+        // using default comparison:
+        if ( std::equal (myvector.begin(), myvector.end(), myints) )
+          std::cout << "The contents of both sequences of std::vector are equal.\n";
+        else
+          std::cout << "The contents of both sequences of std::vector differ.\n";
+        std::cout << '\n';
+        // myvector[3]=81;                                 // myvector: 20 40 60 81 100
+
+        // using predicate comparison:
+        // if ( std::equal (myvector.begin(), myvector.end(), myints, mypredicate) )
+        //   std::cout << "The contents of both sequences are equal.\n";
+        // else
+        //   std::cout << "The contents of both sequences differ.\n";
+
+        int myints1[] = {20,40,60,80,100};               //   myints: 20 40 60 80 100
+        ft::vector<int>myvector1 (myints1, myints1+5);     // myvector: 20 40 60 80 100
+
+        // using default comparison:
+        if ( ft::equal (myvector1.begin(), myvector1.end(), myints1) )
+          std::cout << "The contents of both sequences of ft::vector are equal.\n";
+        else
+          std::cout << "The contents of both sequences of ft::vector differ.\n";
     }
 
     

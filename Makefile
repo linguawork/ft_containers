@@ -6,9 +6,9 @@ CPPFLAGS 	= -Wall -Wextra -Werror -std=c++98 #-g #-fsanitize=address
 
 CONTAINERS	= ./
 
-UTILS		= containers/additional/
+# UTILS		= containers/additional/
 
-TESTS		= tests/
+# TESTS		= tests/
 
 CONTAINERS_HEADERS = $(CONTAINERS)ft_vector.hpp $(CONTAINERS)ft_map.hpp $(CONTAINERS)ft_stack.hpp $(CONTAINERS)ft_set.hpp \
 $(CONTAINERS)ft_redblacktree.hpp $(CONTAINERS)ft_reverse_iterator.hpp $(CONTAINERS)ft_tree_iterator.hpp \
