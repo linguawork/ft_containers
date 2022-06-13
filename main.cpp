@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 18:55:50 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 21:06:47 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ int main ()
       g_end2 = timer();
       t2 = g_end2 - g_start2;
 
-      (t1 >= t2) ? (std::cout << GREEN + std::to_string(t1) + "ms" + DEFAULT) : (std::cout << RED + std::to_string(t1) + "ms" + DEFAULT);
-	    // (t1 > t2) ? printElement(REDD + std::to_string(t1) + "ms" + RESET) : printElement(GREEN + std::to_string(t1) + "ms" + RESET);
+      (t1 >= t2) ? (std::cout <<"std::"<< GREEN + std::to_string(t1) + "ms " + DEFAULT) : (std::cout <<"std::"<< RED + std::to_string(t1) + "ms " + DEFAULT);
+      (t2 >= t1) ? (std::cout << "ft::" << GREEN + std::to_string(t2) + "ms " + DEFAULT) : (std::cout <<"ft::"<< RED + std::to_string(t2) + "ms " + DEFAULT);
      std::cout << '\n';
   }
 
