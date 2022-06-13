@@ -1,3 +1,7 @@
+/*
+TESTS from KSU
+*/
+
 #include <iostream>
 #include "ft_vector.hpp"
 #include "ft_stack.hpp"

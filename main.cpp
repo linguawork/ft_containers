@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 16:40:59 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 18:55:50 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,42 +36,95 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 #include <set>
 
 
+//this is color definition for printing
+#define RED "\033[1;31m" // red color
+#define GREEN "\033[1;32m" // green color
+#define BLUE "\033[1;34m" // blue color
+#define YELLOW "\033[1;33m" // yellow color
+#define DEFAULT "\033[0;37m"
+
+// this is for calculating time
+// #include <machine/types.h> /* __darwin_time_t */ this does not work on mac
+# include <sys/time.h>/* __darwin_time_t, this works */ 
+typedef __darwin_time_t         time_t;
+
+
+time_t timer() {
+	struct timeval start = {};
+	gettimeofday(&start, nullptr);
+	time_t msecs_time = (start.tv_sec * 1000) + (start.tv_usec / 1000);
+	return msecs_time;
+}
+
+volatile static time_t g_start1;
+volatile static time_t g_start2;
+volatile static time_t g_end1;
+volatile static time_t g_end2;
 
 
 int main ()
 {
   
-#define RED "\033[1;31m" // red color
-#define DEFAULT "\033[0;37m"
+
+
+
 
     // CONSTRUCTOR TESTS used in the same order as described above:
   {
     
       std::cout << RED << "\n" <<"VECTOR all constructors test" << "\n" <<DEFAULT;
-      ft::vector<int> first_obj; //test for default constructor
-      ft::vector<int> second (4,100);//test for constructor with values in vector
+
+      time_t t1;
+      g_start1 = timer();
+
+      std::vector<int> first_obj; //test for default constructor
+      std::vector<int> second (4,100);//test for constructor with values in vector
         // std::vector<int> second (4,100); 
         // printf("%d", second[0]);// 32 (4 x 8)
-      ft::vector<int> third (5,20);
-      ft::vector<int> fourth (third);// test for copy constructor of third works
-      
-
+      std::vector<int> third (5,20);
+      std::vector<int> fourth (third);// test for copy constructor of third works
       // the iterator constructor can also be used to construct from arrays:
       //this is the test for range constructor
       int myints[] = {16,2,77,29};
       std::vector<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
-      ft::vector<int> my_fifth (myints, myints + sizeof(myints) / sizeof(int) );
 
       std::cout << "The contents of std::vector are:";
       for (std::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
         std::cout << ' ' << *it;
       std::cout << '\n';
 
+
+      g_end1 = timer();
+      t1 = g_end1 - g_start1;
+     
+
+
+    
+      g_start2 = timer();
+      ft::vector<int> first_obj1; //test for default constructor
+      ft::vector<int> second1 (4,100);//test for constructor with values in vector
+        // std::vector<int> second (4,100); 
+        // printf("%d", second[0]);// 32 (4 x 8)
+      ft::vector<int> third1 (5,20);
+      ft::vector<int> fourth1 (third1);// test for copy constructor of third works
+      int myints1[] = {16,2,77,29};      
+      ft::vector<int> my_fifth (myints1, myints1 + sizeof(myints1) / sizeof(int) );
+
+
       // lack of begin() and end() functions to iterate
       std::cout << "The contents of my ft::vector are:";
       for (ft::vector<int>::iterator my_it = my_fifth.begin(); my_it != my_fifth.end(); ++my_it)
         std::cout << ' ' << *my_it;
       std::cout << '\n';
+  
+      
+      time_t t2;
+      g_end2 = timer();
+      t2 = g_end2 - g_start2;
+
+      (t1 >= t2) ? (std::cout << GREEN + std::to_string(t1) + "ms" + DEFAULT) : (std::cout << RED + std::to_string(t1) + "ms" + DEFAULT);
+	    // (t1 > t2) ? printElement(REDD + std::to_string(t1) + "ms" + RESET) : printElement(GREEN + std::to_string(t1) + "ms" + RESET);
+     std::cout << '\n';
   }
 
 
@@ -924,8 +977,7 @@ int main ()
       std::cout << RED << "\n" << "VECTOR cases finished" << "\n" << DEFAULT;
       /**************VECTOR cases finished******************/
 
-#define GREEN "\033[1;32m" // green color
-#define DEFAULT "\033[0;37m"
+
       
       /*****************STACK test cases start************************/
       std::cout << GREEN << "\n" << "STACK test cases start" << "\n" << DEFAULT;
@@ -1089,8 +1141,7 @@ int main ()
       /**************VECTOR cases finished******************/
       
 
-#define BLUE "\033[1;34m" // blue color
-#define DEFAULT "\033[0;37m"
+
 
 //  << BLUE << DEFAULT
       /*****************MAP test cases start************************/
@@ -2077,10 +2128,6 @@ int main ()
 
 
 
-
-
-#define YELLOW "\033[1;33m" // yellow color
-#define DEFAULT "\033[0;37m"
     /**************SET container tests start*******************/
 
     {
