@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 16:26:43 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 16:40:59 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -726,11 +726,203 @@ int main ()
           std::cout << "The contents of both sequences of ft::vector differ.\n";
     }
 
-    {
+
+      
+  {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
+    std::cout <<RED<< "\t\tV E C T O R EXTRA TESTS \nconstructors/begin/end tests\n" <<DEFAULT;
+    std::vector<int> first;                                // empty vector of ints
+    std::vector<int> second (4,100);                       // four ints with value 100
+    std::vector<int> third (second.begin(),second.end());  // iterating through second
+    std::vector<int> fourth (third);                       // a copy of third
+
+    ft::vector<int> my_first;                                // empty vector of ints
+    ft::vector<int> my_second (4,100);                       // four ints with value 100
+    ft::vector<int> my_third (my_second.begin(),my_second.end());  // iterating through second
+    ft::vector<int> my_fourth (my_third);                       // a copy of third
+
+    // the iterator constructor can also be used to construct from arrays:
+    int myints[] = {16,2,77,29};
+    std::vector<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
+    ft::vector<int> my_fifth (myints, myints + sizeof(myints) / sizeof(int) );
+
+    std::cout << "The contents of std::vector are:";
+    for (std::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
+      std::cout << ' ' << *it;
+    std::cout << '\n';
+
+    std::cout << "The contents of my::vector are:";
+    for (ft::vector<int>::iterator my_it = my_fifth.begin(); my_it != my_fifth.end(); ++my_it)
+      std::cout << ' ' << *my_it;
+    std::cout << '\n';
+    }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
+    {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+    std::cout <<RED<< "\nsize/operator= tests\n" <<DEFAULT;
+
+    std::vector<int> vec1 (3,0);			ft::vector<int> vec3 (3,0);
+    std::vector<int> vec2 (5,0);			ft::vector<int> vec4 (5,0);
+
+    vec1 = vec2;							vec3 = vec4;
+    vec2 = std::vector<int>();				vec4 = ft::vector<int>();
+    std::cout << "std::vector:\nSize of vec1: " << int(vec1.size()) << '\n';
+    std::cout << "Size of vec2: " << int(vec2.size()) << '\n';
+    std::cout << "ft::vector:\nSize of vec3: " << int(vec3.size()) << '\n';
+    std::cout << "Size of vec4: " << int(vec4.size()) << '\n';
+    }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
+    {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+    std::cout <<RED<< "\nempty/front/back/capacity tests\n" <<DEFAULT;
+    std::vector<int> vec1;					ft::vector<int> vec2;
+    std::cout  << "std::vector:\nis vec1 Empty? " << std::boolalpha << vec1.empty() << '\n';
+    std::cout << "ft::vector:\nis vec2 Empty? " << std::boolalpha << vec2.empty() << '\n';
+    vec1.push_back(111);					vec2.push_back(111);
+    vec1.push_back(222);					vec2.push_back(222);
+    std::cout << "std::vector:\nis vec1 Empty? " << std::boolalpha << vec1.empty() << '\n';
+    std::cout << "ft::vector:\nis vec2 Empty? " << vec2.empty() << '\n';
+    std::cout << "std::vector:\ncapacity of vec1: " << int(vec1.capacity()) << '\n';
+    std::cout << "ft::vector:\ncapacity of vec2: " << int(vec2.capacity()) << '\n';
+    std::cout << "std::vector:\nfirst of vec1: " << int(vec1.front()) << '\n';
+    std::cout << "ft::vector:\nfirst of vec2: " << int(vec2.front()) << '\n';
+    std::cout << "std::vector:\nlast of vec1: " << int(vec1.back()) << '\n';
+    std::cout << "ft::vector:\nlast of vec2: " << int(vec2.back()) << '\n';
+    }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
+    {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+    std::cout <<RED<< "\ninsert/operator[] tests\n" <<DEFAULT;
+
+    std::vector<int> myvector (3,100);		ft::vector<int> myvector1 (3,100);
+    std::vector<int>::iterator it;			ft::vector<int>::iterator ft_it;
+    it = myvector.begin();					ft_it = myvector1.begin();
+    it = myvector.insert ( it , 2 );		ft_it = myvector1.insert ( ft_it , 2 );
+
+    std::cout << "std::vector contains: " << myvector.front() << " " <<
+      myvector.back() << " size: " << myvector.size() << "\n";
+    std::cout << "ft::vector contains: " << myvector1.front() << " " <<
+      myvector1.back() << " size: " << myvector1.size() << "\n";
+
+    myvector.insert (it,2,300);				myvector1.insert (ft_it,2,300);
+
+    std::cout << "std::vector contains: " << myvector.front() << " " <<
+      myvector.back() << " size: " << myvector.size() << "\n";
+    std::cout << "ft::vector contains: " << myvector1.front() << " " <<
+      myvector1.back() << " size: " << myvector1.size() << "\n";
+
+    // "it" no longer valid, get a new one:
+    it = myvector.begin();					ft_it = myvector1.begin();
+
+    std::vector<int> anothervec(2,400);
+
+    myvector.insert (it+2,anothervec.end(),anothervec.begin());
+      try
+      {
+      myvector1.insert (ft_it+2,anothervec.end(),anothervec.begin());
+      }
+      catch(const std::exception& e)
+      {
+      std::cerr << e.what() << '\n'; //vector: Invalid iterator
+      }
+
+    std::cout << "std::vector contains: " << myvector[0] << " " <<  myvector[1]
+      << " " << myvector[2] << " " << myvector[3] << " " << myvector[4] <<
+      "... size: " << myvector.size() << "\n";
+    std::cout << "ft::vector contains: " << myvector1[0] << " " <<  myvector1[1]
+      << " " << myvector1[2] << " " << myvector1[3] << " " << myvector1[4] <<
+      "... size: " << myvector1.size() << "\n";
+
+    myvector.insert (it+2,anothervec.begin(),anothervec.end());
+    myvector1.insert (ft_it+2,anothervec.begin(),anothervec.end());
+
+    std::cout << "std::vector contains: " << myvector[0] << " " <<  myvector[1]
+      << " " << myvector[2] << " " << myvector[3] << " " << myvector[4] <<
+      "... size: " << myvector.size() << "\n";
+    std::cout << "ft::vector contains: " << myvector1[0] << " " <<  myvector1[1]
+      << " " << myvector1[2] << " " << myvector1[3] << " " << myvector1[4] <<
+      "... size: " << myvector1.size() << "\n";
+    }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
+    {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+    std::cout <<RED<< "\nmax_size/reserve/resize tests\n" <<DEFAULT;
+    std::vector<int> myvector (3,100);			ft::vector<int> myvector1 (3,100);
+    std::cout << "std::vector max_size: " << myvector.max_size() << "\n";
+    std::cout << "ft::vector max_size: " << myvector1.max_size() << "\n";
+    std::cout << "std::vector size/capacity: " << myvector.size() << " " << myvector.capacity() << "\n";
+    std::cout << "ft::vector size/capacity: " << myvector1.size()<< " " << myvector1.capacity() << "\n";
+    myvector.reserve(10000);								myvector1.reserve(10000);
+    std::cout << "std::vector size/capacity: " << myvector.size() << " " << myvector.capacity() << "\n";
+    std::cout << "ft::vector size/capacity: " << myvector1.size()<< " " << myvector1.capacity() << "\n";
+    myvector.resize(100);						myvector1.resize(100);
+    myvector.resize(1);							myvector1.resize(1);
+    std::cout << "std::vector size/capacity: " << myvector.size() << " " << myvector.capacity() << "\n";
+    std::cout << "ft::vector size/capacity: " << myvector1.size()<< " " << myvector1.capacity() << "\n";
+    }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
+    {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+      std::cout <<RED<< "\nat/operator >< = != tests\n" <<DEFAULT;
+      std::vector<int> vec(5);				std::vector<int> vec1(10, 2);
+      if (vec == vec1)
+        std::cout << "std:: vec = vec1\n";
+      if (vec != vec1)
+        std::cout << "std:: vec != vec1\n";
+      if (vec > vec1)
+        std::cout << "std:: vec > vec1\n";
+      if (vec < vec1)
+        std::cout << "std:: vec < vec1\n";
+      ft::vector<int> vec2(1 , 20);			ft::vector<int> vec3(3, 10);
+      if (vec2 == vec3)
+        std::cout << "ft:: vec2 = vec3\n";
+      if (vec2 != vec3)
+        std::cout << "ft:: vec2 != vec3\n";
+      if (vec2 > vec3)
+        std::cout << "ft:: vec2 > vec3\n";
+      if (vec2 < vec3)
+        std::cout << "ft:: vec2 < vec3\n";
+
+      try
+      {
+        std::cout << "std::vector: ";
+        std::cout << vec1.at(8) << "\n";
+        std::cout << vec1.at(20) << "\n";
+      }
+      catch(const std::exception& e)
+      {
+        std::cerr << e.what() << '\n';
+      }
+      try
+      {
+        std::cout << "ft::vector: ";
+        std::cout << vec3.at(2) << "\n";
+        std::cout << vec3.at(20) << "\n";
+      }
+      catch(const std::exception& e)
+      {
+        std::cerr << e.what() << '\n';
+      }
+    }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
+    {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+    std::cout <<RED<< "\nerase/clear/assign/push_back/pop_back tests\n" <<DEFAULT;
+    std::vector<int> myvector (3,100);			ft::vector<int> myvector1 (3,100);
+    std::cout << "std::vector size/capacity: " << myvector.size() << " " << myvector.capacity() << "\n";
+    std::cout << "ft::vector size/capacity: " << myvector1.size()<< " " << myvector1.capacity() << "\n";
+    myvector.erase(myvector.begin());			myvector1.erase(myvector1.begin());
+    std::cout << "std::vector size/capacity: " << myvector.size() << " " << myvector.capacity() << "\n";
+    std::cout << "ft::vector size/capacity: " << myvector1.size()<< " " << myvector1.capacity() << "\n";
+    myvector.clear();							myvector1.clear();
+    std::cout << "std::vector size/capacity: " << myvector.size() << " " << myvector.capacity() << "\n";
+    std::cout << "ft::vector size/capacity: " << myvector1.size()<< " " << myvector1.capacity() << "\n";
+    myvector.assign(5, 10);			myvector1.assign(5, 10);
+    std::cout << "std::vector size/capacity: " << myvector.size() << " " << myvector.capacity() << "\n";
+    std::cout << "ft::vector size/capacity: " << myvector1.size()<< " " << myvector1.capacity() << "\n";
+    myvector.push_back(1);			myvector1.push_back(1);
+    myvector.push_back(1);			myvector1.push_back(1);
+    myvector.pop_back();			myvector1.pop_back();
+    std::cout << "std::vector size/capacity: " << myvector.size() << " " << myvector.capacity() << "\n";
+    std::cout << "ft::vector size/capacity: " << myvector1.size()<< " " << myvector1.capacity() << "\n";
+    }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
       std::cout << RED << "\n" << "VECTOR cases finished" << "\n" << DEFAULT;
       /**************VECTOR cases finished******************/
-      
-
 
 #define GREEN "\033[1;32m" // green color
 #define DEFAULT "\033[0;37m"
@@ -738,9 +930,7 @@ int main ()
       /*****************STACK test cases start************************/
       std::cout << GREEN << "\n" << "STACK test cases start" << "\n" << DEFAULT;
 
-    }
-
-
+  
 
     {
       // <<GREEN << DEFAULT
@@ -847,8 +1037,54 @@ int main ()
       }
       std::cout << '\n';
     }
+      
+    {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+      std::cout <<GREEN<< "\n\t\tS T A C K EXTRA TESTS\nconstructors/size/push/pop/operator >< = != tests\n" <<DEFAULT;
+      std::stack<int> first;                    // empty stack
+      ft::stack<int> first1;
 
-    {
+
+      std::cout << "std::stack:\nis first Empty? " << std::boolalpha <<first.empty() << std::endl;
+      std::cout << "ft::stack:\nis first1 Empty? "<< std::boolalpha <<first1.empty() << std::endl;
+      first.push(1); first.push(2); first.push(3); first.push(4);
+      first1.push(1); first1.push(2); first1.push(3); first1.push(4);
+
+      std::cout << "size of first: " << first.size() << '\n';
+      std::cout << "size of first1: " << first1.size() << '\n';
+
+      std::stack<int> second(first);		// stack initialized to copy of first
+      ft::stack<int> second1(first1);		//4 3 2 1
+
+      std::cout << "top of second: " << second.top() << '\n';
+      std::cout << "top of second1: " << second1.top() << '\n';
+
+      second.pop(); //3 2 1
+      second1.pop(); //3 2 1
+
+      std::cout << "top of second: " << second.top() << '\n';
+      std::cout << "top of second1: " << second1.top() << '\n';
+
+
+      if (first == second)						//first/4 3 2 1  second/3 2 1
+        std::cout << "std:: first = second\n";
+      if (first != second)
+        std::cout << "std:: first != second\n";
+      if (first > second)
+        std::cout << "std:: first > second\n";
+      if (first < second)
+        std::cout << "std:: first < second\n";
+
+      if (first1 == second1)
+        std::cout << "ft:: first1 = second1\n";
+      if (first1 != second1)
+        std::cout << "ft:: first1 != second1\n";
+      if (first1 > second1)
+        std::cout << "ft:: first1 > second1\n";
+      if (first1 < second1)
+        std::cout << "ft:: first1 < second1\n";
+
+    }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+    
       std::cout <<GREEN << "\n" << "STACK TESTS finished" << "\n"<< DEFAULT;
       /**************VECTOR cases finished******************/
       
@@ -860,7 +1096,7 @@ int main ()
       /*****************MAP test cases start************************/
       std::cout  << BLUE << "\n" << "MAP TESTS start" << "\n"<< DEFAULT;
 
-    }
+    
 
     {
        std::cout  << BLUE << "\n" << "MAP default constructor test" << "\n"<< DEFAULT;
@@ -1731,6 +1967,116 @@ int main ()
         mymap1.get_allocator().deallocate(p1,5);
     }
 
+                                      /*Additional map tests*/
+        
+    {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+      std::cout <<BLUE<< "\n\t\t\t\tM A P EXTRA TESTS\nconstructors/size/maxsize/empty/lower_bound/upper_bound tests\n" <<DEFAULT;
+      std::map<char,int> first;		ft::map<char,int> first1;
+      first['a']=10;					first1['a']=10;
+      first['b']=30;					first1['b']=30;
+      first['c']=50;					first1['c']=50;
+      first['d']=70;					first1['d']=70;
+      first['f']=90;					first1['f']=90;
+      //begin/end
+      std::cout << "std::map<char,int> first: " << first.begin()->first << " " << first.begin()->second << std::endl;
+      std::cout << "ft::map<char,int> first1: " << first1.begin()->first << " " << first1.begin()->second << std::endl;
+      //range contructor
+      std::map<char,int> second (first.begin(),first.end());
+      ft::map<char,int> second1 (first1.begin(),first1.end());
+      //size/maxsize/empty
+      std::cout << "std::map<char,int> second: " << second.size() << " " << second.max_size() << " " << std::boolalpha << second.empty() << std::endl;
+      std::cout << "ft::map<char,int> second1: " << second1.size() << " " << second1.max_size() << " " << std::boolalpha << second1.empty() << std::endl;
+      //copy contructor
+      std::map<char,int> third (second);
+      ft::map<char,int> third1 (second1);
+      // lower_bound/upper_bound
+      std::cout << "std::map<char,int> first: " << third.lower_bound('e')->second << " " << third.upper_bound('b')->second << std::endl;
+      std::cout << "ft::map<char,int> first1: " << third1.lower_bound('e')->second << " " << third1.upper_bound('b')->second << std::endl;
+      }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
+      {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+      std::cout <<BLUE<< "operator[]/at/pair/insert/swap tests\n" <<DEFAULT;
+      std::map<float,std::string> first;		ft::map<float,std::string> first1;
+      first[0.1]="You ";						first1[0.1]="much ";
+      first[0.2]="have ";						first1[0.2]="I ";
+      first[0.3]="no ";						first1[0.3]="hate ";
+      first[0.4]="idea ";						first1[0.4]="the ";
+      first[0.5]="how ";						first1[0.5]="ft_containers ";
+      //[]
+      std::cout << "std::map<float,std::string> first: " << first[0.1] << first[0.2] << first[0.3]<< first[0.4] << first[0.5] << first[42] << std::endl;
+      std::cout << "ft::map<float,std::string> first1: " << first1[0.1] << first1[0.2] << first1[0.3]<< first1[0.4] << first1[0.5] << first[42] << std::endl;
+      //at
+      try
+      {
+        std::cout << "std::map<float,std::string> first: " << first.at(0.5) << std::endl << first.at(0.6) << std::endl;
+      }
+      catch(const std::exception& e)
+      {
+        std::cerr << e.what() << '\n';
+      }
+      try
+      {
+        std::cout << "ft::map<float,std::string> first1: " << first1.at(0.5) << std::endl << first1.at(0.6) << std::endl;
+      }
+      catch(const std::exception& e)
+      {
+        std::cerr << e.what() << '\n';
+      }
+      //pair/insert
+      first.insert(std::pair<float, std::string>(99.9, "hello!"));
+      first1.insert(ft::pair<float, std::string>(99.9, "hello!"));
+      std::cout << "std::map<float,std::string> first: " << first[99.9] << std::endl;
+      std::cout << "ft::map<float,std::string> first1: " << first1[99.9] << std::endl;
+      //swap
+      std::map<float,std::string> second;		ft::map<float,std::string> second1;
+      second[1]="one ";						second1[1]="one ";
+      second[2]="two ";						second1[2]="two ";
+      second[3]="three ";						second1[3]="three ";
+      second[4]="four ";						second1[4]="four ";
+      second[5]="five ";						second1[5]="five ";
+      first.swap(second);
+      first1.swap(second1);
+      std::cout << "std::map: after swap first-second: " << first[1] << first[2] << second[0.1]<< second[0.2] << std::endl;
+      std::cout << "ft::map: after swap first-second: " << first1[1] << first1[2] << second1[0.1]<< second1[0.2] << std::endl;
+
+      //~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+      std::cout <<BLUE<< "operator >< = !=/erase/count tests\n" <<DEFAULT;
+      if (first == second)
+        std::cout << "std:: first = second\n";
+      if (first != second)
+        std::cout << "std:: first != second\n";
+      if (first > second)
+        std::cout << "std:: first > second\n";
+      if (first < second)
+        std::cout << "std:: first < second\n";
+
+      if (first1 == second1)
+        std::cout << "ft:: first1 = second1\n";
+      if (first1 != second1)
+        std::cout << "ft:: first1 != second1\n";
+      if (first1 > second1)
+        std::cout << "ft:: first1 > second1\n";
+      if (first1 < second1)
+        std::cout << "ft:: first1 < second1\n";
+      //erase
+      std::cout << "first element of std::map before erase 1: "<< first.begin()->first << std::endl;
+      std::cout << "first element of ft::map before erase 1: "<< first1.begin()->first << std::endl;
+      first.erase(first.begin());
+      first1.erase(first1.begin());
+      std::cout << "first element of std::map after erase 1: " << first.begin()->first << std::endl;
+      std::cout << "first element of ft::map after erase 1: " << first1.begin()->first << std::endl;
+
+      //cout
+      std::cout << "first.count(2): " << first.count(2) << std::endl;
+      std::cout << "first1.count(2): " << first1.count(2) << std::endl;
+      std::cout << "first.count(35): " << first.count(35) << std::endl;
+      std::cout << "first1.count(35): " << first1.count(35) << std::endl;
+	  }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
+
+
+
+
 
 
 #define YELLOW "\033[1;33m" // yellow color
@@ -2369,10 +2715,10 @@ int main ()
     }
 
 
-      /*Additional set tests*/
+                              /*Additional set tests*/
 
     {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
-      std::cout <<YELLOW<< "\n\t\t\t\tS E T \nconstructors/insert/size/maxsize/empty/begin/empty tests\n" <<DEFAULT;
+      std::cout <<YELLOW<< "\n\t\t\t\tS E T EXTRA TESTS\nconstructors/insert/size/maxsize/empty/begin/empty tests\n" <<DEFAULT;
       std::set<int> first;                                // empty set of ints
       first.insert(0); first.insert(1); first.insert(2); first.insert(3);
       std::set<int> second (first.begin(), first.end());  // iterating through first
