@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 16:08:35 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 16:16:26 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int main ()
     // CONSTRUCTOR TESTS used in the same order as described above:
   {
     
-      std::cout << RED << "\n" <<"all constructors test" << "\n" <<DEFAULT;
+      std::cout << RED << "\n" <<"VECTOR all constructors test" << "\n" <<DEFAULT;
       ft::vector<int> first_obj; //test for default constructor
       ft::vector<int> second (4,100);//test for constructor with values in vector
         // std::vector<int> second (4,100); 
@@ -79,7 +79,7 @@ int main ()
   //rbegin, rend() methods need reverse_iterator
   //https://www.cplusplus.com/reference/vector/vector/rbegin/
   {
-      std::cout << RED << "\n"  << "rbegin(), rend() test" << "\n" << DEFAULT;
+      std::cout << RED << "\n"  << "VECTOR rbegin(), rend() test" << "\n" << DEFAULT;
       ft::vector<int> myvector (5);  // 5 default-constructed ints
 
       int i=0;
@@ -99,7 +99,7 @@ int main ()
     
     //test for size() https://www.cplusplus.com/reference/vector/vector/size/
     {
-       std::cout << RED << "\n" << "size() test" << "\n" << DEFAULT;
+       std::cout << RED << "\n" << "VECTOR size() test" << "\n" << DEFAULT;
       
       ft::vector<int> myints;
       std::cout << "0. size: " << myints.size() << '\n';
@@ -121,7 +121,7 @@ int main ()
 
     // test for max_size() https://www.cplusplus.com/reference/vector/vector/max_size/
     {
-        std::cout << RED << "\n" << "max_size() test" << "\n" << DEFAULT;
+        std::cout << RED << "\n" << "VECTOR max_size() test" << "\n" << DEFAULT;
         // set some content in the vector:   
         ft::vector<int> myvector (4,100);
         std::cout << "size: " << myvector.size() << "\n";
@@ -131,7 +131,7 @@ int main ()
 
     //test for resize() https://www.cplusplus.com/reference/vector/vector/resize/
     {
-      std::cout << RED << "\n" << "resize() test" << "\n" << DEFAULT;
+      std::cout << RED << "\n" << "VECTOR resize() test" << "\n" << DEFAULT;
         // set some content in the vector:   
       ft::vector<int> myvector; // no elements inside
 
@@ -157,7 +157,7 @@ int main ()
 
     //https://www.cplusplus.com/reference/vector/vector/capacity/
     {
-      std::cout << RED << "\n" << "capacity() test" << "\n" << DEFAULT;
+      std::cout << RED << "\n" << "VECTOR capacity() test" << "\n" << DEFAULT;
       
       ft::vector<int> myvector (99, 5);
       std::vector<int> myvector2 (99, 5);
@@ -176,7 +176,7 @@ int main ()
 
     //https://www.cplusplus.com/reference/vector/vector/empty/
     {
-      std::cout << RED << "\n" << "empty() test" << "\n" << DEFAULT;
+      std::cout << RED << "\n" << "VECTOR empty() test" << "\n" << DEFAULT;
         // std::vector<int> myvector;
         // int sum (0);
         
@@ -208,7 +208,7 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/reserve/
     {
-      std::cout << RED << "\n" << "reserve() test" << "\n" << DEFAULT;
+      std::cout << RED << "\n" << "VECTOR reserve() test" << "\n" << DEFAULT;
       ft::vector<int>::size_type sz;
       
       ft::vector<int> bar;
@@ -232,14 +232,14 @@ int main ()
 
 //https://www.cplusplus.com/reference/vector/vector/operator[]/
     {
-       std::cout << RED << "\n" << "operator[] test" << "\n"<< DEFAULT;
+       std::cout << RED << "\n" << "VECTOR operator[] test" << "\n"<< DEFAULT;
        std::cout  << "The test is skipped because  the operator= code uses "<< "\n" 
        << " the operator[], it works" << "\n";
     }
 
 //https://www.cplusplus.com/reference/vector/vector/at/
     {
-       std::cout << "\n" << "at() test" << "\n";
+       std::cout << RED <<  "\n" << "at() test" << "\n" << DEFAULT;
          std::vector<int> myvector (10);   // 10 zero-initialized ints
 
        // assign some values:
@@ -264,44 +264,44 @@ int main ()
         std::cout << '\n';
     }
 
-    {
-      std::cout << RED  << "\n" << "DEBUGGING AT() from the tests" << "\n"<< DEFAULT;
+    // {
+    //   std::cout << RED  << "\n" << "VECTOR DEBUGGING AT() from the tests" << "\n"<< DEFAULT;
 
-      int _ratio = 10000;
-      std::vector<int> vector;
+    //   int _ratio = 10000;
+    //   std::vector<int> vector;
         
-      vector.assign(9900 * _ratio, 1); //99 000 000 elements with 1 value in each
+    //   vector.assign(9900 * _ratio, 1); //99 000 000 elements with 1 value in each
       
       
-      std::cout << "The vector elements is : ";
-      std::cout << vector.at(354 * _ratio) << ' '; //printout the 3 540 000th elem
-      // why mine is zero, should be 1
-      std::cout <<  std::endl;;
+    //   std::cout << "The vector elements is : ";
+    //   std::cout << vector.at(354 * _ratio) << ' '; //printout the 3 540 000th elem
+    //   // why mine is zero, should be 1
+    //   std::cout <<  std::endl;;
 
 
 
-      ft::vector<int> ft_vector;
-      ft_vector.assign(9900 * _ratio, 1); //99 000 000 elements with 1 value in each
-      std::cout << "The ft_vector elements is : ";
-      std::cout << ft_vector.at(0) << ' '; //printout the 3 540 000th elem
-      std::cout << ft_vector.at(1) << ' '; 
-        std::cout << ft_vector.at(354 * _ratio) << ' '; 
-      // why mine is zero, should be 1
-      /* 
-      I printed out the values of different elements and it turns out that assign()
-      assigns only to the 1st element, so it is not the problem of at()
-      Method at() depends on the result of assign() in the test
+    //   ft::vector<int> ft_vector;
+    //   ft_vector.assign(9900 * _ratio, 1); //99 000 000 elements with 1 value in each
+    //   std::cout << "The ft_vector elements is : ";
+    //   std::cout << ft_vector.at(0) << ' '; //printout the 3 540 000th elem
+    //   std::cout << ft_vector.at(1) << ' '; 
+    //     std::cout << ft_vector.at(354 * _ratio) << ' '; 
+    //   // why mine is zero, should be 1
+    //   /* 
+    //   I printed out the values of different elements and it turns out that assign()
+    //   assigns only to the 1st element, so it is not the problem of at()
+    //   Method at() depends on the result of assign() in the test
 
-      So I need to run test for assign to see the problem
-      */
-      std::cout <<  std::endl;;
+    //   So I need to run test for assign to see the problem
+    //   */
+    //   std::cout <<  std::endl;;
       
-    }
+    // }
 
 
 //https://www.cplusplus.com/reference/vector/vector/front/
     {
-      std::cout << RED << "\n" << "front() test" << "\n"<< DEFAULT;
+      std::cout << RED << "\n" << "VECTOR front() test" << "\n"<< DEFAULT;
       std::vector<int> myvector (5, 10);
       ft::vector<int> ftvector (5, 10);
       // myvector.push_back(78);
@@ -318,7 +318,7 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/back/
     {
-        std::cout << RED << "\n" << "back() test" << "\n"<< DEFAULT;
+        std::cout << RED << "\n" << "VECTOR back() test" << "\n"<< DEFAULT;
       
         std::vector<int> myvector (1, 88);
         ft::vector<int> ftvector (1, 99);
@@ -345,7 +345,7 @@ int main ()
     //https://www.cplusplus.com/reference/vector/vector/
     //Unit-tests mainly require assign() method, so one can start testing 
     {
-      std::cout << RED << "\n" << "assign() test" << "\n" << DEFAULT;
+      std::cout << RED << "\n" << "VECTOR assign() test" << "\n" << DEFAULT;
       
 
       std::vector<int> first;
@@ -390,38 +390,38 @@ int main ()
       
     }   
 
-    {
-    std::cout << RED << "\n" << "DEBUG of ASSIGN()" << "\n" << DEFAULT;
+    // {
+    // std::cout << RED << "\n" << "VECTOR DEBUG of ASSIGN()" << "\n" << DEFAULT;
     
-    /*
-    found problem in method reallocate in the cycle of construction
-    */
+    // /*
+    // found problem in method reallocate in the cycle of construction
+    // */
 
-    int _ratio = 3;
-    std::vector<int> vector;
+    // int _ratio = 3;
+    // std::vector<int> vector;
       
-    vector.assign(2 * _ratio, 1); //99 000 000 elements with 1 value in each
+    // vector.assign(2 * _ratio, 1); //99 000 000 elements with 1 value in each
 
 
-    ft::vector<int> ft_vector;
+    // ft::vector<int> ft_vector;
       
-    ft_vector.assign(2 * _ratio, 1); //99 000 000 elements with 1 value in each
+    // ft_vector.assign(2 * _ratio, 1); //99 000 000 elements with 1 value in each
 
-        std::cout << "The vector elements are : ";
-        for(unsigned long i=0; i < vector.size(); i++)
-        std::cout << vector.at(i) << ' ';
-        std::cout <<  std::endl;;
+    //     std::cout << "The vector elements are : ";
+    //     for(unsigned long i=0; i < vector.size(); i++)
+    //     std::cout << vector.at(i) << ' ';
+    //     std::cout <<  std::endl;;
 
-        std::cout << "The ft_vector elements are : ";
-        for(unsigned long i=0; i < ft_vector.size(); i++)
-        std::cout << ft_vector.at(i) << ' ';
-        std::cout <<  std::endl;
+    //     std::cout << "The ft_vector elements are : ";
+    //     for(unsigned long i=0; i < ft_vector.size(); i++)
+    //     std::cout << ft_vector.at(i) << ' ';
+    //     std::cout <<  std::endl;
       
-    }   
+    // }   
 
   //https://www.cplusplus.com/reference/vector/vector/push_back/
     {
-        std::cout << RED << "\n" << "pushback() test commented so far" << "\n"<< DEFAULT;
+        std::cout << RED << "\n" << "VECTOR pushback() test commented so far" << "\n"<< DEFAULT;
         // std::vector<int> myvector(100, 4);
         // int myint;
 
@@ -464,7 +464,7 @@ int main ()
   //https://www.cplusplus.com/reference/vector/vector/pop_back/
     {
 
-        std::cout << RED << "\n" << "pop_back() test" << "\n"<< DEFAULT;
+        std::cout << RED << "\n" << "VECTOR pop_back() test" << "\n"<< DEFAULT;
         std::vector<int> myvector;
         int sum (0);
         myvector.push_back (100);
@@ -507,7 +507,7 @@ int main ()
 
     //https://www.cplusplus.com/reference/vector/vector/insert/
     {
-      std::cout << RED << "\n" << "insert() test" << "\n"<< DEFAULT;
+      std::cout << RED << "\n" << "VECTOR insert() test" << "\n"<< DEFAULT;
       std::vector<int> myvector (3,100); //100 100 100
       std::vector<int>::iterator it;
       // it = myvector.begin();
@@ -581,7 +581,7 @@ int main ()
 
     //https://www.cplusplus.com/reference/vector/vector/erase/
     {
-      std::cout << RED << "\n" << "erase() test" << "\n"<< DEFAULT;
+      std::cout << RED << "\n" << "VECTOR erase() test" << "\n"<< DEFAULT;
       std::vector<int> myvector;
 
       // set some values (from 1 to 10)
@@ -620,7 +620,7 @@ int main ()
 
   // https://www.cplusplus.com/reference/vector/vector/swap/
     {
-      std::cout << RED << "\n" << "swap() test" << "\n"<< DEFAULT;
+      std::cout << RED << "\n" << "VECTOR swap() test" << "\n"<< DEFAULT;
       std::vector<int> foo (3,100);   // three ints with a value of 100
       std::vector<int> bar (5,200);   // five ints with a value of 200
 
@@ -656,7 +656,7 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/clear/
     {
-        std::cout << RED << "\n" << "clear() test" << "\n"<< DEFAULT;
+        std::cout << RED << "\n" << "VECTOR clear() test" << "\n"<< DEFAULT;
         std::vector<int> myvector;
         myvector.push_back (100);
         myvector.push_back (200);
@@ -701,7 +701,7 @@ int main ()
   // https://www.cplusplus.com/reference/vector/vector/get_allocator/
     {
       // << RED << DEFAULT
-        std::cout << RED << "\n" << "get_allocator() test" << "\n"<< DEFAULT;
+        std::cout << RED << "\n" << "VECTOR get_allocator() test" << "\n"<< DEFAULT;
         std::vector<int> myvector;
         int * p;
         unsigned int i;
@@ -744,7 +744,7 @@ int main ()
 
     // METHODS finished and now we ADD RELATIONAL OPERATORS
     {
-      std::cout << RED << "\n" << "relational operators() test" << "\n" << DEFAULT;
+      std::cout << RED << "\n" << "VECTOR relational operators() test" << "\n" << DEFAULT;
         ft::vector<int> foo (2,250);   // three ints with a value of 100
         ft::vector<int> bar (2,200);   // two ints with a value of 200
 
@@ -757,6 +757,32 @@ int main ()
 
         
       
+    }
+
+    {
+      std::cout <<RED << "\n" << "redundant VECTOR equal test" << "\n" << DEFAULT;
+      //https://m.cplusplus.com/reference/algorithm/equal/
+        int myints[] = {20,40,60,80,100};               //   myints: 20 40 60 80 100
+        std::vector<int>myvector (myints, myints+5);     // myvector: 20 40 60 80 100
+
+        // using default comparison:
+        if ( std::equal (myvector.begin(), myvector.end(), myints) )
+          std::cout << "The contents of both sequences of std::vector are equal.\n";
+        else
+          std::cout << "The contents of both sequences of std::vector differ.\n";
+        std::cout << '\n';
+
+        
+
+
+        int myints1[] = {20,40,60,80,100};               //   myints: 20 40 60 80 100
+        ft::vector<int>myvector1 (myints1, myints1+5);     // myvector: 20 40 60 80 100
+
+        // using default comparison:
+        if ( ft::equal (myvector1.begin(), myvector1.end(), myints1) )
+          std::cout << "The contents of both sequences of ft::vector are equal.\n";
+        else
+          std::cout << "The contents of both sequences of ft::vector differ.\n";
     }
 
     {
@@ -2401,33 +2427,6 @@ int main ()
       
     }
 
-
-
-    {
-      std::cout <<YELLOW<< "\n" << "VECTOR equal test" << "\n" << DEFAULT;
-      //https://m.cplusplus.com/reference/algorithm/equal/
-        int myints[] = {20,40,60,80,100};               //   myints: 20 40 60 80 100
-        std::vector<int>myvector (myints, myints+5);     // myvector: 20 40 60 80 100
-
-        // using default comparison:
-        if ( std::equal (myvector.begin(), myvector.end(), myints) )
-          std::cout << "The contents of both sequences of std::vector are equal.\n";
-        else
-          std::cout << "The contents of both sequences of std::vector differ.\n";
-        std::cout << '\n';
-
-        
-
-
-        int myints1[] = {20,40,60,80,100};               //   myints: 20 40 60 80 100
-        ft::vector<int>myvector1 (myints1, myints1+5);     // myvector: 20 40 60 80 100
-
-        // using default comparison:
-        if ( ft::equal (myvector1.begin(), myvector1.end(), myints1) )
-          std::cout << "The contents of both sequences of ft::vector are equal.\n";
-        else
-          std::cout << "The contents of both sequences of ft::vector differ.\n";
-    }
 
       /*Additional set tests*/
 
