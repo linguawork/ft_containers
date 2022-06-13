@@ -6,12 +6,28 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:18 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/12 18:44:10 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 13:13:06 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_TREE_ITERATOR_HPP
 # define FT_TREE_ITERATOR_HPP// need to have a gap
+
+
+//https://stackoverflow.com/questions/3582608/how-to-correctly-implement-custom-iterators-and-const-iterators
+
+/*
+A red black iterator's pseudocode is explained by Rob Edwards:
+https://www.youtube.com/watch?v=-qjrcxVmf2Q (Lecture 1)
+
+this is the description what Bidirectional iterator should do:
+https://cplusplus.com/reference/iterator/
+https://cplusplus.com/reference/iterator/BidirectionalIterator/
+
+
+good article about implementing a tree iterator (“in-order” traversal)
+https://www.cs.odu.edu/~zeil/cs361/latest/Public/treetraversal/index.html
+*/
 
 
 

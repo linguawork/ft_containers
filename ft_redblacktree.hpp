@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:16:57 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/12 18:52:03 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 14:36:23 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ class RBTree
 		typedef Value value_type;
 		typedef Compare value_compare;
 		typedef Alloc	allocator_type;
+		//https://stackoverflow.com/questions/14148756/what-does-template-rebind-do
+		//https://cplusplus.com/reference/memory/allocator/rebind/
+		//https://docs.microsoft.com/ru-ru/cpp/standard-library/allocator-class?view=msvc-170  this explanation is good and has code
 		typedef typename Alloc::template
-				rebind<Node<Value> >::other					node_allocator;
+				rebind<Node<Value> >::other					node_allocator; // allocating memory to the other that container type of object: NODE
 		typedef	typename node_allocator::pointer			node_pointer;
 		typedef typename allocator_type::reference			reference;
 		typedef typename allocator_type::const_reference	const_reference;
@@ -722,11 +725,11 @@ bool operator>(const RBTree<Content, Compare, Alloc>& lhs,  const RBTree<Content
 	return (lhs < rhs);
 }
 
-
+// ft::equal used
 template<class Content, class Compare, class Alloc>
 bool operator==(const RBTree<Content, Compare, Alloc>& lhs, const RBTree<Content, Compare, Alloc>& rhs)
 {
-	return (lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+	return (lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin())); 
 }
 
 template<class Content, class Compare, class Alloc>

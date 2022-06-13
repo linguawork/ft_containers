@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 11:41:53 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 15:59:36 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,14 @@ https://www.cplusplus.com/reference/vector/vector/vector/
 
 int main ()
 {
+  
+#define RED "\033[1;31m" // green color
+#define DEFAULT "\033[0;37m"
+
     // CONSTRUCTOR TESTS used in the same order as described above:
   {
     
-      std::cout << "\n" <<"all constructors test" << "\n";
+      std::cout << RED << "\n" <<"all constructors test" << "\n" <<DEFAULT;
       ft::vector<int> first_obj; //test for default constructor
       ft::vector<int> second (4,100);//test for constructor with values in vector
         // std::vector<int> second (4,100); 
@@ -75,7 +79,7 @@ int main ()
   //rbegin, rend() methods need reverse_iterator
   //https://www.cplusplus.com/reference/vector/vector/rbegin/
   {
-      std::cout << "\n"  << "rbegin(), rend() test" << "\n";
+      std::cout << RED << "\n"  << "rbegin(), rend() test" << "\n" << DEFAULT;
       ft::vector<int> myvector (5);  // 5 default-constructed ints
 
       int i=0;
@@ -95,7 +99,7 @@ int main ()
     
     //test for size() https://www.cplusplus.com/reference/vector/vector/size/
     {
-       std::cout << "\n" << "size() test" << "\n";
+       std::cout << RED << "\n" << "size() test" << "\n" << DEFAULT;
       
       ft::vector<int> myints;
       std::cout << "0. size: " << myints.size() << '\n';
@@ -117,7 +121,7 @@ int main ()
 
     // test for max_size() https://www.cplusplus.com/reference/vector/vector/max_size/
     {
-        std::cout << "\n" << "max_size() test" << "\n";
+        std::cout << RED << "\n" << "max_size() test" << "\n" << DEFAULT;
         // set some content in the vector:   
         ft::vector<int> myvector (4,100);
         std::cout << "size: " << myvector.size() << "\n";
@@ -127,7 +131,7 @@ int main ()
 
     //test for resize() https://www.cplusplus.com/reference/vector/vector/resize/
     {
-      std::cout << "\n" << "resize() test" << "\n";
+      std::cout << RED << "\n" << "resize() test" << "\n" << DEFAULT;
         // set some content in the vector:   
       ft::vector<int> myvector; // no elements inside
 
@@ -153,7 +157,7 @@ int main ()
 
     //https://www.cplusplus.com/reference/vector/vector/capacity/
     {
-      std::cout << "\n" << "capacity() test" << "\n";
+      std::cout << RED << "\n" << "capacity() test" << "\n" << DEFAULT;
       
       ft::vector<int> myvector (99, 5);
       std::vector<int> myvector2 (99, 5);
@@ -172,7 +176,7 @@ int main ()
 
     //https://www.cplusplus.com/reference/vector/vector/empty/
     {
-      std::cout << "\n" << "empty() test" << "\n";
+      std::cout << RED << "\n" << "empty() test" << "\n" << DEFAULT;
         // std::vector<int> myvector;
         // int sum (0);
         
@@ -204,7 +208,7 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/reserve/
     {
-      std::cout << "\n" << "reserve() test" << "\n";
+      std::cout << RED << "\n" << "reserve() test" << "\n" << DEFAULT;
       ft::vector<int>::size_type sz;
       
       ft::vector<int> bar;
@@ -228,7 +232,7 @@ int main ()
 
 //https://www.cplusplus.com/reference/vector/vector/operator[]/
     {
-       std::cout << "\n" << "operator[] test" << "\n";
+       std::cout << RED << "\n" << "operator[] test" << "\n"<< DEFAULT;
        std::cout  << "The test is skipped because  the operator= code uses "<< "\n" 
        << " the operator[], it works" << "\n";
     }
@@ -261,7 +265,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "DEBUGGING AT() from the tests" << "\n";
+      std::cout << RED  << "\n" << "DEBUGGING AT() from the tests" << "\n"<< DEFAULT;
 
       int _ratio = 10000;
       std::vector<int> vector;
@@ -297,7 +301,7 @@ int main ()
 
 //https://www.cplusplus.com/reference/vector/vector/front/
     {
-      std::cout << "\n" << "front() test" << "\n";
+      std::cout << RED << "\n" << "front() test" << "\n"<< DEFAULT;
       std::vector<int> myvector (5, 10);
       ft::vector<int> ftvector (5, 10);
       // myvector.push_back(78);
@@ -314,7 +318,7 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/back/
     {
-        std::cout << "\n" << "back() test" << "\n";
+        std::cout << RED << "\n" << "back() test" << "\n"<< DEFAULT;
       
         std::vector<int> myvector (1, 88);
         ft::vector<int> ftvector (1, 99);
@@ -341,7 +345,7 @@ int main ()
     //https://www.cplusplus.com/reference/vector/vector/
     //Unit-tests mainly require assign() method, so one can start testing 
     {
-      std::cout << "\n" << "assign() test" << "\n";
+      std::cout << RED << "\n" << "assign() test" << "\n" << DEFAULT;
       
 
       std::vector<int> first;
@@ -387,7 +391,7 @@ int main ()
     }   
 
     {
-    std::cout << "\n" << "DEBUG of ASSIGN()" << "\n";
+    std::cout << RED << "\n" << "DEBUG of ASSIGN()" << "\n" << DEFAULT;
     
     /*
     found problem in method reallocate in the cycle of construction
@@ -417,7 +421,7 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/push_back/
     {
-        std::cout << "\n" << "pushback() test commented so far" << "\n";
+        std::cout << RED << "\n" << "pushback() test commented so far" << "\n"<< DEFAULT;
         // std::vector<int> myvector(100, 4);
         // int myint;
 
@@ -460,7 +464,7 @@ int main ()
   //https://www.cplusplus.com/reference/vector/vector/pop_back/
     {
 
-        std::cout << "\n" << "pop_back() test" << "\n";
+        std::cout << RED << "\n" << "pop_back() test" << "\n"<< DEFAULT;
         std::vector<int> myvector;
         int sum (0);
         myvector.push_back (100);
@@ -503,7 +507,7 @@ int main ()
 
     //https://www.cplusplus.com/reference/vector/vector/insert/
     {
-      std::cout << "\n" << "insert() test" << "\n";
+      std::cout << RED << "\n" << "insert() test" << "\n"<< DEFAULT;
       std::vector<int> myvector (3,100); //100 100 100
       std::vector<int>::iterator it;
       // it = myvector.begin();
@@ -577,7 +581,7 @@ int main ()
 
     //https://www.cplusplus.com/reference/vector/vector/erase/
     {
-      std::cout << "\n" << "erase() test" << "\n";
+      std::cout << RED << "\n" << "erase() test" << "\n"<< DEFAULT;
       std::vector<int> myvector;
 
       // set some values (from 1 to 10)
@@ -616,7 +620,7 @@ int main ()
 
   // https://www.cplusplus.com/reference/vector/vector/swap/
     {
-      std::cout << "\n" << "swap() test" << "\n";
+      std::cout << RED << "\n" << "swap() test" << "\n"<< DEFAULT;
       std::vector<int> foo (3,100);   // three ints with a value of 100
       std::vector<int> bar (5,200);   // five ints with a value of 200
 
@@ -652,7 +656,7 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/clear/
     {
-        std::cout << "\n" << "clear() test" << "\n";
+        std::cout << RED << "\n" << "clear() test" << "\n"<< DEFAULT;
         std::vector<int> myvector;
         myvector.push_back (100);
         myvector.push_back (200);
@@ -696,7 +700,8 @@ int main ()
 
   // https://www.cplusplus.com/reference/vector/vector/get_allocator/
     {
-        std::cout << "\n" << "get_allocator() test" << "\n";
+      // << RED << DEFAULT
+        std::cout << RED << "\n" << "get_allocator() test" << "\n"<< DEFAULT;
         std::vector<int> myvector;
         int * p;
         unsigned int i;
@@ -739,7 +744,7 @@ int main ()
 
     // METHODS finished and now we ADD RELATIONAL OPERATORS
     {
-      std::cout << "\n" << "relational operators() test" << "\n";
+      std::cout << RED << "\n" << "relational operators() test" << "\n" << DEFAULT;
         ft::vector<int> foo (2,250);   // three ints with a value of 100
         ft::vector<int> bar (2,200);   // two ints with a value of 200
 
@@ -755,19 +760,25 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "VECTOR cases finished" << "\n";
+      std::cout << RED << "\n" << "VECTOR cases finished" << "\n" << DEFAULT;
       /**************VECTOR cases finished******************/
       
+
+
+#define GREEN "\033[1;32m" // green color
+#define DEFAULT "\033[0;37m"
+      
       /*****************STACK test cases start************************/
-      std::cout << "\n" << "STACK test cases start" << "\n";
+      std::cout << GREEN << "\n" << "STACK test cases start" << "\n" << DEFAULT;
 
     }
 
 
 
     {
+      // <<GREEN << DEFAULT
       //https://en.cppreference.com/w/cpp/container/stack/top
-      std::cout << "\n" << "STACK top() test" << "\n";
+      std::cout << GREEN << "\n" << "STACK top() test" << "\n" << DEFAULT;
       /*Returns reference to the top element in the stack. 
       This is the most recently pushed element. 
       This element will be removed on a call to pop(). 
@@ -797,7 +808,7 @@ int main ()
     {
       //https://en.cppreference.com/w/cpp/container/stack/empty
       //Checks if the underlying container has no elements, i.e. whether c.empty()
-      std::cout << "\n" << "STACK empty() test" << "\n";
+      std::cout <<GREEN << "\n" << "STACK empty() test" << "\n"<< DEFAULT;
       std::cout << std::boolalpha;
 
       std::stack<int> container;
@@ -820,7 +831,7 @@ int main ()
 
       
     { 
-      std::cout << "\n" << "STACK size() test" << "\n";
+      std::cout <<GREEN << "\n" << "STACK size() test" << "\n"<< DEFAULT;
       //https://en.cppreference.com/w/cpp/container/stack/size
       //Returns the number of elements in the underlying container, that is, c.size()
       std::stack<int> container;
@@ -839,7 +850,7 @@ int main ()
 
     {
       //https://m.cplusplus.com/reference/stack/stack/push/
-      std::cout << "\n" << "STACK push() and pop() test" << "\n";
+      std::cout <<GREEN << "\n" << "STACK push() and pop() test" << "\n"<< DEFAULT;
       //Pushes the given element value to the top of the stack.
       //Removes the element on top of the stack, effectively reducing its size by one.
       std::stack<int> mystack;
@@ -871,20 +882,21 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "STACK TESTS finished" << "\n";
+      std::cout <<GREEN << "\n" << "STACK TESTS finished" << "\n"<< DEFAULT;
       /**************VECTOR cases finished******************/
       
 
+#define BLUE "\033[1;34m" // blue color
+#define DEFAULT "\033[0;37m"
 
-
-
+//  << BLUE << DEFAULT
       /*****************MAP test cases start************************/
-      std::cout << "\n" << "MAP TESTS start" << "\n";
+      std::cout  << BLUE << "\n" << "MAP TESTS start" << "\n"<< DEFAULT;
 
     }
 
     {
-       std::cout << "\n" << "MAP default constructor test" << "\n";
+       std::cout  << BLUE << "\n" << "MAP default constructor test" << "\n"<< DEFAULT;
       //https://en.cppreference.com/w/cpp/container/map/map
 
       // (1) Default constructor
@@ -916,7 +928,7 @@ int main ()
       
     {
     //   // (2) Range constructor
-      std::cout << "\n" << "Range constructor to make" << "\n";
+      std::cout << BLUE  << "\n" << "Range constructor to make" << "\n"<< DEFAULT;
 
       std::map<std::string, int> map3;
       map3["something"] = 69;
@@ -959,7 +971,7 @@ int main ()
 
     {
       //write methods
-       std::cout << "\n" << "MAP operator = test" << "\n";
+       std::cout << BLUE << "\n" << "MAP operator = test" << "\n"<< DEFAULT ;
       //https://m.cplusplus.com/reference/map/map/operator=/
         std::map<char,int> first;
         std::map<char,int> second;
@@ -997,7 +1009,7 @@ int main ()
     
     {
       //https://m.cplusplus.com/reference/map/map/size/
-      std::cout << "\n" << "MAP capacity: size() test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP capacity: size() test" << "\n"<< DEFAULT;
       
       std::map<char,int> mymap;
       mymap['a']=101;
@@ -1017,7 +1029,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "MAP capacity: max_size() test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP capacity: max_size() test" << "\n"<< DEFAULT;
       //https://m.cplusplus.com/reference/map/map/max_size/
         int i;
         std::map<int,int> mymap;
@@ -1044,7 +1056,7 @@ int main ()
     } 
     
     {
-      std::cout << "\n" << "MAP capacity: empty() test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP capacity: empty() test" << "\n"<< DEFAULT;
       //https://m.cplusplus.com/reference/map/map/empty/
       std::map<char,int> mymap;
 
@@ -1075,7 +1087,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "MAP element access method: operator[] test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP element access method: operator[] test" << "\n"<< DEFAULT;
       //https://m.cplusplus.com/reference/map/map/operator[]/
       std::map<char,std::string> mymap;
 
@@ -1106,7 +1118,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "MAP element access method: at() test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP element access method: at() test" << "\n"<< DEFAULT;
       //https://m.cplusplus.com/reference/map/map/at/
       std::map<std::string, int> map1;
       map1["alpha"] = 0;
@@ -1159,7 +1171,7 @@ int main ()
       returning an iterator to this existing element (if the function returns a value)
      */
 
-      std::cout << "\n" << "MAP modifier method: insert() test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP modifier method: insert() test" << "\n"<< DEFAULT;
       //https://m.cplusplus.com/reference/map/map/insert/
 
       std::map<char,int> mymap;
@@ -1248,7 +1260,7 @@ int main ()
 
 
     {
-       std::cout << "\n" << "MAP modifier method: erase() test" << "\n";
+       std::cout  << BLUE << "\n" << "MAP modifier method: erase() test" << "\n"<< DEFAULT;
        //https://m.cplusplus.com/reference/map/map/erase/
         std::map<char,int> mymap;
         std::map<char,int>::iterator it;
@@ -1302,7 +1314,7 @@ int main ()
     }
 
     {
-        std::cout << "\n" << "MAP modifier method: swap() test" << "\n";
+        std::cout  << BLUE << "\n" << "MAP modifier method: swap() test" << "\n"<< DEFAULT;
         //https://m.cplusplus.com/reference/map/map/swap/
         /*
         Another map container of the same type as this (i.e., with the same template parameters, Key, T, Compare and Alloc) 
@@ -1360,7 +1372,7 @@ int main ()
         Removes all elements from the map container (which are destroyed), leaving the container with a size of 0.
       */
       //https://m.cplusplus.com/reference/map/map/clear/
-      std::cout << "\n" << "MAP modifier method: clear() test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP modifier method: clear() test" << "\n"<< DEFAULT;
 
       std::map<char,int> mymap;
 
@@ -1408,7 +1420,7 @@ int main ()
       /*
         Returns a copy of the comparison object used by the container to compare keys.
       */ 
-      std::cout << "\n" << "MAP observer method: key_comp() test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP observer method: key_comp() test" << "\n"<< DEFAULT;
       std::map<char,int> mymap;
 
       std::map<char,int>::key_compare mycomp = mymap.key_comp();
@@ -1472,7 +1484,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "MAP observer method: value_comp() test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP observer method: value_comp() test" << "\n"<< DEFAULT;
       //https://m.cplusplus.com/reference/map/map/value_comp/
 
       /* this method is also based on less  https://www.cplusplus.com/reference/functional/less/  so the code is almost the same here */
@@ -1515,7 +1527,7 @@ int main ()
        /*Searches the container for an element with a key equivalent to k 
        and returns an iterator to it if found, otherwise it returns an iterator to map::end. */
        // https://m.cplusplus.com/reference/map/map/find/
-      std::cout << "\n" << "MAP OPERATIONS method: find() test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP OPERATIONS method: find() test" << "\n"<< DEFAULT;
       std::map<char,int> mymap;
       std::map<char,int>::iterator it;
 
@@ -1558,7 +1570,7 @@ int main ()
     {
       //https://m.cplusplus.com/reference/map/map/count/
       // T think this method should be called search (not count)
-      std::cout << "\n" << "MAP OPERATIONS method: count() test" << "\n";
+      std::cout  << BLUE << "\n" << "MAP OPERATIONS method: count() test" << "\n"<< DEFAULT;
       /*
         Searches the container for elements with a key equivalent to k and returns the number of matches.
 
@@ -1607,7 +1619,7 @@ int main ()
     }
 
     {
-       std::cout << "\n" << "MAP OPERATIONS method: lower/upper_bound() test" << "\n";
+       std::cout  << BLUE << "\n" << "MAP OPERATIONS method: lower/upper_bound() test" << "\n"<< DEFAULT;
         /*
         https://m.cplusplus.com/reference/map/map/lower_bound/
         
@@ -1661,7 +1673,7 @@ int main ()
     }
 
     {
-        std::cout << "\n" << "MAP OPERATIONS method: equal_range() test" << "\n";
+        std::cout  << BLUE << "\n" << "MAP OPERATIONS method: equal_range() test" << "\n"<< DEFAULT;
         /*
         https://m.cplusplus.com/reference/map/map/equal_range/
         
@@ -1719,7 +1731,7 @@ int main ()
 
 
     {
-        std::cout << "\n" << "MAP get_allocator() test" << "\n";
+        std::cout  << BLUE << "\n" << "MAP get_allocator() test" << "\n"<< DEFAULT;
         //https://m.cplusplus.com/reference/map/map/get_allocator/
         int psize;
         std::map<char,int> mymap;
@@ -1753,11 +1765,14 @@ int main ()
     }
 
 
+
+#define YELLOW "\033[1;33m" // yellow color
+#define DEFAULT "\033[0;37m"
     /**************SET container tests start*******************/
 
     {
-      
-      std::cout << "\n" << "SET constructors test" << "\n";
+      // <<YELLOW << DEFAULT;
+      std::cout <<YELLOW << "\n" << "SET constructors test" << "\n" << DEFAULT;
       // https://m.cplusplus.com/reference/set/set/set/
       std::set<int> first;                           // empty set of ints
 
@@ -1807,7 +1822,7 @@ int main ()
     }
 
     {
-        std::cout << "\n" << "SET operator= test" << "\n";
+        std::cout <<YELLOW << "\n" << "SET operator= test" << "\n" << DEFAULT;
         //https://m.cplusplus.com/reference/set/set/operator=/
       
         int myints[]={ 12,82,37,64,15 };
@@ -1835,7 +1850,7 @@ int main ()
     }
 
     {
-        std::cout << "\n" << "SET CAPACITY empty() test" << "\n";
+        std::cout <<YELLOW << "\n" << "SET CAPACITY empty() test" << "\n" << DEFAULT;
         //https://cplusplus.com/reference/set/set/empty/
         std::set<int> myset;
 
@@ -1868,7 +1883,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "SET CAPACITY size() test" << "\n";
+      std::cout <<YELLOW<< "\n" << "SET CAPACITY size() test" << "\n"<< DEFAULT;
       //https://cplusplus.com/reference/set/set/size/
 
         std::set<int> myints;
@@ -1898,7 +1913,7 @@ int main ()
     }
 
     {
-        std::cout << "\n" << "SET CAPACITY max_size() test" << "\n";
+        std::cout << YELLOW  "\n" << "SET CAPACITY max_size() test" << "\n" << DEFAULT;
         //https://cplusplus.com/reference/set/set/max_size/
         int i;
         std::set<int> myset;
@@ -1928,7 +1943,7 @@ int main ()
     }
 
     {
-        std::cout << "\n" << "SET MODIFIERS insert() test" << "\n";
+        std::cout <<YELLOW << "\n" << "SET MODIFIERS insert() test" << "\n" << DEFAULT;
         //https://cplusplus.com/reference/set/set/insert/
 
         std::set<int> myset;
@@ -1986,7 +2001,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "!!!SET MODIFIERS erase() test" << "\n";
+      std::cout <<YELLOW << "\n" << "!!!SET MODIFIERS erase() test" << "\n" << DEFAULT;
       // https://m.cplusplus.com/reference/set/set/erase/
       std::set<int> myset;
       std::set<int>::iterator it;
@@ -2035,7 +2050,7 @@ int main ()
     }
 
     {
-        std::cout << "\n" << "SET MODIFIERS swap() test" << "\n";
+        std::cout <<YELLOW << "\n" << "SET MODIFIERS swap() test" << "\n"<< DEFAULT;
         //https://m.cplusplus.com/reference/set/set/swap/
 
         int myints[]={12,75,10,32,20,25};
@@ -2074,7 +2089,7 @@ int main ()
     }
 
     {
-        std::cout << "\n" << "SET MODIFIERS clear() test" << "\n";
+        std::cout <<YELLOW << "\n" << "SET MODIFIERS clear() test" << "\n"<< DEFAULT;
         //https://m.cplusplus.com/reference/set/set/clear/
         std::set<int> myset;
 
@@ -2122,7 +2137,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "SET OBSERVERS key_comp() test" << "\n";
+      std::cout <<YELLOW << "\n" << "SET OBSERVERS key_comp() test" << "\n"<< DEFAULT;
       // https://m.cplusplus.com/reference/set/set/key_comp/
 
       std::set<int> myset;
@@ -2164,7 +2179,7 @@ int main ()
 
 
     {
-      std::cout << "\n" << "SET OBSERVERS value_comp() test" << "\n";//Returns a copy of the comparison object used by the container.
+      std::cout <<YELLOW << "\n" << "SET OBSERVERS value_comp() test" << "\n"<< DEFAULT;//Returns a copy of the comparison object used by the container.
       //https://m.cplusplus.com/reference/set/set/value_comp/
       //key_comp defines the order of the keys in a container. value_comp defines the order of the values in a container.
         std::set<int> myset;
@@ -2203,7 +2218,7 @@ int main ()
 
 
     {
-      std::cout << "\n" << "SET OPERATIONS find() test" << "\n";
+      std::cout <<YELLOW << "\n" << "SET OPERATIONS find() test" << "\n"<< DEFAULT;
       //https://m.cplusplus.com/reference/set/set/find/
       //Searches the container for an element equivalent to val and returns an iterator to it if found, otherwise it returns an iterator to set::end.
 
@@ -2241,7 +2256,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "SET OPERATIONS count() test" << "\n";
+      std::cout <<YELLOW << "\n" << "SET OPERATIONS count() test" << "\n"<< DEFAULT;
       //https://m.cplusplus.com/reference/set/set/count/
       /*
         Searches the container for elements equivalent to val and returns the number of matches.
@@ -2285,7 +2300,7 @@ int main ()
     }
 
     {
-      std::cout << "\n" << "SET OPERATIONS lower/upper_bound() test" << "\n";
+      std::cout <<YELLOW << "\n" << "SET OPERATIONS lower/upper_bound() test" << "\n"<< DEFAULT;
       // https://m.cplusplus.com/reference/set/set/lower_bound/
       //https://m.cplusplus.com/reference/set/set/upper_bound/
       std::set<int> myset;
@@ -2324,7 +2339,7 @@ int main ()
 
 
     {
-      std::cout << "\n" << "SET OPERATIONS equal_range() test" << "\n";
+      std::cout <<YELLOW << "\n" << "SET OPERATIONS equal_range() test" << "\n"<< DEFAULT;
       //https://m.cplusplus.com/reference/set/set/equal_range/
       std::set<int> myset;
 
@@ -2348,7 +2363,7 @@ int main ()
     }
 
     {
-       std::cout << "\n" << "SET OPERATIONS allocator() test" << "\n";
+       std::cout<<YELLOW<<"\n" << "SET OPERATIONS allocator() test" << "\n"<< DEFAULT;
         //https://m.cplusplus.com/reference/set/set/get_allocator/
         std::set<int> myset;
         int * p;
@@ -2386,14 +2401,11 @@ int main ()
       
     }
 
-    {
-      std::cout << "\n" << "VECTOR equal test" << "\n";
 
-      // bool mypredicate (int i, int j) 
-      // {
-      //    return (i==j);
-      // };
-      
+
+    {
+      std::cout <<YELLOW<< "\n" << "VECTOR equal test" << "\n" << DEFAULT;
+      //https://m.cplusplus.com/reference/algorithm/equal/
         int myints[] = {20,40,60,80,100};               //   myints: 20 40 60 80 100
         std::vector<int>myvector (myints, myints+5);     // myvector: 20 40 60 80 100
 
@@ -2403,13 +2415,9 @@ int main ()
         else
           std::cout << "The contents of both sequences of std::vector differ.\n";
         std::cout << '\n';
-        // myvector[3]=81;                                 // myvector: 20 40 60 81 100
 
-        // using predicate comparison:
-        // if ( std::equal (myvector.begin(), myvector.end(), myints, mypredicate) )
-        //   std::cout << "The contents of both sequences are equal.\n";
-        // else
-        //   std::cout << "The contents of both sequences differ.\n";
+        
+
 
         int myints1[] = {20,40,60,80,100};               //   myints: 20 40 60 80 100
         ft::vector<int>myvector1 (myints1, myints1+5);     // myvector: 20 40 60 80 100
@@ -2421,8 +2429,73 @@ int main ()
           std::cout << "The contents of both sequences of ft::vector differ.\n";
     }
 
-    
+      /*Additional set tests*/
 
-    // clang++ ft_map.hpp ft_stack.hpp  main.cpp
+    {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+      std::cout <<YELLOW<< "\n\t\t\t\tS E T \nconstructors/insert/size/maxsize/empty/begin/empty tests\n" <<DEFAULT;
+      std::set<int> first;                                // empty set of ints
+      first.insert(0); first.insert(1); first.insert(2); first.insert(3);
+      std::set<int> second (first.begin(), first.end());  // iterating through first
+      std::set<int> third (second);                       // a copy of third
+
+      ft::set<int> first1;                                // empty vector of ints
+      first1.insert(0); first1.insert(1); first1.insert(2); first1.insert(3);
+      std::set<int> second1 (first1.begin(), first1.end());  // iterating through first
+      std::set<int> third1 (second1);                       // a copy of third
+      //Size/maxsize
+      std::cout << "std::set: Size/maxsize of first: " << first.size() << " " << first.max_size() << '\n';
+      std::cout << "ft::set: Size/maxsize of first1: " << first1.size() << " " << first1.max_size() << '\n';
+      //empty
+      std::cout << "std::set: second is empty? : " << std::boolalpha << second.empty() << std::endl;
+      std::cout << "ft::set: second1 is empty? : " << std::boolalpha << second1.empty() << std::endl;
+      //insert duplicate
+      first1.insert(0);									first.insert(0);
+      std::cout << "std::set: Size/maxsize of first: " << first.size() << "\n";
+      std::cout << "ft::set: Size/maxsize of first1: " << first1.size() << '\n';
+    }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
+    {//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+      std::cout <<YELLOW << "swap/find/cout tests\n" << DEFAULT;
+      std::set<int> first;								ft::set<int> first1;
+      first.insert(0); first.insert(1); first.insert(2); first.insert(3);
+      first1.insert(0); first1.insert(1); first1.insert(2); first1.insert(3);
+      std::set<int> second;								ft::set<int> second1;
+      second.insert(4); second.insert(5); second.insert(6); second.insert(7);
+      second1.insert(4); second1.insert(5); second1.insert(6); second1.insert(7);
+      std::cout << "std::set: before swap first-second: " << *(first.find(0)) << " " << *(first.find(1)) << " " << *(first.find(2)) << " " << *(first.find(3)) << std::endl;
+      std::cout << "ft::set: before swap first-second: " << *(first1.find(0)) << " " << *(first1.find(1)) << " " << *(first1.find(2)) << " " << *(first1.find(3)) << std::endl;
+      first.swap(second);
+      first1.swap(second1);
+      std::cout << "std::set: after swap first-second: " << *(first.find(4)) << " " << *(first.find(5)) << " " << *(first.find(6)) << " " << *(first.find(7)) << std::endl;
+      std::cout << "ft::set: after swap first-second: " << *(first1.find(4)) << " " << *(first1.find(5)) << " " << *(first1.find(6)) << " " << *(first1.find(7)) << std::endl;
+      //cout
+      std::cout << "first.count(4): " << first.count(4) << std::endl;
+      std::cout << "first1.count(4): " << first1.count(4) << std::endl;
+      std::cout << "first.count(35): " << first.count(35) << std::endl;
+      std::cout << "first1.count(35): " << first1.count(35) << std::endl;
+      // lower_bound/upper_bound
+      std::cout << "std::set: first: " << *(first.lower_bound(42)) << " " << *(first.upper_bound(1)) << std::endl;
+      std::cout << "ft::set: first1: " << *(first1.lower_bound(42)) << " " << *(first1.upper_bound(1)) << std::endl;
+
+      std::cout << YELLOW << "operator >< = !=/erase/count tests\n" <<DEFAULT;
+      if (first == second)
+        std::cout << "std:: first = second\n";
+      if (first != second)
+        std::cout << "std:: first != second\n";
+      if (first > second)
+        std::cout << "std:: first > second\n";
+      if (first < second)
+        std::cout << "std:: first < second\n";
+
+      if (first1 == second1)
+        std::cout << "ft:: first1 = second1\n";
+      if (first1 != second1)
+        std::cout << "ft:: first1 != second1\n";
+      if (first1 > second1)
+        std::cout << "ft:: first1 > second1\n";
+      if (first1 < second1)
+        std::cout << "ft:: first1 < second1\n";
+    }//~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/~/
+
   return 0;
 }
