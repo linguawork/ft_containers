@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 16:18:34 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/13 16:26:43 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,43 +360,45 @@ int main ()
 
   //https://www.cplusplus.com/reference/vector/vector/push_back/
     {
-        std::cout << RED << "\n" << "VECTOR pushback() test commented so far" << "\n"<< DEFAULT;
-        // std::vector<int> myvector(100, 4);
-        // int myint;
+        std::cout << RED << "\n" << "VECTOR pushback() test" << "\n"<< DEFAULT;
+        std::vector<int> myvector(100, 4);
+        int myint = 4;
 
-        // std::cout << "Please enter some integers for vector (enter 0 to end):\n";
+        std::cout << "Please enter some integers for vector (enter 0 to end):\n";
 
-        // do 
-        // {
-        //   std::cin >> myint;
-        //   myvector.push_back (myint);
-        // } while (myint);
+        do 
+        {
+          for (; myint > 0; myint--)
+          // std::cin >> myint;
+            myvector.push_back (myint);
+        } while (myint);
 
-        // std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
+        std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
               
-        // std::vector<int>::size_type sz;
-        // sz = myvector.capacity(); 
-        // std::cout << "capacity of vector changed: " << sz << '\n';
+        std::vector<int>::size_type sz;
+        sz = myvector.capacity(); 
+        std::cout << "capacity of vector changed: " << sz << '\n';
 
 
 
 
 
-        // ft::vector<int> ftvector(100, 4);;
-        // int ftint;
+        ft::vector<int> ftvector(100, 4);;
+        int ftint = 4;
 
-        // std::cout << "Please enter some integers for ft_vector (enter 0 to end):\n";
+        std::cout << "Please enter some integers for ft_vector (enter 0 to end):\n";
 
-        // do 
-        // {
-        //   std::cin >> ftint;
-        //   ftvector.push_back (ftint);
-        // } while (ftint);
+        do 
+        {
+          for (; ftint > 0; ftint--)
+          // std::cin >> ftint;
+            ftvector.push_back (ftint);
+        } while (ftint);
 
-        // std::cout << "ft::vector stores " << int(ftvector.size()) << " numbers.\n";
-        // ft::vector<int>::size_type sz1;
-        // sz1 = ftvector.capacity(); 
-        // std::cout << "capacity of ft_vector changed: " << sz1 << '\n';
+        std::cout << "ft::vector stores " << int(ftvector.size()) << " numbers.\n";
+        ft::vector<int>::size_type sz1;
+        sz1 = ftvector.capacity(); 
+        std::cout << "capacity of ft_vector changed: " << sz1 << '\n';
     }
 
 
