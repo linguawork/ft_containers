@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 15:02:27 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 15:45:07 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,28 @@ int main ()
   //https://www.cplusplus.com/reference/vector/vector/rbegin/
   {
       std::cout << RED << "\n"  << "VECTOR rbegin(), rend() test" << "\n" << DEFAULT;
+
+      time_t t1;
+      g_start1 = timer();
+      
+      std::vector<int> myvector1 (5);  // 5 default-constructed ints
+
+      int i1=0;
+
+      std::vector<int>::reverse_iterator rit1 = myvector1.rbegin();
+      for (; rit1!= myvector1.rend(); ++rit1) // putting from the end (which is start) - запись с конца
+      // нулевой элемент[] справа 
+      *rit1 = ++i1;
+
+      std::cout << "std::vector contains:";
+      for (std::vector<int>::iterator it1 = myvector1.begin(); it1 != myvector1.end(); ++it1)
+      std::cout << ' ' << *it1;
+      std::cout << '\n';
+      
+      g_end1 = timer();
+      t1 = g_end1 - g_start1;
+      
+      g_start2 = timer();
       ft::vector<int> myvector (5);  // 5 default-constructed ints
 
       int i=0;
@@ -146,6 +168,15 @@ int main ()
       for (ft::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
       std::cout << ' ' << *it;
       std::cout << '\n';
+
+      time_t t2;
+      g_end2 = timer();
+      t2 = g_end2 - g_start2;
+
+      (t1 >= t2) ? (std::cout <<"std::"<< GREEN + std::to_string(t1) + "ms " + DEFAULT) : (std::cout <<"std::"<< RED + std::to_string(t1) + "ms " + DEFAULT);
+      (t2 >= t1) ? (std::cout << "ft::" << GREEN + std::to_string(t2) + "ms " + DEFAULT) : (std::cout <<"ft::"<< RED + std::to_string(t2) + "ms " + DEFAULT);
+      
+      std::cout << '\n';
     }
 
     /*******************CAPACITY PART TESTS**********************************/
@@ -153,21 +184,55 @@ int main ()
     //test for size() https://www.cplusplus.com/reference/vector/vector/size/
     {
        std::cout << RED << "\n" << "VECTOR size() test" << "\n" << DEFAULT;
+       
+      time_t t1;
+      g_start1 = timer();
       
+      std::vector<int> myints1;
+      std::cout << "0. size: " << myints1.size() << '\n';
+
+      std::vector<int> myvector1 (5);
+      std::cout << "0. size: " << myvector1.size() << '\n';
+
+      for (int i=0; i<10; i++) myints1.push_back(i);
+      std::cout << "1. size: " << myints1.size() << '\n';
+
+      myints1.insert (myints1.end(),10,100);
+      std::cout << "2. size: " << myints1.size() << '\n';
+
+      myints1.pop_back();
+      std::cout << "3. size: " << myints1.size() << '\n';
+
+      std::cout << '\n';
+      g_end1 = timer();
+      t1 = g_end1 - g_start1;
+      g_start2 = timer();
+    
+
       ft::vector<int> myints;
       std::cout << "0. size: " << myints.size() << '\n';
 
       ft::vector<int> myvector (5);
       std::cout << "0. size: " << myvector.size() << '\n';
 
-      // for (int i=0; i<10; i++) myints.push_back(i);
-      // std::cout << "1. size: " << myints.size() << '\n';
+      for (int i=0; i<10; i++) myints.push_back(i);
+      std::cout << "1. size: " << myints.size() << '\n';
 
-      // myints.insert (myints.end(),10,100);
-      // std::cout << "2. size: " << myints.size() << '\n';
+      myints.insert (myints.end(),10,100);
+      std::cout << "2. size: " << myints.size() << '\n';
 
-      // myints.pop_back();
-      // std::cout << "3. size: " << myints.size() << '\n';
+      myints.pop_back();
+      std::cout << "3. size: " << myints.size() << '\n';
+      std::cout << '\n';
+
+      time_t t2;
+      g_end2 = timer();
+      t2 = g_end2 - g_start2;
+
+      (t1 >= t2) ? (std::cout <<"std::"<< RED + std::to_string(t1) + "ms " + DEFAULT) : (std::cout <<"std::"<< GREEN + std::to_string(t1) + "ms " + DEFAULT);
+      (t2 > t1) ? (std::cout << "ft::" << RED + std::to_string(t2) + "ms " + DEFAULT) : (std::cout <<"ft::"<< GREEN + std::to_string(t2) + "ms " + DEFAULT);
+      
+      std::cout << '\n';
       
     }
 
@@ -175,57 +240,95 @@ int main ()
     // test for max_size() https://www.cplusplus.com/reference/vector/vector/max_size/
     {
         std::cout << RED << "\n" << "VECTOR max_size() test" << "\n" << DEFAULT;
-        // set some content in the vector:   
-        ft::vector<int> myvector (4,100);
+        
+        time_t t1;
+        g_start1 = timer();
+        std::vector<int> myvector (100000000,4);
         std::cout << "size: " << myvector.size() << "\n";
         std::cout << "max_size: " << myvector.max_size() << "\n";
+        
+        std::cout << '\n';
+        g_end1 = timer();
+        t1 = g_end1 - g_start1;
+        g_start2 = timer();
+        
+        
+        // set some content in the vector:   
+        ft::vector<int> myvector1 (100000000,4);
+        std::cout << "size: " << myvector1.size() << "\n";
+        std::cout << "max_size: " << myvector1.max_size() << "\n";
+
+        std::cout << '\n';
+        time_t t2;
+        g_end2 = timer();
+        t2 = g_end2 - g_start2;
+        (t1 >= t2) ? (std::cout <<"std::"<< RED + std::to_string(t1) + "ms " + DEFAULT) : (std::cout <<"std::"<< GREEN + std::to_string(t1) + "ms " + DEFAULT);
+      (t2 > t1) ? (std::cout << "ft::" << RED + std::to_string(t2) + "ms " + DEFAULT) : (std::cout <<"ft::"<< GREEN + std::to_string(t2) + "ms " + DEFAULT);
+        std::cout << '\n';
     }
 
 
     //test for resize() https://www.cplusplus.com/reference/vector/vector/resize/
     {
       std::cout << RED << "\n" << "VECTOR resize() test" << "\n" << DEFAULT;
-             std::vector<int> myvector1; // no elements inside
 
-        myvector1.resize(5); //5 zeros
-        std::cout << "std::myvector contains:";
-        for (unsigned long i=0;i<myvector1.size();i++)
-          std::cout << ' ' << myvector1[i];
-        std::cout << '\n';
+      
+        std::vector<int> myvector1; // no elements inside
+
+        time_t t1;
+        g_start1 = timer();
+        myvector1.resize(5000000); //5 zeros
+        // std::cout << "std::myvector contains:";
+        // for (unsigned long i=0;i<myvector1.size();i++)
+        //   std::cout << ' ' << myvector1[i];
+        // std::cout << '\n';
         
-        myvector1.resize(8,100); // added 3 elem of value 100 over 5
-        std::cout << "std::myvector contains:";
-        for (unsigned long i=0;i<myvector1.size();i++)
-          std::cout << ' ' << myvector1[i];
-        std::cout << '\n';
+        myvector1.resize(8000000,100); // added 3 elem of value 100 over 5
+        // std::cout << "std::myvector contains:";
+        // for (unsigned long i=0;i<myvector1.size();i++)
+        //   std::cout << ' ' << myvector1[i];
+        // std::cout << '\n';
         
-        myvector1.resize(12, 3); // added 4 elem of value 3 over 8
-        std::cout << "std::myvector contains:";
-        for (unsigned long i=0;i<myvector1.size();i++)
-          std::cout << ' ' << myvector1[i];
+        myvector1.resize(12000000, 3); // added 4 elem of value 3 over 8
+        // std::cout << "std::myvector contains:";
+        // for (unsigned long i=0;i<myvector1.size();i++)
+        //   std::cout << ' ' << myvector1[i];
+        // std::cout << '\n';
+
         std::cout << '\n';
+        g_end1 = timer();
+        t1 = g_end1 - g_start1;
+        g_start2 = timer();
        
        
        
         // set some content in the vector:   
       ft::vector<int> myvector; // no elements inside
 
-        myvector.resize(5); //5 zeros
-        std::cout << "myvector contains:";
-        for (unsigned long i=0;i<myvector.size();i++)
-          std::cout << ' ' << myvector[i];
-        std::cout << '\n';
+        myvector.resize(5000000); //5 zeros
+        // std::cout << "myvector contains:";
+        // for (unsigned long i=0;i<myvector.size();i++)
+        //   std::cout << ' ' << myvector[i];
+        // std::cout << '\n';
         
-        myvector.resize(8,100); // added 3 elem of value 100 over 5
-        std::cout << "myvector contains:";
-        for (unsigned long i=0;i<myvector.size();i++)
-          std::cout << ' ' << myvector[i];
-        std::cout << '\n';
+        myvector.resize(8000000,100); // added 3 elem of value 100 over 5
+        // std::cout << "myvector contains:";
+        // for (unsigned long i=0;i<myvector.size();i++)
+        //   std::cout << ' ' << myvector[i];
+        // std::cout << '\n';
         
-        myvector.resize(12, 3); // added 4 elem of value 3 over 8
-        std::cout << "myvector contains:";
-        for (unsigned long i=0;i<myvector.size();i++)
-          std::cout << ' ' << myvector[i];
+        myvector.resize(12000000, 3); // added 4 elem of value 3 over 8
+        // std::cout << "myvector contains:";
+        // for (unsigned long i=0;i<myvector.size();i++)
+        //   std::cout << ' ' << myvector[i];
+        // std::cout << '\n';
+
+        std::cout << '\n';
+        time_t t2;
+        g_end2 = timer();
+        t2 = g_end2 - g_start2;
+        (t1 >= t2) ? (std::cout <<"std::"<< RED + std::to_string(t1) + "ms " + DEFAULT) : (std::cout <<"std::"<< GREEN + std::to_string(t1) + "ms " + DEFAULT);
+        (t2 > t1) ? (std::cout << "ft::" << RED + std::to_string(t2) + "ms " + DEFAULT) : (std::cout <<"ft::"<< GREEN + std::to_string(t2) + "ms " + DEFAULT);
         std::cout << '\n';
     }
 
@@ -234,18 +337,30 @@ int main ()
     {
       std::cout << RED << "\n" << "VECTOR capacity() test" << "\n" << DEFAULT;
       
-      ft::vector<int> myvector (99, 5);
-      std::vector<int> myvector2 (99, 5);
-
-      // need to check with push_back()
-
-      std::cout << "size: " << (int) myvector.size() << '\n';
-      std::cout << "capacity: " << (int) myvector.capacity() << '\n';
-      std::cout << "max_size: " <<  myvector.max_size() << '\n'; //when we cast to int, we get -1
-
+      time_t t1;
+      g_start1 = timer();
+      std::vector<int> myvector2 (99000000, 5);
       std::cout << "size: " << (int) myvector2.size() << '\n';
       std::cout << "capacity: " << (int) myvector2.capacity() << '\n';
       std::cout << "max_size: " <<  myvector2.max_size() << '\n'; //when we cast to int we get -1
+      
+      std::cout << '\n';
+      g_end1 = timer();
+      t1 = g_end1 - g_start1;
+      g_start2 = timer();
+      // need to check with push_back()
+      ft::vector<int> myvector (99000000, 5);
+      std::cout << "size: " << (int) myvector.size() << '\n';
+      std::cout << "capacity: " << (int) myvector.capacity() << '\n';
+      std::cout << "max_size: " <<  myvector.max_size() << '\n'; //when we cast to int, we get -1
+      std::cout << '\n';
+      time_t t2;
+      g_end2 = timer();
+      t2 = g_end2 - g_start2;
+      (t1 >= t2) ? (std::cout <<"std::"<< RED + std::to_string(t1) + "ms " + DEFAULT) : (std::cout <<"std::"<< GREEN + std::to_string(t1) + "ms " + DEFAULT);
+      (t2 > t1) ? (std::cout << "ft::" << RED + std::to_string(t2) + "ms " + DEFAULT) : (std::cout <<"ft::"<< GREEN + std::to_string(t2) + "ms " + DEFAULT);
+      std::cout << '\n';
+      
     }
 
 
