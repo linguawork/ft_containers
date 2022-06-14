@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 14:52:48 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 17:03:07 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 13:35:49 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 # define FT_STACK_HPP
 
 #include "ft_vector.hpp"
+// #include <list>
+// #include <deque>
 
 namespace ft {
 
 	template<typename T, typename Container = ft::vector<T> >
+	// template<typename T, typename Container = std::list<T> >
+	// template<typename T, typename Container = std::deque<T> >
 	class stack {
 	public:
 		typedef typename Container::value_type			value_type;

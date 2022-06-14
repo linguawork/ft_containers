@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 11:49:42 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 13:42:27 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ namespace ft
 			// typedef		reverse_iterator<iterator> 				reverse_iterator;
 			// typedef		reverse_iterator<const_iterator> 		const_reverse_iterator;	
 			
-			typedef ft::vector_iterator<value_type> iterator;
-			typedef ft::vector_iterator<const value_type> const_iterator;
+			typedef ft::vector_iterator<value_type> iterator; 
+			typedef ft::vector_iterator<const value_type> const_iterator;  // const iterator from const value_type
 			typedef ft::reverse_iterator<iterator> reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;	
+			typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;	// const iter becomes const reverse_iter
 //			typedef		std::ptrdiff_t 							difference_type;
 //			typedef		std::size_t 							size_type;		
 

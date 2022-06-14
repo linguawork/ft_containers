@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:40:31 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 12:40:47 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 13:43:16 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ namespace ft {
 	private:
 		iterator_type ptr;
 	};
-
+	
+	// separate comparing of const iterators
 	template <class Iterator>
 	bool operator==(const reverse_iterator<Iterator>& lhs,
 					const reverse_iterator<Iterator>& rhs) {

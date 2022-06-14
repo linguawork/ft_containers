@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/12 17:14:57 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 13:11:33 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ namespace ft
 		};
 	public:
 		typedef pair_compare value_compare;
-		typedef RBTree<value_type, pair_compare, allocator_type> tree_type; // using RBT
+		typedef RBTree<value_type, pair_compare, allocator_type> tree_type; // using RBT // rebind is inside RBT
 		typedef typename tree_type::iterator				iterator;
 		typedef typename tree_type::const_iterator			const_iterator;
 		typedef typename tree_type::reverse_iterator		reverse_iterator; // using reverse iter from RBT=tree type
