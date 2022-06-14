@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 19:45:35 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:05:56 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ namespace ft
 
 
 	template<class iterator>
-	struct iterator_traits {
+	struct iterator_traits 
+	{
 		typedef iterator iterator_type;
 		typedef typename iterator::difference_type difference_type;
 		typedef typename iterator::value_type value_type;
@@ -65,7 +66,8 @@ namespace ft
 	};
 
 	template<class T>
-	struct iterator_traits<T *> {
+	struct iterator_traits<T *> 
+	{
 		typedef ptrdiff_t difference_type;
 		typedef T value_type;
 		typedef T *pointer;
@@ -261,16 +263,16 @@ namespace ft
 		typedef Category iterator_category;
 	};
 
-	template<class T>
-	class bidirectional_iterator: ft::iterator<std::bidirectional_iterator_tag, T> {
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::iterator_category iterator_category;
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::value_type value_type;
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::difference_type difference_type;
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::pointer pointer;
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::reference reference;
-	private:
-		pointer _elem;
-	};
+	// template<class T>
+	// class bidirectional_iterator: ft::iterator<std::bidirectional_iterator_tag, T> {
+	// 	typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::iterator_category iterator_category;
+	// 	typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::value_type value_type;
+	// 	typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::difference_type difference_type;
+	// 	typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::pointer pointer;
+	// 	typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::reference reference;
+	// private:
+	// 	pointer _elem;
+	// };
 
 	// this is needed in reverse iterator for 	pointer operator->() const
 	template<class T>

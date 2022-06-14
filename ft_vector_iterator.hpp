@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 19:29:09 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 19:35:59 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:23:28 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 		typedef T* pointer;
 		typedef T& reference;
 
-		typedef T                                                     						 	iterator_type;
+		// typedef T                                                     						 	iterator_type;
+		typedef pointer iterator_type;
 		typedef typename ft::iterator<std::random_access_iterator_tag, T>::iterator_category     iterator_category;
 		typedef typename ft::iterator<std::random_access_iterator_tag, T>::value_type            value_type;
 		typedef typename ft::iterator<std::random_access_iterator_tag, T>::difference_type       difference_type;

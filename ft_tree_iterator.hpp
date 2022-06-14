@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:18 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 14:33:54 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:08:56 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ class TreeIter
 		typedef typename ft::iterator_traits<T*>::difference_type	difference_type;
 		//here we use Node struct as node ptr
 		typedef Node<typename ft::off_const<value_type>::type >* node_pointer;
-		//remove_const makes incoming const just a type, which is defined as node_ptr
+		//off_const makes incoming const just a type, which is defined as node_ptr
 
 	private:
 		node_pointer _node; // making a node ptr 

@@ -19,7 +19,7 @@ $(CONTAINERS)ft_utility.hpp $(CONTAINERS)ft_vector_iterator.hpp
 
 # TESTS_HEADERS = $(TESTS)tests.hpp $(TESTS)test_vector.hpp $(TESTS)test_stack.hpp $(TESTS)test_map.hpp
 
-FILES 	= main.cpp  #debug_isIntegral.cpp
+FILES 	=  debugIterTraits.cpp #debug_isIntegral.cpp main.cpp 
 
 OBJS 	= $(FILES:.cpp=.o)
 

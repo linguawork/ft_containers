@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 19:39:07 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:52:11 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ namespace ft
 		// It is my habit to use private field above public, so I have to typedef certain public fields first
 		public:
 			typedef 	Allocator 								allocator_type; // renamed Allocator
-			typedef 	typename allocator_type::pointer 		pointer; // shortcut to pointer of std::allocator member
-			
-			
+			typedef 	typename allocator_type::pointer 		pointer; // shortcut to pointer of std::allocator member	
 			typedef		std::ptrdiff_t 							difference_type;
 			/*
 			https://www.quora.com/Why-do-some-C-programs-use-size_t-instead-of-int-What-are-the-advantages
