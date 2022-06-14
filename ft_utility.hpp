@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 19:17:05 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:45:35 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,168 +162,42 @@ namespace ft
 	/*
 	is_integral
 	*/
-//Проверяет, является ли T целочисленным типом. Предоставляет постоянное value члена, равное true,
-// если T - это тип bool , char , char8_t , char16_t , char32_t , wchar_t , short , int , long ,
-// long long или любые расширенные целочисленные типы, определенные реализацией, включая любые
-// подписанные, неподписанные и cv-квалифицированные варианты. В противном случае value равно false
+	//Проверяет, является ли T целочисленным типом. Предоставляет постоянное value члена, равное true,
+	// если T - это тип bool , char , char8_t , char16_t , char32_t , wchar_t , short , int , long ,
+	// long long или любые расширенные целочисленные типы, определенные реализацией, включая любые
+	// подписанные, неподписанные и cv-квалифицированные варианты. В противном случае value равно false
 
-template<class T, bool v>
-	struct integral_constant
-	{
-		static const bool value = v;
-		typedef T value_type;
-		typedef integral_constant type;
-		operator value_type() const { return value; }
-	};
+	template<class T, bool v>
+		struct integral_constant
+		{
+			static const bool value = v;
+			typedef T value_type;
+			typedef integral_constant type;
+			operator value_type() const { return value; }
+		};
 
-template <class T> struct is_integral				: public ft::integral_constant<T, false> {};
-template <> struct is_integral<bool>				: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<char>				: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<signed char>			: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<unsigned char>		: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<wchar_t>				: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<char16_t>			: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<short>				: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<unsigned short>		: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<int>					: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<unsigned int>		: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<long>				: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<unsigned long> 		: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<long long>			: public ft::integral_constant<bool, true> {};
-template <> struct is_integral<unsigned long long>	: public ft::integral_constant<bool, true> {};
+	template <class T> struct is_integral				: public ft::integral_constant<T, false> {};
+	template <> struct is_integral<bool>				: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<char>				: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<signed char>			: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<unsigned char>		: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<wchar_t>				: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<char16_t>			: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<short>				: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<unsigned short>		: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<int>					: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<unsigned int>		: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<long>				: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<unsigned long> 		: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<long long>			: public ft::integral_constant<bool, true> {};
+	template <> struct is_integral<unsigned long long>	: public ft::integral_constant<bool, true> {};
 
-	// template<bool type_is_integral, typename T>
-	// 	struct is_integral_result 
-	// 	{
-	// 		static const bool value = type_is_integral;
-	// 		typedef T type;
-	// 	};
-
-	// template<class T, bool v>
-	// struct integral_result
-	// {
-	// 	static const bool value = v;
-	// 	typedef T value_type;
-	// 	typedef integral_result type;
-	// 	operator value_type() const { return value; }
-	// };
-
-
-	// template <typename>
-	// struct is_integral_type: public is_integral_result<false, bool> {};
-
-	// template <>
-	// struct is_integral_type<char>: public is_integral_result<true, char> {};
-
-	// template <>
-	// struct is_integral_type<wchar_t>:
-	// 		public is_integral_result<true, wchar_t> {};
-
-	// template <>
-	// struct is_integral_type<signed char>:
-	// 		public is_integral_result<true, signed char> {};
-
-	// template <>
-	// struct is_integral_type<short int>:
-	// 		public is_integral_result<true, short int> {};
-
-	// template <>
-	// struct is_integral_type<int>:
-	// 		public is_integral_result<true, int> {};
-
-	// template <>
-	// struct is_integral_type<long int>:
-	// 		public is_integral_result<true, long int> {};
-
-	// template <>
-	// struct is_integral_type<long long int>:
-	// 		public is_integral_result<true, long long int> {};
-
-	// template <>
-	// struct is_integral_type<unsigned char>:
-	// 		public is_integral_result<true, unsigned char> {};
-
-	// template <>
-	// struct is_integral_type<unsigned short int>:
-	// 		public is_integral_result<true, unsigned short int> {};
-
-	// template <>
-	// struct is_integral_type<unsigned int>:
-	// 		public is_integral_result<true, unsigned int> {};
-
-	// template <>
-	// struct is_integral_type<unsigned long int>:
-	// 		public is_integral_result<true, unsigned long int> {};
-
-	// template <>
-	// struct is_integral_type<unsigned long long int>:
-	// 		public is_integral_result<true, unsigned long long int> 
-	// 		{
-				
-	// 		};
-
-	// template <class T>
-	// struct is_integral: public is_integral_type<T>
-	// {
-		
-	// };
-
-	// template <class Arg1, class Arg2, class Result>
-	// struct binary_function {
-	// 	typedef Arg1 first_argument_type;
-	// 	typedef Arg2 second_argument_type;
-	// 	typedef Result result_type;
-	// };
 
 	/*
 	block enable if
 
 	*/
-
-	// template<class T>
-	// typename std::enable_if<std::is_object<T>::value, T*>::type  addressof(T& arg) {
-	// 	return reinterpret_cast<T*>(&const_cast<char&>(reinterpret_cast<const volatile char&>(arg)));
-	// }
-
-	// template<class T>
-	// typename std::enable_if<!std::is_object<T>::value, T*>::type addressof(T& arg) {
-	// 	return &arg;
-	// }
-
-
-
-
-	/*
-	lexicographical compare
-	*/
-
-
-
-
 	
-
-
-
-
-
-
-
-
-
-
-	template<bool Cond, class T, class F>
-		struct conditional
-	{
-		typedef F type;
-	};
-
-	template<class T, class F>
-	struct conditional<true, T, F> {typedef T type;};
-
-
-
-
-
 	template<bool Cond, class T = void> 
 	struct enable_if 
 	{
@@ -335,8 +209,9 @@ template <> struct is_integral<unsigned long long>	: public ft::integral_constan
 		typedef T type;
 	};
 
-	
-
+	/*
+	lexicographical compare
+	*/
 	template<class InputIterator1, class InputIterator2>
 	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
 								 InputIterator2 first2, InputIterator2 last2) {
@@ -397,185 +272,17 @@ template <> struct is_integral<unsigned long long>	: public ft::integral_constan
 		pointer _elem;
 	};
 
-
-	template<typename T>
-	class vector_iterator: public ft::iterator<std::random_access_iterator_tag, T> 
-	{
-	public:
-		typedef T value_t;
-		typedef T* pointer;
-		typedef T& reference;
-
-		typedef T                                                     						 	iterator_type;
-		typedef typename ft::iterator<std::random_access_iterator_tag, T>::iterator_category     iterator_category;
-		typedef typename ft::iterator<std::random_access_iterator_tag, T>::value_type            value_type;
-		typedef typename ft::iterator<std::random_access_iterator_tag, T>::difference_type       difference_type;
-	public:
-		vector_iterator(): ptr(0) {}
-
-		vector_iterator(pointer other): ptr(other) {}
-
-		vector_iterator(vector_iterator const &other): ptr(other.ptr) {}
-
-		virtual ~vector_iterator() {}
-
-		vector_iterator &operator=(const vector_iterator& other) {
-			if (this == &other)
-				return (*this);
-			ptr = other.ptr;
-			return (*this);
-		}
-
-		pointer base() const {
-			return (ptr);
-		}
-
-		reference operator*(void) const {
-			return (*ptr);
-		}
-
-		pointer operator->(void) {
-			return &(operator*());
-		}
-
-		vector_iterator operator+(difference_type n) const {
-			return (ptr + n);
-		}
-
-		vector_iterator operator-(difference_type n) const {
-			return (ptr - n);
-		}
-
-		vector_iterator& operator++() {
-			ptr++;
-			return (*this);
-		}
-
-		vector_iterator operator++(int) {
-			vector_iterator temp(*this);
-			operator++();
-			return (temp);
-		}
-
-		vector_iterator& operator--() {
-			ptr--;
-			return (*this);
-		}
-
-		vector_iterator operator--(int) {
-			vector_iterator temp(*this);
-			operator--();
-			return (temp);
-		}
-
-		vector_iterator& operator+=(difference_type n) {
-			ptr += n;
-			return (*this);
-		}
-
-		vector_iterator& operator-=(difference_type n) {
-			ptr -= n;
-			return (*this);
-		}
-
-		reference operator[](difference_type n) {
-			return (*(ptr + n));
-		}
-	private:
-		pointer ptr;
-	};
-
-	template <typename T>
-	typename ft::vector_iterator<T>::difference_type
-	operator-(const ft::vector_iterator<T> lhs,
-			  const ft::vector_iterator<T> rhs) {
-		return (lhs.base() - rhs.base());
+	// this is needed in reverse iterator for 	pointer operator->() const
+	template<class T>
+	typename std::enable_if<std::is_object<T>::value, T*>::type  addressof(T& arg) {
+		return reinterpret_cast<T*>(&const_cast<char&>(reinterpret_cast<const volatile char&>(arg)));
 	}
 
-	template<typename T>
-	ft::vector_iterator<T> operator+(typename ft::vector_iterator<T>::difference_type n,
-			typename ft::vector_iterator<T>& rai) {
-		return (&(*rai) + n);
+	template<class T>
+	typename std::enable_if<!std::is_object<T>::value, T*>::type addressof(T& arg) {
+		return &arg;
 	}
 
-	template<typename T_LEFT, typename T_RIGHT>
-	typename ft::vector_iterator<T_LEFT>::difference_type
-	operator-(const ft::vector_iterator<T_LEFT> lhs,
-			  const ft::vector_iterator<T_RIGHT> rhs) {
-		return (lhs.base() - rhs.base());
-	}
-
-	template <typename T>
-	typename ft::vector_iterator<T>::difference_type
-	operator==(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() == rhs.base());
-	}
-
-	template <typename T_LEFT, typename T_RIGHT>
-	typename ft::vector_iterator<T_LEFT>::difference_type
-	operator==(const ft::vector_iterator<T_LEFT> lhs, const ft::vector_iterator<T_RIGHT> rhs) {
-		return (lhs.base() == rhs.base());
-	}
-
-	template <typename T>
-	typename ft::vector_iterator<T>::difference_type
-	operator!=(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() != rhs.base());
-	}
-
-	template <typename T_LEFT, typename T_RIGHT>
-	typename ft::vector_iterator<T_LEFT>::difference_type
-	operator!=(const ft::vector_iterator<T_LEFT> lhs, const ft::vector_iterator<T_RIGHT> rhs) {
-		return (lhs.base() != rhs.base());
-	}
-
-	template <typename T>
-	typename ft::vector_iterator<T>::difference_type
-	operator<(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() < rhs.base());
-	}
-
-	template <typename T_LEFT, typename T_RIGHT>
-	typename ft::vector_iterator<T_LEFT>::difference_type
-	operator<=(const ft::vector_iterator<T_LEFT> lhs, const ft::vector_iterator<T_RIGHT> rhs) {
-		return (lhs.base() <= rhs.base);
-	}
-
-	template <typename T>
-	typename ft::vector_iterator<T>::difference_type
-	operator<=(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() <= rhs.base);
-	}
-
-	template <typename T_LEFT, typename T_RIGHT>
-	typename ft::vector_iterator<T_LEFT>::difference_type
-	operator<(const ft::vector_iterator<T_LEFT> lhs, const ft::vector_iterator<T_RIGHT> rhs) {
-		return (lhs.base() < rhs.base);
-	}
-
-	template <typename T>
-	typename ft::vector_iterator<T>::difference_type
-	operator>(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() > rhs.base());
-	}
-
-	template <typename T_LEFT, typename T_RIGHT>
-	typename ft::vector_iterator<T_LEFT>::difference_type
-	operator>(const ft::vector_iterator<T_LEFT> lhs, const ft::vector_iterator<T_RIGHT> rhs) {
-		return (lhs.base() > rhs.base());
-	}
-
-	template <typename T>
-	typename ft::vector_iterator<T>::difference_type
-	operator>=(const ft::vector_iterator<T> lhs, const ft::vector_iterator<T> rhs) {
-		return (lhs.base() >= rhs.base());
-	}
-
-	template <typename T_LEFT, typename T_RIGHT>
-	typename ft::vector_iterator<T_LEFT>::difference_type
-	operator>=(const ft::vector_iterator<T_LEFT> lhs, const ft::vector_iterator<T_RIGHT> rhs) {
-		return (lhs.base() >= rhs.base());
-	}
 
 	
 };

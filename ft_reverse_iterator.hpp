@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:40:31 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 13:43:16 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:43:57 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,10 @@ namespace ft {
 				   const reverse_iterator<Iterator_RIGHT>& rhs) {
 		return (lhs.base() - rhs.base());
 	}
+
+
+
+
 
 }
 

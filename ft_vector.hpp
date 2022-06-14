@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 13:42:27 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:39:07 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include <iostream>
 #include "ft_utility.hpp"
 #include "ft_reverse_iterator.hpp"
+#include "ft_vector_iterator.hpp"
+
+
 
 
 /*
