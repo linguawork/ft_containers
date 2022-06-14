@@ -6,15 +6,15 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 18:32:57 by areggie           #+#    #+#             */
-/*   Updated: 2022/05/22 17:12:52 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 18:32:35 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.hpp"
 
 
+#define UTILITIES		"../../../ft_utility.hpp"
 
-#define	_vector 			ft::vector
 #include "./ft_containers-unit-test/sources/system/system_methods.ipp"
 #include "./ft_containers-unit-test/sources/system/lib.hpp"
 

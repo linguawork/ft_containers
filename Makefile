@@ -19,7 +19,7 @@ $(CONTAINERS)ft_utility.hpp
 
 # TESTS_HEADERS = $(TESTS)tests.hpp $(TESTS)test_vector.hpp $(TESTS)test_stack.hpp $(TESTS)test_map.hpp
 
-FILES 	= main.cpp
+FILES 	= main.cpp  #debug_isIntegral.cpp
 
 OBJS 	= $(FILES:.cpp=.o)
 

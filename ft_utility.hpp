@@ -6,12 +6,9 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 14:52:32 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:17:05 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-
 
 #ifndef FT_UTILITY_HPP
 #define FT_UTILITY_HPP
@@ -45,7 +42,17 @@ iterator traits
 #include <iostream>
 
 
-namespace ft {
+namespace ft 
+{
+	//struct remove_const
+	template<class T> 
+	struct off_const 
+	{ typedef T type; };
+
+	template<class T> 
+	struct off_const <const T>
+	 { typedef T type; };
+
 
 	template<class iterator>
 	struct iterator_traits {
@@ -75,6 +82,297 @@ namespace ft {
 		typedef std::random_access_iterator_tag iterator_category;
 	};
 
+	// struct pair
+	template<class T1, class T2> struct pair
+	{
+		typedef T1 first_type;
+		typedef T2 second_type;
+
+		first_type	first;
+		second_type	second;
+		pair() : first(), second() {}
+		template <class U, class V>
+		pair(const pair<U, V> &pr) : first(pr.first), second(pr.second) {}
+		pair(const pair & pr) : first(pr.first), second(pr.second) {}
+		pair(const first_type &a, const second_type &b) : first(a), second(b) {}
+		pair &operator=(const pair &pr)
+		{
+			first = pr.first;
+			second = pr.second;
+			return (*this);
+		}
+
+	};
+		//operators of comparison with pair 
+	template <class T1, class T2>
+	bool operator==(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return lhs.first == rhs.first && lhs.second == rhs.second;
+	}
+
+	template <class T1, class T2>
+	bool operator!=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class T1, class T2>
+	bool operator<(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return lhs.first < rhs.first ||
+			(!(rhs.first < lhs.first) && lhs.second < rhs.second);
+	}
+
+	template <class T1, class T2>
+	bool operator<=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template <class T1, class T2>
+	bool operator>(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return rhs < lhs;
+	}
+
+	template <class T1, class T2>
+	bool operator>=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+	//make pair method
+	template <class T1, class T2>
+	pair<T1, T2> make_pair(T1 x, T2 y)
+	{
+		return (pair<T1, T2>(x, y));
+	}
+
+
+
+	/*
+		https://www.cplusplus.com/reference/iterator/reverse_iterator/?kw=reverse_iterator
+
+		implementation of iterator for vector, which inher  random_access_iterator
+	*/
+
+
+
+
+	/*
+	is_integral
+	*/
+//Проверяет, является ли T целочисленным типом. Предоставляет постоянное value члена, равное true,
+// если T - это тип bool , char , char8_t , char16_t , char32_t , wchar_t , short , int , long ,
+// long long или любые расширенные целочисленные типы, определенные реализацией, включая любые
+// подписанные, неподписанные и cv-квалифицированные варианты. В противном случае value равно false
+
+template<class T, bool v>
+	struct integral_constant
+	{
+		static const bool value = v;
+		typedef T value_type;
+		typedef integral_constant type;
+		operator value_type() const { return value; }
+	};
+
+template <class T> struct is_integral				: public ft::integral_constant<T, false> {};
+template <> struct is_integral<bool>				: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<char>				: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<signed char>			: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<unsigned char>		: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<wchar_t>				: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<char16_t>			: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<short>				: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<unsigned short>		: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<int>					: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<unsigned int>		: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<long>				: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<unsigned long> 		: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<long long>			: public ft::integral_constant<bool, true> {};
+template <> struct is_integral<unsigned long long>	: public ft::integral_constant<bool, true> {};
+
+	// template<bool type_is_integral, typename T>
+	// 	struct is_integral_result 
+	// 	{
+	// 		static const bool value = type_is_integral;
+	// 		typedef T type;
+	// 	};
+
+	// template<class T, bool v>
+	// struct integral_result
+	// {
+	// 	static const bool value = v;
+	// 	typedef T value_type;
+	// 	typedef integral_result type;
+	// 	operator value_type() const { return value; }
+	// };
+
+
+	// template <typename>
+	// struct is_integral_type: public is_integral_result<false, bool> {};
+
+	// template <>
+	// struct is_integral_type<char>: public is_integral_result<true, char> {};
+
+	// template <>
+	// struct is_integral_type<wchar_t>:
+	// 		public is_integral_result<true, wchar_t> {};
+
+	// template <>
+	// struct is_integral_type<signed char>:
+	// 		public is_integral_result<true, signed char> {};
+
+	// template <>
+	// struct is_integral_type<short int>:
+	// 		public is_integral_result<true, short int> {};
+
+	// template <>
+	// struct is_integral_type<int>:
+	// 		public is_integral_result<true, int> {};
+
+	// template <>
+	// struct is_integral_type<long int>:
+	// 		public is_integral_result<true, long int> {};
+
+	// template <>
+	// struct is_integral_type<long long int>:
+	// 		public is_integral_result<true, long long int> {};
+
+	// template <>
+	// struct is_integral_type<unsigned char>:
+	// 		public is_integral_result<true, unsigned char> {};
+
+	// template <>
+	// struct is_integral_type<unsigned short int>:
+	// 		public is_integral_result<true, unsigned short int> {};
+
+	// template <>
+	// struct is_integral_type<unsigned int>:
+	// 		public is_integral_result<true, unsigned int> {};
+
+	// template <>
+	// struct is_integral_type<unsigned long int>:
+	// 		public is_integral_result<true, unsigned long int> {};
+
+	// template <>
+	// struct is_integral_type<unsigned long long int>:
+	// 		public is_integral_result<true, unsigned long long int> 
+	// 		{
+				
+	// 		};
+
+	// template <class T>
+	// struct is_integral: public is_integral_type<T>
+	// {
+		
+	// };
+
+	// template <class Arg1, class Arg2, class Result>
+	// struct binary_function {
+	// 	typedef Arg1 first_argument_type;
+	// 	typedef Arg2 second_argument_type;
+	// 	typedef Result result_type;
+	// };
+
+	/*
+	block enable if
+
+	*/
+
+	// template<class T>
+	// typename std::enable_if<std::is_object<T>::value, T*>::type  addressof(T& arg) {
+	// 	return reinterpret_cast<T*>(&const_cast<char&>(reinterpret_cast<const volatile char&>(arg)));
+	// }
+
+	// template<class T>
+	// typename std::enable_if<!std::is_object<T>::value, T*>::type addressof(T& arg) {
+	// 	return &arg;
+	// }
+
+
+
+
+	/*
+	lexicographical compare
+	*/
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+	template<bool Cond, class T, class F>
+		struct conditional
+	{
+		typedef F type;
+	};
+
+	template<class T, class F>
+	struct conditional<true, T, F> {typedef T type;};
+
+
+
+
+
+	template<bool Cond, class T = void> 
+	struct enable_if 
+	{
+		
+	};
+	
+	template<class T>
+	struct enable_if<true, T> {
+		typedef T type;
+	};
+
+	
+
+	template<class InputIterator1, class InputIterator2>
+	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
+								 InputIterator2 first2, InputIterator2 last2) {
+		for (; first1 != last1 && first2 != last2; ++first1, ++first2) {
+			if (*first1 < *first2)
+				return (true);
+			if (*first2 < *first1)
+				return (false);
+		}
+		return (first1 == last1) && (first2 != last2);//?
+	}
+	//https://www.cplusplus.com/reference/algorithm/lexicographical_compare/
+	template<class InputIterator1, class InputIterator2, class Compare>
+	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
+								 InputIterator2 first2, InputIterator2 last2,
+								 Compare comp) {
+		for (; first1 != last1 && first2 != last2; ++first1, ++first2) {
+			if (comp(*first1, *first2)) return true;
+			if (comp(*first2, *first1)) return false;
+		}
+		return (first1 == last1) && (first2 != last2);
+	}
+
+	//equal
+	template <class InputIterator1, class InputIterator2>
+  	bool equal ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2 )
+	{
+		while (first1!=last1)
+		{
+			if (!(*first1 == *first2))
+				return false;
+			++first1; ++first2;
+		}
+			return true;
+	}
+
 
 	//template class Iterator
 	template<class Category, class T, class Distance = ptrdiff_t,
@@ -100,19 +398,6 @@ namespace ft {
 	};
 
 
-	
-
-}
-
-
-
-/*
-	https://www.cplusplus.com/reference/iterator/reverse_iterator/?kw=reverse_iterator
-
-	implementation of iterator for vector, which inher  random_access_iterator
-*/
-
-namespace ft {
 	template<typename T>
 	class vector_iterator: public ft::iterator<std::random_access_iterator_tag, T> 
 	{
@@ -292,241 +577,8 @@ namespace ft {
 		return (lhs.base() >= rhs.base());
 	}
 
-
-	/*
-	is_integral
-	*/
-
-	template<bool type_is_integral, typename T>
-		struct is_integral_result {
-			static const bool value = type_is_integral;
-			typedef T type;
-		};
-
-	template <typename>
-	struct is_integral_type: public is_integral_result<false, bool> {};
-
-	template <>
-	struct is_integral_type<char>: public is_integral_result<true, char> {};
-
-	template <>
-	struct is_integral_type<wchar_t>:
-			public is_integral_result<true, wchar_t> {};
-
-	template <>
-	struct is_integral_type<signed char>:
-			public is_integral_result<true, signed char> {};
-
-	template <>
-	struct is_integral_type<short int>:
-			public is_integral_result<true, short int> {};
-
-	template <>
-	struct is_integral_type<int>:
-			public is_integral_result<true, int> {};
-
-	template <>
-	struct is_integral_type<long int>:
-			public is_integral_result<true, long int> {};
-
-	template <>
-	struct is_integral_type<long long int>:
-			public is_integral_result<true, long long int> {};
-
-	template <>
-	struct is_integral_type<unsigned char>:
-			public is_integral_result<true, unsigned char> {};
-
-	template <>
-	struct is_integral_type<unsigned short int>:
-			public is_integral_result<true, unsigned short int> {};
-
-	template <>
-	struct is_integral_type<unsigned int>:
-			public is_integral_result<true, unsigned int> {};
-
-	template <>
-	struct is_integral_type<unsigned long int>:
-			public is_integral_result<true, unsigned long int> {};
-
-	template <>
-	struct is_integral_type<unsigned long long int>:
-			public is_integral_result<true, unsigned long long int> 
-			{
-				
-			};
-
-	template <class T>
-	struct is_integral: public is_integral_type<T>
-	{
-		
-	};
-
-	template<bool Cond, class T = void> 
-	struct enable_if 
-	{
-		
-	};
 	
-	template<class T>
-	struct enable_if<true, T> {
-		typedef T type;
-	};
-
-	template <class Arg1, class Arg2, class Result>
-	struct binary_function {
-		typedef Arg1 first_argument_type;
-		typedef Arg2 second_argument_type;
-		typedef Result result_type;
-	};
-
-	/*
-	block enable if
-
-	*/
-
-	template<class T>
-	typename std::enable_if<std::is_object<T>::value, T*>::type  addressof(T& arg) {
-		return reinterpret_cast<T*>(&const_cast<char&>(reinterpret_cast<const volatile char&>(arg)));
-	}
-
-	template<class T>
-	typename std::enable_if<!std::is_object<T>::value, T*>::type addressof(T& arg) {
-		return &arg;
-	}
-
-
-}
-
-/*
-lexicographical compare
-*/
-
-namespace ft 
-{
-	template<class InputIterator1, class InputIterator2>
-	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
-								 InputIterator2 first2, InputIterator2 last2) {
-		for (; first1 != last1 && first2 != last2; ++first1, ++first2) {
-			if (*first1 < *first2)
-				return (true);
-			if (*first2 < *first1)
-				return (false);
-		}
-		return (first1 == last1) && (first2 != last2);//?
-	}
-//https://www.cplusplus.com/reference/algorithm/lexicographical_compare/
-	template<class InputIterator1, class InputIterator2, class Compare>
-	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
-								 InputIterator2 first2, InputIterator2 last2,
-								 Compare comp) {
-		for (; first1 != last1 && first2 != last2; ++first1, ++first2) {
-			if (comp(*first1, *first2)) return true;
-			if (comp(*first2, *first1)) return false;
-		}
-		return (first1 == last1) && (first2 != last2);
-	}
-
-	//struct remove_const
-	template<class T> 
-	struct off_const 
-	{ typedef T type; };
-
-	template<class T> 
-	struct off_const <const T>
-	 { typedef T type; };
-
-
-
-	// struct pair
-	template<class T1, class T2> struct pair
-	{
-		typedef T1 first_type;
-		typedef T2 second_type;
-
-		first_type	first;
-		second_type	second;
-		pair() : first(), second() {}
-		template <class U, class V>
-		pair(const pair<U, V> &pr) : first(pr.first), second(pr.second) {}
-		pair(const pair & pr) : first(pr.first), second(pr.second) {}
-		pair(const first_type &a, const second_type &b) : first(a), second(b) {}
-		pair &operator=(const pair &pr)
-		{
-			first = pr.first;
-			second = pr.second;
-			return (*this);
-		}
-
-	};
-
-
-	//operators of comparison with pair 
-	template <class T1, class T2>
-	bool operator==(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
-	{
-		return lhs.first == rhs.first && lhs.second == rhs.second;
-	}
-
-	template <class T1, class T2>
-	bool operator!=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
-	{
-		return !(lhs == rhs);
-	}
-
-	template <class T1, class T2>
-	bool operator<(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
-	{
-		return lhs.first < rhs.first ||
-			(!(rhs.first < lhs.first) && lhs.second < rhs.second);
-	}
-
-	template <class T1, class T2>
-	bool operator<=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
-	{
-		return !(rhs < lhs);
-	}
-
-	template <class T1, class T2>
-	bool operator>(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
-	{
-		return rhs < lhs;
-	}
-
-	template <class T1, class T2>
-	bool operator>=(const pair<T1, T2> &lhs, const pair<T1, T2> &rhs)
-	{
-		return !(lhs < rhs);
-	}
-
-	//make pair method
-	template <class T1, class T2>
-	pair<T1, T2> make_pair(T1 x, T2 y)
-	{
-		return (pair<T1, T2>(x, y));
-	}
-
-
-
-	//equal
-	template <class InputIterator1, class InputIterator2>
-  	bool equal ( InputIterator1 first1, InputIterator1 last1, InputIterator2 first2 )
-	{
-		while (first1!=last1)
-		{
-			if (!(*first1 == *first2))
-				return false;
-			++first1; ++first2;
-		}
-			return true;
-	}
-
-
-
-
-
-	
-}
+};
 
 
 #endif
