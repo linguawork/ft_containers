@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:18 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 13:13:06 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 14:33:54 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ class TreeIter
 		typedef typename ft::iterator_traits<T*>::pointer			pointer;
 		typedef typename ft::iterator_traits<T*>::difference_type	difference_type;
 		//here we use Node struct as node ptr
-		typedef Node<typename ft::remove_const<value_type>::type >* node_pointer;
+		typedef Node<typename ft::off_const<value_type>::type >* node_pointer;
 		//remove_const makes incoming const just a type, which is defined as node_ptr
 
 	private:
@@ -127,12 +127,12 @@ class TreeIter
 		}
 		
 		//copy constructor
-		TreeIter(const TreeIter<typename ft::remove_const<value_type>::type > & other)
+		TreeIter(const TreeIter<typename ft::off_const<value_type>::type > & other)
 		{
 			*this = other;
 		}
 
-		TreeIter& operator=(const TreeIter<typename ft::remove_const<value_type>::type>& other)
+		TreeIter& operator=(const TreeIter<typename ft::off_const<value_type>::type>& other)
 		{
 			this->_node = other.node();
 			return *this;

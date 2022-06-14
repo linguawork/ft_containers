@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:32:02 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 21:06:47 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 15:02:27 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,28 @@ int main ()
     //test for resize() https://www.cplusplus.com/reference/vector/vector/resize/
     {
       std::cout << RED << "\n" << "VECTOR resize() test" << "\n" << DEFAULT;
+             std::vector<int> myvector1; // no elements inside
+
+        myvector1.resize(5); //5 zeros
+        std::cout << "std::myvector contains:";
+        for (unsigned long i=0;i<myvector1.size();i++)
+          std::cout << ' ' << myvector1[i];
+        std::cout << '\n';
+        
+        myvector1.resize(8,100); // added 3 elem of value 100 over 5
+        std::cout << "std::myvector contains:";
+        for (unsigned long i=0;i<myvector1.size();i++)
+          std::cout << ' ' << myvector1[i];
+        std::cout << '\n';
+        
+        myvector1.resize(12, 3); // added 4 elem of value 3 over 8
+        std::cout << "std::myvector contains:";
+        for (unsigned long i=0;i<myvector1.size();i++)
+          std::cout << ' ' << myvector1[i];
+        std::cout << '\n';
+       
+       
+       
         // set some content in the vector:   
       ft::vector<int> myvector; // no elements inside
 

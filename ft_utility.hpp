@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 12:27:23 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 14:52:32 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,11 @@ iterator traits
 
 */
 
-
-
-
-
+#include <iterator>
 #include <iostream>
 
+
 namespace ft {
-	class random_access_iterator_tag {};
-
-	class bidirectional_iterator_tag {};
-
-	class forward_iterator_tag {};
 
 	template<class iterator>
 	struct iterator_traits {
@@ -70,7 +63,7 @@ namespace ft {
 		typedef T value_type;
 		typedef T *pointer;
 		typedef T &reference;
-		typedef ft::random_access_iterator_tag iterator_category;
+		typedef std::random_access_iterator_tag iterator_category;
 	};
 
 	template<class T>
@@ -79,7 +72,7 @@ namespace ft {
 		typedef T value_type;
 		typedef const T *pointer;
 		typedef const T &reference;
-		typedef ft::random_access_iterator_tag iterator_category;
+		typedef std::random_access_iterator_tag iterator_category;
 	};
 
 
@@ -96,12 +89,12 @@ namespace ft {
 	};
 
 	template<class T>
-	class bidirectional_iterator: ft::iterator<ft::bidirectional_iterator_tag, T> {
-		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::iterator_category iterator_category;
-		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::value_type value_type;
-		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::difference_type difference_type;
-		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::pointer pointer;
-		typedef typename ft::iterator<ft::bidirectional_iterator_tag, T>::reference reference;
+	class bidirectional_iterator: ft::iterator<std::bidirectional_iterator_tag, T> {
+		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::iterator_category iterator_category;
+		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::value_type value_type;
+		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::difference_type difference_type;
+		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::pointer pointer;
+		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::reference reference;
 	private:
 		pointer _elem;
 	};
@@ -121,7 +114,7 @@ namespace ft {
 
 namespace ft {
 	template<typename T>
-	class vector_iterator: public ft::iterator<ft::random_access_iterator_tag, T> 
+	class vector_iterator: public ft::iterator<std::random_access_iterator_tag, T> 
 	{
 	public:
 		typedef T value_t;
@@ -129,9 +122,9 @@ namespace ft {
 		typedef T& reference;
 
 		typedef T                                                     						 	iterator_type;
-		typedef typename ft::iterator<ft::random_access_iterator_tag, T>::iterator_category     iterator_category;
-		typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type            value_type;
-		typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type       difference_type;
+		typedef typename ft::iterator<std::random_access_iterator_tag, T>::iterator_category     iterator_category;
+		typedef typename ft::iterator<std::random_access_iterator_tag, T>::value_type            value_type;
+		typedef typename ft::iterator<std::random_access_iterator_tag, T>::difference_type       difference_type;
 	public:
 		vector_iterator(): ptr(0) {}
 
@@ -358,12 +351,23 @@ namespace ft {
 
 	template <>
 	struct is_integral_type<unsigned long long int>:
-			public is_integral_result<true, unsigned long long int> {};
+			public is_integral_result<true, unsigned long long int> 
+			{
+				
+			};
 
 	template <class T>
-	struct is_integral: public is_integral_type<T>{};
+	struct is_integral: public is_integral_type<T>
+	{
+		
+	};
 
-	template<bool Cond, class T = void> struct enable_if {};
+	template<bool Cond, class T = void> 
+	struct enable_if 
+	{
+		
+	};
+	
 	template<class T>
 	struct enable_if<true, T> {
 		typedef T type;
@@ -425,11 +429,11 @@ namespace ft
 
 	//struct remove_const
 	template<class T> 
-	struct remove_const 
+	struct off_const 
 	{ typedef T type; };
 
 	template<class T> 
-	struct remove_const <const T>
+	struct off_const <const T>
 	 { typedef T type; };
 
 

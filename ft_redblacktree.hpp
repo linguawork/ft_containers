@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:16:57 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/13 14:36:23 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 14:48:36 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class RBTree
 		//https://cplusplus.com/reference/memory/allocator/rebind/
 		//https://docs.microsoft.com/ru-ru/cpp/standard-library/allocator-class?view=msvc-170  this explanation is good and has code
 		typedef typename Alloc::template
-				rebind<Node<Value> >::other					node_allocator; // allocating memory to the other that container type of object: NODE
+				rebind<Node<Value> >::other					node_allocator; // allocating memory to the other than container type of object: NODE
 		typedef	typename node_allocator::pointer			node_pointer;
 		typedef typename allocator_type::reference			reference;
 		typedef typename allocator_type::const_reference	const_reference;

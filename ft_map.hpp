@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:38:32 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 13:11:33 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 14:47:03 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ namespace ft
 		typedef T mapped_type;
 		typedef std::size_t size_type;
 		typedef std::ptrdiff_t difference_type;
-		typedef Compare key_compare;
+		typedef Compare key_compare; // pair
 		typedef pair<const Key, T> value_type;
 		typedef Allocator allocator_type;
 		typedef const value_type & reference;
@@ -62,16 +62,22 @@ namespace ft
 	private:
 		allocator_type	_alloc;
 		tree_type		rbtree_;
-		key_compare		_compare;
+		key_compare		_compare; //pair
 
 	public:
-
+			//compare pairs therefore we use brackets ()
 		explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()):
-			_alloc(alloc), rbtree_(tree_type(comp, alloc)), _compare(comp) {}
+			_alloc(alloc), rbtree_(tree_type(comp, alloc)), _compare(comp) 
+			{
+				
+			}
 
 		template< class InputIt >
 		map(InputIt first, InputIt last, const Compare& compare = Compare(), const Allocator& alloc = Allocator()):
-			_alloc(alloc), rbtree_(first, last, compare, _alloc), _compare(compare) {}
+			_alloc(alloc), rbtree_(first, last, compare, _alloc), _compare(compare) 
+			{
+				
+			}
 
 
 
