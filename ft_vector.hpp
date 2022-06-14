@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/05 15:15:46 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 11:49:42 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -512,7 +512,7 @@ namespace ft
 		//range assign
 		template <class InputIterator>
 		void assign (InputIterator first, InputIterator last,
-				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = nullptr)      
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = 0)      
 		{
 			if(first > last)
 				throw std::logic_error("ft_vector::assign error");

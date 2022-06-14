@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/07 13:25:02 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/14 12:27:23 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ Ptrdiff - это целый тип который представляет ра�
 iterator traits
 
 */
+
+
+
+
 
 #include <iostream>
 
@@ -129,7 +133,7 @@ namespace ft {
 		typedef typename ft::iterator<ft::random_access_iterator_tag, T>::value_type            value_type;
 		typedef typename ft::iterator<ft::random_access_iterator_tag, T>::difference_type       difference_type;
 	public:
-		vector_iterator(): ptr(nullptr) {}
+		vector_iterator(): ptr(0) {}
 
 		vector_iterator(pointer other): ptr(other) {}
 
