@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:26:38 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 19:52:11 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/15 11:56:27 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ https://www.cplusplus.com/reference/vector/vector/?kw=vector
 
 std98 allocator
 https://www.cplusplus.com/reference/memory/allocator/
-
 In vector container I have to use std::allocator's members
 
 */
@@ -40,8 +39,6 @@ In vector container I have to use std::allocator's members
 
 namespace ft
 {
-
-	
 	//Template according to std98 documentation
 	//https://www.cplusplus.com/reference/memory/allocator/
 	//there are fields inside std::allocator and I redefined them via typedef
@@ -203,39 +200,6 @@ namespace ft
 	}
 
 	
-		
-	//operator of assignation= (K helped to debug, but there were leaks)
-	// vector& operator=(const vector& x)
-	// {
-	// 	size_type i;
-		
-	// 	// if (c)
-		
-	// 	if (*this == x)
-	// 		return *this;
-		
-
-	// 	for (i = 0; i < size_t_not_int; i++)
-	// 		allocator_kind.destroy(ptr_first_elem + i);
-
-	// 	this->allocator_kind = x.allocator_kind;//
-	// 	allocator_kind.deallocate(ptr_first_elem, capacity_in_size_t);
-	// 	// allocator_kind.dealloca
-			
-	// 	this->size_t_not_int = x.size_t_not_int;
-	// 	this->capacity_in_size_t = x.capacity_in_size_t;
-	// 	// if(capacity_in_size_t < size_t_not_int)
-	// 	// {
-	// 	// 	if (capacity_in_size_t != 0)
-				
-	// 		// capacity_in_size_t = size_t_not_int;
-	// 	ptr_first_elem = allocator_kind.allocate(capacity_in_size_t);
-	// 	// }
-	// 	for ( size_type i = 0; i < size_t_not_int; i++)
-	// 		allocator_kind.construct(ptr_first_elem + i, x[i]); // the operator [] is not working yet
-	// 	return *this;
-	// }
-
 
 	//copy constructor
 	vector (const vector& x) :  size_t_not_int (0), capacity_in_size_t (0)
@@ -244,16 +208,6 @@ namespace ft
 		*this = x; // we need to use operator = 
 	}
 	
-	//K helped to debug but there were leaks
-	// vector (const vector& x) : allocator_kind(x.allocator_kind)
-	// {
-	// 	this->size_t_not_int = x.size_t_not_int;
-	// 	this->capacity_in_size_t = x.capacity_in_size_t;
-	// 	this->ptr_first_elem = this->allocator_kind.allocate(this->capacity_in_size_t);
-	// 	for (size_type i = 0; i < this->size_t_not_int; i++){
-	// 		this->allocator_kind.construct(this->ptr_first_elem + i, x.ptr_first_elem[i]);
-	// 	}
-	// }
 
 	//destructor
 	~vector()

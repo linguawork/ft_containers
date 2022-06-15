@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:17:27 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 20:05:56 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/15 11:47:33 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,18 @@ iterator traits
 
 namespace ft 
 {
-	//struct remove_const
+	//struct off_const
 	template<class T> 
 	struct off_const 
-	{ typedef T type; };
+	{ 
+		typedef T type; 
+	};
 
 	template<class T> 
 	struct off_const <const T>
-	 { typedef T type; };
+	{ 
+		 typedef T type; 
+	};
 
 
 	template<class iterator>
@@ -175,24 +179,99 @@ namespace ft
 			static const bool value = v;
 			typedef T value_type;
 			typedef integral_constant type;
-			operator value_type() const { return value; }
+			operator value_type() const 
+			{ 
+				return value; 
+			}
 		};
 
-	template <class T> struct is_integral				: public ft::integral_constant<T, false> {};
-	template <> struct is_integral<bool>				: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<char>				: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<signed char>			: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<unsigned char>		: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<wchar_t>				: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<char16_t>			: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<short>				: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<unsigned short>		: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<int>					: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<unsigned int>		: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<long>				: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<unsigned long> 		: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<long long>			: public ft::integral_constant<bool, true> {};
-	template <> struct is_integral<unsigned long long>	: public ft::integral_constant<bool, true> {};
+	template <class T> 
+	struct is_integral : public ft::integral_constant<T, false> 
+	{
+		
+	};
+	
+	template <> 
+	struct is_integral<bool> : public ft::integral_constant<bool, true> 
+	{
+		
+	};
+	
+	template <> 
+	struct is_integral<char> : public ft::integral_constant<bool, true> 
+	{
+		
+	};
+
+	template <> 
+	struct is_integral<signed char>	: public ft::integral_constant<bool, true> 
+	{
+		
+	};
+	
+	template <> 
+	struct is_integral<unsigned char>: public ft::integral_constant<bool, true> 
+	{
+
+	};
+	
+	template <> 
+	struct is_integral<wchar_t>	: public ft::integral_constant<bool, true> 
+	{
+
+	};
+	
+	template <> struct is_integral<char16_t> : public ft::integral_constant<bool, true> 
+	{
+
+	};
+	
+	template <> 
+	struct is_integral<short> : public ft::integral_constant<bool, true> 
+	{
+		
+	};
+
+	template <> 
+	struct is_integral<unsigned short> : public ft::integral_constant<bool, true> 
+	{
+
+	};
+	
+	template <> 
+	struct is_integral<int>	: public ft::integral_constant<bool, true> 
+	{
+		
+	};
+	template <> 
+	struct is_integral<unsigned int> : public ft::integral_constant<bool, true> 
+	{
+		
+	};
+
+	template <> 
+	struct is_integral<long> : public ft::integral_constant<bool, true> 
+	{
+		
+	};
+	
+	template <> 
+	struct is_integral<unsigned long> : public ft::integral_constant<bool, true> 
+	{
+		
+	};
+	
+	template <> 
+	struct is_integral<long long> : public ft::integral_constant<bool, true>
+	{
+		
+	};
+	
+	template <> 
+	struct is_integral<unsigned long long>	: public ft::integral_constant<bool, true> 
+	{
+		
+	};
 
 
 	/*

@@ -6,7 +6,7 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:16:57 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 14:48:36 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/15 11:56:10 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -444,7 +444,7 @@ class RBTree
 			}
 			free_node(for_free);
 			if (y_original_is_black){
-				erase_fixup(x);//if del black node // here is seg
+				erase_fixup(x);//if del black node // here was seg
 			}
 				
 			_size--;

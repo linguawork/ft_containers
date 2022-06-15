@@ -6,32 +6,14 @@
 /*   By: areggie <areggie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 16:40:31 by areggie           #+#    #+#             */
-/*   Updated: 2022/06/14 19:43:57 by areggie          ###   ########.fr       */
+/*   Updated: 2022/06/15 11:55:01 by areggie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_REVERSE_ITERATOR_HPP
 #define FT_REVERSE_ITERATOR_HPP
 
-
 #include "ft_utility.hpp"
-/*
-acc to subj I need to implement reverse_iterator (making class)
-random_access_iterator should not be implemented 
-as subject does not require to implement random_access_iterator
-random access iterator can be just replaced by pointer from std::Allocator
-in ft::vector
-which I am going to implement
-
-but tests of the RAI on pointers from Allocators (one peer's realization)
-showed that there were problems with method resize()
-
-so I decided to switch back to RAI class
-
-to pass the tester I made ft_reverse_iterator.hpp file without making
-a different file for RAI class (it probably is nested for the sake of unit tester)
-*/
-
 
 
 namespace ft {
